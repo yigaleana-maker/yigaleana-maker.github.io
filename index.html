@@ -81,7 +81,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .p-wn h2{font-family:var(--f-serif);font-weight:700}
 .p-wn p{font-family:var(--f-maquina);color:var(--tinta2)}
 .p-wn .ir{color:var(--rojo)}
-.p-wn .sello{position:absolute;right:22px;top:22px;width:86px;height:86px;border-radius:50%;border:3px solid #e5352a99;display:grid;place-items:center;transform:rotate(-12deg);font-family:var(--f-maquina);color:#e5352aaa;font-size:15px;box-shadow:inset 0 0 0 5px var(--papel), inset 0 0 0 6.5px #e5352a77}
+.p-wn .sello{position:absolute;cursor:pointer;right:22px;top:22px;width:86px;height:86px;border-radius:50%;border:3px solid #e5352a99;display:grid;place-items:center;transform:rotate(-12deg);font-family:var(--f-maquina);color:#e5352aaa;font-size:15px;box-shadow:inset 0 0 0 5px var(--papel), inset 0 0 0 6.5px #e5352a77}
 
 /* ——— Teléfonos ——— */
 .tira{display:flex;gap:6px;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px 4px 18px;margin-top:36px;scrollbar-width:thin}
@@ -151,7 +151,28 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .btn-wn{background:var(--rojo);color:#fff}
 .btn-wn2{background:var(--tinta);color:var(--papel)}
 .sello-grande{width:120px;height:120px;border-radius:50%;border:3px solid #e5352aa8;display:grid;place-items:center;text-align:center;font-family:var(--f-maquina);color:#e5352ab8;font-size:18px;line-height:1.1;transform:rotate(-14deg);box-shadow:inset 0 0 0 7px var(--papel), inset 0 0 0 9px #e5352a80;margin-left:auto}
-.sello-grande.estampa{animation:estampar .55s cubic-bezier(.3,1.6,.5,1) both}
+.sello-grande{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.p-wn .sello{--giro:-12deg}
+.sello-grande{--giro:-14deg}
+/* El sellado: baja desde arriba, golpea (se aplasta un poco), rebota y la tinta se asienta */
+.estampa{animation:sellar .7s cubic-bezier(.2,.7,.3,1) both}
+@keyframes sellar{
+  0%{transform:rotate(calc(var(--giro) + 8deg)) scale(2.3);opacity:0;filter:blur(3px)}
+  45%{transform:rotate(var(--giro)) scale(.9);opacity:1;filter:blur(0)}
+  62%{transform:rotate(var(--giro)) scale(1.06)}
+  78%{transform:rotate(var(--giro)) scale(.98)}
+  100%{transform:rotate(var(--giro)) scale(1);opacity:.92}
+}
+/* El golpe deja una onda de tinta alrededor */
+.estampa::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid #e5352a;opacity:0;animation:tinta .7s ease-out .3s both;pointer-events:none}
+@keyframes tinta{0%{transform:scale(.85);opacity:.55}100%{transform:scale(1.45);opacity:0}}
+/* Y lo de alrededor tiembla un instante */
+.golpe{animation:golpe .32s ease-out .3s both}
+@keyframes golpe{0%,100%{translate:0 0}25%{translate:0 2px}50%{translate:-1px -1px}75%{translate:1px 1px}}
+/* Al deslizar: lo que se acerca a la orilla de arriba o de abajo se difumina y se encoge un poco */
+.desvanece{opacity:var(--o,1);scale:var(--s,1);will-change:opacity,scale}
+/* Las tiras de pantallas se difuminan en sus orillas, como en las apps */
+.tira{-webkit-mask-image:linear-gradient(90deg,transparent,#000 22px,#000 calc(100% - 22px),transparent);mask-image:linear-gradient(90deg,transparent,#000 22px,#000 calc(100% - 22px),transparent)}
 @keyframes estampar{0%{transform:rotate(-14deg) scale(1.8);opacity:0}100%{transform:rotate(-14deg) scale(1);opacity:1}}
 
 /* ——— Cómo instalar / privacidad ——— */
@@ -219,7 +240,7 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
 
     <div class="puertas">
       <a class="puerta p-hp" href="#headpod">
-        <svg viewBox="0 0 300 40" aria-hidden="true"><path d="M0 20 Q 18 6 36 20 T 72 20 T 108 20 T 144 20 T 180 20 T 216 20 T 252 20 T 288 20" fill="none" stroke="#ffb3b3" stroke-width="3" stroke-linecap="round"/></svg>
+        <svg viewBox="0 0 300 40" aria-hidden="true"><path id="onda-puerta" d="M0 20 Q 18 6 36 20 T 72 20 T 108 20 T 144 20 T 180 20 T 216 20 T 252 20 T 288 20" fill="none" stroke="#ffb3b3" stroke-width="3" stroke-linecap="round"/></svg>
         <img class="ico" src="img/hp-icono.png" alt="">
         <div>
           <h2>Headpod</h2>
@@ -228,7 +249,7 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
         </div>
       </a>
       <a class="puerta p-wn" href="#whynote">
-        <span class="sello" aria-hidden="true">WhyType</span>
+        <span class="sello" id="sello-puerta" aria-hidden="true">WhyType</span>
         <img class="ico" src="img/whytype-icono.png" alt="">
         <div>
           <h2>WhyType</h2>
@@ -246,7 +267,7 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
         <video src="audifonos.mp4" poster="img/audifonos.jpg" autoplay muted loop playsinline aria-label="Los audífonos de Headpod girando"></video>
         <div class="texto">
           <h2 class="hp-nombre">Headpod</h2>
-          <svg class="onda" id="onda" viewBox="0 0 600 28" preserveAspectRatio="none" aria-hidden="true"><path d="M2 14 C 27 2, 52 2, 77 14 S 127 26, 152 14 S 202 2, 227 14 S 277 26, 302 14 S 352 2, 377 14 S 427 26, 452 14 S 502 2, 527 14 S 577 26, 598 14"/></svg>
+          <svg class="onda" id="onda" viewBox="0 0 600 28" preserveAspectRatio="none" aria-hidden="true"><path id="onda-hp" d="M2 14 C 27 2, 52 2, 77 14 S 127 26, 152 14 S 202 2, 227 14 S 277 26, 302 14 S 352 2, 377 14 S 427 26, 452 14 S 502 2, 527 14 S 577 26, 598 14"/></svg>
           <p class="hp-lema">Bienvenido a la experiencia más increíble de podcast</p>
           <p class="hp-sub">Tus programas, tu avance, tu manera de escuchar.</p>
           <div class="botones">
@@ -400,11 +421,85 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
         if (!e.isIntersecting) return;
         if (e.target === onda){ onda.classList.remove('dibuja'); void onda.getBoundingClientRect(); onda.classList.add('dibuja'); }
         if (e.target === tecleado) teclear();
-        if (e.target === sello) sello.classList.add('estampa');
+        if (e.target === sello) sellar(sello);
         io.unobserve(e.target);
       });
     }, {threshold:.5});
     io.observe(onda); io.observe(tecleado); io.observe(sello);
+  }
+
+  /* El sellado: se puede volver a sellar tocándolo */
+  function sellar(el){
+    if (quieto) return;
+    el.classList.remove('estampa'); void el.offsetWidth; el.classList.add('estampa');
+    var caja = el.closest('.puerta, .botones');
+    if (caja){ caja.classList.remove('golpe'); void caja.offsetWidth; caja.classList.add('golpe'); }
+  }
+  var selloPuerta = document.getElementById('sello-puerta');
+  if (!quieto) setTimeout(function(){ sellar(selloPuerta); }, 700);
+  selloPuerta.addEventListener('mouseenter', function(){ sellar(selloPuerta); });
+  sello.addEventListener('click', function(){ sellar(sello); });
+
+  /* Las ondas de Headpod se mueven solas, como en la app (solo mientras se ven) */
+  var ondas = [
+    {el: document.getElementById('onda-puerta'), w: 300, h: 40, a: 8, largo: 72, x0: 0, visible: true},
+    {el: document.getElementById('onda-hp'), w: 600, h: 28, a: 9, largo: 150, x0: 2, visible: false}
+  ];
+  function dibujarOnda(o, fase){
+    var d = '', mitad = o.h / 2, fin = o.w - o.x0;
+    var aliento = 0.72 + 0.28 * Math.sin(fase * 0.35);
+    for (var x = o.x0; x <= fin; x += 4){
+      /* Las puntas llegan suaves */
+      var borde = Math.min(1, (x - o.x0) / 40, (fin - x) / 40);
+      var y = mitad + Math.sin(x / o.largo * 2 * Math.PI + fase) * o.a * aliento * borde;
+      d += (x === o.x0 ? 'M' : 'L') + x.toFixed(1) + ' ' + y.toFixed(2) + ' ';
+    }
+    o.el.setAttribute('d', d);
+  }
+  if (!quieto){
+    if ('IntersectionObserver' in window){
+      var vo = new IntersectionObserver(function(es){
+        es.forEach(function(e){ ondas.forEach(function(o){ if (o.el.ownerSVGElement === e.target) o.visible = e.isIntersecting; }); });
+      });
+      ondas.forEach(function(o){ vo.observe(o.el.ownerSVGElement); });
+    } else ondas.forEach(function(o){ o.visible = true; });
+    (function mover(ts){
+      var fase = ts / 1000 * 2.6;
+      ondas.forEach(function(o){ if (o.visible) dibujarOnda(o, fase); });
+      requestAnimationFrame(mover);
+    })(0);
+  }
+
+  /* Al deslizar, lo que llega a las orillas se difumina */
+  if (!quieto){
+    var piezas = Array.prototype.slice.call(document.querySelectorAll(
+      '.portada .eti, .portada h1, .portada .bajada, .puerta, .escena video, .escena .texto > *, .tira-titulo, .tira, .cosa, .maquina > *, .whynote .botones, .final h2, .pasos li, .extra > div'));
+    piezas.forEach(function(p){ p.classList.add('desvanece'); });
+    var barra = document.querySelector('.barra');
+    var pendiente = false;
+    function orillas(){
+      pendiente = false;
+      var alto = window.innerHeight, arriba = barra ? barra.getBoundingClientRect().bottom : 0;
+      var zona = Math.max(90, Math.min(190, alto * 0.24));
+      piezas.forEach(function(p){
+        var r = p.getBoundingClientRect();
+        if (r.bottom < -50 || r.top > alto + 50) return;
+        var c = r.top + Math.min(r.height, zona) / 2;
+        var c2 = r.bottom - Math.min(r.height, zona) / 2;
+        /* Arriba solo se difumina cuando ya deslizaste: la primera vista se ve completa */
+        var fuerza = Math.min(1, window.scrollY / 140);
+        var tArriba = 1 - (1 - Math.max(0, Math.min(1, (c - arriba) / zona))) * fuerza;
+        var t = Math.min(tArriba, (alto - c2) / zona);
+        t = Math.max(0, Math.min(1, t));
+        var e = t * t * (3 - 2 * t);
+        p.style.setProperty('--o', (0.06 + 0.94 * e).toFixed(3));
+        p.style.setProperty('--s', (0.95 + 0.05 * e).toFixed(3));
+      });
+    }
+    function pedir(){ if (!pendiente){ pendiente = true; requestAnimationFrame(orillas); } }
+    window.addEventListener('scroll', pedir, {passive: true});
+    window.addEventListener('resize', pedir);
+    orillas();
   }
 
   /* Copiar el correo */
