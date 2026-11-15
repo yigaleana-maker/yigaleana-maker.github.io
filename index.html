@@ -175,6 +175,48 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .tira{-webkit-mask-image:linear-gradient(90deg,transparent,#000 22px,#000 calc(100% - 22px),transparent);mask-image:linear-gradient(90deg,transparent,#000 22px,#000 calc(100% - 22px),transparent)}
 @keyframes estampar{0%{transform:rotate(-14deg) scale(1.8);opacity:0}100%{transform:rotate(-14deg) scale(1);opacity:1}}
 
+
+/* ——— Pruébala, novedades y QR ——— */
+.extra-app{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:14px;margin-top:14px}
+.extra-app > *{min-width:0}
+.eti-prueba{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:12px}
+.prueba-hp,.headpod .novedades{background:var(--cafe);border-radius:26px;padding:20px}
+.prueba-hp .eti-prueba,.headpod .novedades h3{color:var(--rosa);font-family:var(--f-hp)}
+.mini{display:flex;align-items:center;gap:14px}
+.mini-portada{width:58px;height:58px;flex:0 0 auto;background:linear-gradient(135deg,#f1953e,#ffb3b3);display:grid;place-items:center;font-family:var(--f-marca);font-weight:800;color:#3a1715;font-size:22px}
+.mini-texto{flex:1;min-width:0;font-family:var(--f-hp)}
+.mini-texto small{display:block;font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--crema2)}
+.mini-texto b{display:block;font-weight:800;font-size:16px;color:var(--crema);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mini-play{flex:0 0 auto;width:62px;height:62px;border:0;background:var(--rosa);color:#3a1715;border-radius:31px;display:grid;place-items:center;cursor:pointer;transition:border-radius .5s cubic-bezier(.34,1.56,.64,1),transform .3s cubic-bezier(.34,1.56,.64,1)}
+.mini-play:active{transform:scale(.92)}
+.mini-play.sonando{border-radius:18px}
+.mini-play svg{width:26px;height:26px}
+.mini-onda{display:block;width:100%;height:44px;margin-top:14px;cursor:pointer;touch-action:none}
+.mini-tiempos{display:flex;justify-content:space-between;font-family:var(--f-hp);font-weight:700;font-size:13px;color:var(--crema2);font-variant-numeric:tabular-nums}
+.novedades h3{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin:0 0 12px}
+.novedades ol{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.novedades li b{display:block;font-size:15px}
+.novedades li small{font-size:12.5px;opacity:.7}
+.novedades li ul{margin:6px 0 0;padding-left:18px;font-size:14px;line-height:1.45}
+.headpod .novedades{font-family:var(--f-hp);color:var(--crema2)}
+.headpod .novedades b{color:var(--crema);font-weight:800}
+.whynote .novedades,.prueba-wn{background:#fffaf1;border:1px solid #2a262312;border-radius:26px;padding:20px}
+.whynote .novedades h3,.prueba-wn .eti-prueba{color:var(--rojo)}
+.whynote .novedades{color:var(--tinta2)}
+.whynote .novedades b{color:var(--tinta);font-family:var(--f-serif)}
+.prueba-wn textarea{width:100%;min-height:118px;resize:none;border:0;outline:0;background:transparent;font-family:var(--f-maquina);font-size:19px;line-height:1.55;color:var(--tinta);padding:4px 0;caret-color:var(--rojo)}
+.prueba-wn textarea::placeholder{color:#2a262355}
+.prueba-wn .riel{margin-top:10px}
+.prueba-wn .pie-prueba{display:flex;justify-content:space-between;align-items:center;margin-top:12px;gap:10px;flex-wrap:wrap}
+.prueba-wn button{font:inherit;font-family:var(--f-maquina);font-size:14px;background:transparent;border:1px solid #2a262330;color:var(--tinta);border-radius:99px;padding:6px 14px;cursor:pointer}
+.prueba-wn small{font-family:var(--f-maquina);color:var(--tinta2)}
+.qr-caja{display:none;align-items:center;gap:12px;padding:10px 14px 10px 10px;border-radius:20px;font-size:13px;line-height:1.35;max-width:270px}
+.qr-caja .qr{background:#fff;padding:6px;border-radius:12px;line-height:0}
+.qr-caja .qr img,.qr-caja .qr canvas{width:84px!important;height:84px!important}
+.headpod .qr-caja{background:var(--cafe);color:var(--crema2);font-family:var(--f-hp);font-weight:700}
+.whynote .qr-caja{background:#fffaf1;color:var(--tinta2);font-family:var(--f-maquina)}
+@media (min-width: 900px){ .qr-caja{display:flex} }
+
 /* ——— Cómo instalar / privacidad ——— */
 .final{background:var(--pizarra);padding-block:72px}
 .final h2{font-family:var(--f-marca);font-weight:700;font-size:clamp(26px, 4vw, 38px);letter-spacing:-.03em}
@@ -273,6 +315,7 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
           <div class="botones">
             <a class="btn btn-hp" href="https://github.com/yigaleana-maker/headpod-actualizaciones/releases/latest/download/headpod.apk">⬇ Descargar Headpod <small>APK</small></a>
             <a class="btn btn-hp2" href="https://apps.obtainium.imranr.dev/redirect?r=obtainium://add/https://github.com/yigaleana-maker/headpod-actualizaciones">➕ Obtainium</a>
+            <div class="qr-caja"><div class="qr" data-url="https://yigaleana-maker.github.io/headpod"></div><span>¿Estás en la computadora? Escanéalo con tu celular para descargarla.</span></div>
           </div>
         </div>
       </div>
@@ -300,6 +343,23 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
         <div class="cosa"><b>🌙 Temporizador suave</b><span>Baja el volumen poco a poco. Sacude el teléfono y suma 5 minutos.</span></div>
         <div class="cosa"><b>📝 Transcripción</b><span>Lee lo que se dice y toca una frase para ir ahí.</span></div>
         <div class="cosa"><b>🔵 Tus audífonos</b><span>Al conectarlos, sigue donde te quedaste.</span></div>
+      </div>
+
+      <div class="extra-app">
+        <div class="prueba-hp">
+          <span class="eti-prueba">Pruébalo aquí</span>
+          <div class="mini">
+            <div class="mini-portada" id="mini-portada">H</div>
+            <div class="mini-texto"><small>TU PROGRAMA</small><b>Así se siente el reproductor</b></div>
+            <button class="mini-play" id="mini-play" type="button" aria-label="Reproducir"><svg viewBox="0 0 24 24" aria-hidden="true"><path id="mini-icono" d="M8 5v14l11-7z" fill="currentColor"/></svg></button>
+          </div>
+          <canvas class="mini-onda" id="mini-onda" aria-label="Barra de progreso: tócala o arrástrala"></canvas>
+          <div class="mini-tiempos"><span id="t-ya">0:00</span><span id="t-falta">-42:00</span></div>
+        </div>
+        <div class="novedades" data-repo="headpod-actualizaciones" data-boton=".btn-hp" data-app="Headpod">
+          <h3>Lo nuevo en Headpod</h3>
+          <ol><li><small>Cargando las últimas versiones…</small></li></ol>
+        </div>
       </div>
     </div>
   </section>
@@ -340,9 +400,23 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
         <div class="cosa"><b>Comparte como hoja</b><span>Una imagen escrita a máquina, lista para Instagram o WhatsApp.</span></div>
       </div>
 
+      <div class="extra-app">
+        <div class="prueba-wn">
+          <span class="eti-prueba">Pruébala: escribe aquí</span>
+          <textarea id="maquinita" maxlength="600" placeholder="Escribe algo y escucha la máquina…" aria-label="Escribe para probar la máquina de escribir"></textarea>
+          <div class="riel" aria-hidden="true"><div class="carro" id="carro2"><i></i><i></i><i></i></div></div>
+          <div class="pie-prueba"><small id="cuenta">0 letras</small><button type="button" id="sonido">🔊 Sonido: sí</button></div>
+        </div>
+        <div class="novedades" data-repo="whynote-actualizaciones" data-boton=".btn-wn" data-app="WhyType">
+          <h3>Lo nuevo en WhyType</h3>
+          <ol><li><small>Cargando las últimas versiones…</small></li></ol>
+        </div>
+      </div>
+
       <div class="botones">
         <a class="btn btn-wn" href="https://github.com/yigaleana-maker/whynote-actualizaciones/releases/latest/download/whynote.apk">⬇ Descargar WhyType <small>APK</small></a>
         <a class="btn btn-wn2" href="https://apps.obtainium.imranr.dev/redirect?r=obtainium://add/https://github.com/yigaleana-maker/whynote-actualizaciones">➕ Obtainium</a>
+        <div class="qr-caja"><div class="qr" data-url="https://yigaleana-maker.github.io/whytype"></div><span>¿En la computadora? Escanéalo con tu celular.</span></div>
         <div class="sello-grande" id="sello" aria-hidden="true">WhyType<br>gratis</div>
       </div>
     </div>
@@ -360,7 +434,7 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
       <div class="extra">
         <div>
           <b>Tu privacidad</b>
-          <p>Headpod y WhyType no piden cuenta, no tienen anuncios y no recogen tus datos. Tus notas, programas y avance se quedan en tu teléfono, y en tu Google Drive solo si tú activas el respaldo.</p>
+          <p>Headpod y WhyType no piden cuenta, no tienen anuncios y no recogen tus datos. Tus notas, programas y avance se quedan en tu teléfono, y en tu Google Drive solo si tú activas el respaldo. <a href="privacidad/">Lee el aviso de privacidad completo</a>.</p>
         </div>
         <div>
           <b>¿Algo falló o tienes una idea?</b>
@@ -373,10 +447,11 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
 </main>
 
 <footer>
-  <div class="envoltura"><span>Hecho en México con ❤️ por Yehu</span><span>Headpod · WhyType</span></div>
+  <div class="envoltura"><span>Hecho en México con ❤️ por Yehu</span><span>Headpod · WhyType · <a href="privacidad/">Privacidad</a></span></div>
 </footer>
 
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 (function(){
   var quieto = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -473,7 +548,7 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
   /* Al deslizar, lo que llega a las orillas se difumina */
   if (!quieto){
     var piezas = Array.prototype.slice.call(document.querySelectorAll(
-      '.portada .eti, .portada h1, .portada .bajada, .puerta, .escena video, .escena .texto > *, .tira-titulo, .tira, .cosa, .maquina > *, .whynote .botones, .final h2, .pasos li, .extra > div'));
+      '.portada .eti, .portada h1, .portada .bajada, .puerta, .escena video, .escena .texto > *, .tira-titulo, .tira, .cosa, .extra-app > *, .maquina > *, .whynote .botones, .final h2, .pasos li, .extra > div'));
     piezas.forEach(function(p){ p.classList.add('desvanece'); });
     var barra = document.querySelector('.barra');
     var pendiente = false;
@@ -501,6 +576,161 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
     window.addEventListener('resize', pedir);
     orillas();
   }
+
+
+  /* ——— Novedades automáticas desde GitHub, y la versión en el botón ——— */
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  Array.prototype.forEach.call(document.querySelectorAll('.novedades'), function(caja){
+    var repo = caja.getAttribute('data-repo'), app = caja.getAttribute('data-app');
+    fetch('https://api.github.com/repos/yigaleana-maker/' + repo + '/releases?per_page=3')
+      .then(function(r){ if (!r.ok) throw 0; return r.json(); })
+      .then(function(lista){
+        if (!lista.length) throw 0;
+        var ol = caja.querySelector('ol'); ol.innerHTML = '';
+        lista.forEach(function(v){
+          var fecha = new Date(v.published_at).toLocaleDateString('es-MX', {day:'numeric', month:'long', year:'numeric'});
+          var puntos = (v.body || '').split('\n').map(function(l){ return l.replace(/^\s*[•\-*]\s*/, '').replace(/\*\*/g, '').trim(); }).filter(Boolean).slice(0, 5);
+          var li = document.createElement('li');
+          li.innerHTML = '<b>' + esc(v.name || v.tag_name) + '</b><small>' + esc(fecha) + '</small>' +
+            (puntos.length ? '<ul>' + puntos.map(function(p){ return '<li>' + esc(p) + '</li>'; }).join('') + '</ul>' : '');
+          ol.appendChild(li);
+        });
+        var boton = document.querySelector(caja.getAttribute('data-boton'));
+        var version = (lista[0].name || '').replace(app, '').trim();
+        if (boton && version) boton.innerHTML = '⬇ Descargar ' + esc(app) + ' <small>' + esc(version) + '</small>';
+      })
+      .catch(function(){ caja.hidden = true; });
+  });
+
+  /* ——— QR para descargar desde la computadora ——— */
+  if (window.QRCode){
+    Array.prototype.forEach.call(document.querySelectorAll('.qr'), function(q){
+      new QRCode(q, {text: q.getAttribute('data-url'), width: 168, height: 168, colorDark: '#1d1411', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.M});
+    });
+  } else Array.prototype.forEach.call(document.querySelectorAll('.qr-caja'), function(c){ c.hidden = true; });
+
+  /* ——— Pruébalo: el mini reproductor de Headpod ——— */
+  (function(){
+    var boton = document.getElementById('mini-play'), icono = document.getElementById('mini-icono');
+    var lienzo = document.getElementById('mini-onda'), portada = document.getElementById('mini-portada');
+    var tYa = document.getElementById('t-ya'), tFalta = document.getElementById('t-falta');
+    if (!boton || !lienzo) return;
+    var DUR = 42 * 60, pos = 9 * 60, sonando = false, amp = 0, galleta = 0, fase = 0, ultimo = 0, arrastrando = false;
+    function mmss(s){ s = Math.max(0, Math.round(s)); return Math.floor(s / 60) + ':' + ('0' + s % 60).slice(-2); }
+    function forma(){
+      /* Cuadro redondeado en pausa, galleta de orillas onduladas al sonar (como en la app) */
+      var pts = [], n = 72;
+      for (var i = 0; i < n; i++){
+        var a = i / n * 2 * Math.PI, ca = Math.cos(a), sa = Math.sin(a);
+        var rs = 1 / Math.pow(Math.pow(Math.abs(ca), 5) + Math.pow(Math.abs(sa), 5), 1 / 5);
+        var rg = 1 - 0.05 + 0.05 * Math.cos(9 * a);
+        var r = rs + (rg - rs) * galleta;
+        pts.push((50 + 50 * r * ca).toFixed(1) + '% ' + (50 + 50 * r * sa).toFixed(1) + '%');
+      }
+      portada.style.clipPath = 'polygon(' + pts.join(',') + ')';
+    }
+    function dibujar(){
+      var dpr = window.devicePixelRatio || 1, w = lienzo.clientWidth, h = lienzo.clientHeight;
+      if (lienzo.width !== Math.round(w * dpr)){ lienzo.width = Math.round(w * dpr); lienzo.height = Math.round(h * dpr); }
+      var c = lienzo.getContext('2d'); c.setTransform(dpr, 0, 0, dpr, 0, 0); c.clearRect(0, 0, w, h);
+      var mid = h / 2, x = Math.max(4, Math.min(w - 8, pos / DUR * w)), hueco = 7, grosor = 4;
+      c.lineCap = 'round'; c.lineWidth = grosor;
+      c.strokeStyle = '#57402c'; c.beginPath(); c.moveTo(x + hueco, mid); c.lineTo(w - 8, mid); c.stroke();
+      c.fillStyle = '#ffb3b3'; c.beginPath(); c.arc(w - 3, mid, 2.2, 0, 7); c.fill();
+      c.strokeStyle = '#ffb3b3'; c.beginPath();
+      for (var px = 2; px <= x - hueco; px += 2){
+        var calma = Math.min(1, (x - hueco - px) / 26);
+        var y = mid + Math.sin(px / 6.5 + fase) * 3.6 * amp * calma;
+        if (px === 2) c.moveTo(px, y); else c.lineTo(px, y);
+      }
+      c.stroke();
+      var am = arrastrando ? 6 : 4, al = arrastrando ? 32 : 22;
+      c.fillStyle = '#ffb3b3'; c.beginPath();
+      if (c.roundRect) c.roundRect(x - am / 2, mid - al / 2, am, al, am / 2); else c.rect(x - am / 2, mid - al / 2, am, al);
+      c.fill();
+      tYa.textContent = mmss(pos); tFalta.textContent = '-' + mmss(DUR - pos);
+    }
+    function cuadro(ts){
+      var dt = ultimo ? Math.min(0.05, (ts - ultimo) / 1000) : 0; ultimo = ts;
+      var meta = sonando ? 1 : 0;
+      amp += (meta - amp) * Math.min(1, dt * 4);
+      galleta += (meta - galleta) * Math.min(1, dt * 5);
+      if (sonando){ fase += dt * 5.2; pos = Math.min(DUR, pos + dt); }
+      forma(); dibujar();
+      if (sonando || Math.abs(amp - meta) > 0.01 || Math.abs(galleta - meta) > 0.01 || arrastrando) requestAnimationFrame(cuadro);
+      else { ultimo = 0; }
+    }
+    function animar(){ if (!ultimo) requestAnimationFrame(cuadro); }
+    boton.addEventListener('click', function(){
+      sonando = !sonando;
+      boton.classList.toggle('sonando', sonando);
+      boton.setAttribute('aria-label', sonando ? 'Pausar' : 'Reproducir');
+      icono.setAttribute('d', sonando ? 'M7 5h3.6v14H7zM13.4 5H17v14h-3.6z' : 'M8 5v14l11-7z');
+      animar();
+    });
+    function ir(e){ var r = lienzo.getBoundingClientRect(); pos = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)) * DUR; }
+    lienzo.addEventListener('pointerdown', function(e){ arrastrando = true; lienzo.setPointerCapture(e.pointerId); ir(e); animar(); });
+    lienzo.addEventListener('pointermove', function(e){ if (arrastrando){ ir(e); if (!sonando) dibujar(); } });
+    lienzo.addEventListener('pointerup', function(){ arrastrando = false; animar(); });
+    lienzo.addEventListener('pointercancel', function(){ arrastrando = false; animar(); });
+    window.addEventListener('resize', dibujar);
+    forma(); dibujar();
+  })();
+
+  /* ——— Pruébala: la máquinita de WhyType, con su sonido ——— */
+  (function(){
+    var area = document.getElementById('maquinita'), carro = document.getElementById('carro2');
+    var cuenta = document.getElementById('cuenta'), botonSonido = document.getElementById('sonido');
+    if (!area) return;
+    var conSonido = true, audio = null, largo = 0, RENGLON = 38;
+    try { if (localStorage.getItem('wt-sonido') === 'no') conSonido = false; } catch(e){}
+    function marcar(){ botonSonido.textContent = conSonido ? '🔊 Sonido: sí' : '🔇 Sonido: no'; }
+    marcar();
+    botonSonido.addEventListener('click', function(){ conSonido = !conSonido; marcar(); try { localStorage.setItem('wt-sonido', conSonido ? 'si' : 'no'); } catch(e){} });
+    function ctx(){
+      if (!audio){ var A = window.AudioContext || window.webkitAudioContext; if (!A) return null; audio = new A(); }
+      if (audio.state === 'suspended') audio.resume();
+      return audio;
+    }
+    function ruido(dur, freq, vol){
+      var a = ctx(); if (!a) return;
+      var n = Math.floor(a.sampleRate * dur), buf = a.createBuffer(1, n, a.sampleRate), d = buf.getChannelData(0);
+      for (var i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / n, 3);
+      var s = a.createBufferSource(); s.buffer = buf;
+      var f = a.createBiquadFilter(); f.type = 'bandpass'; f.frequency.value = freq; f.Q.value = 0.9;
+      var g = a.createGain(); g.gain.value = vol;
+      s.connect(f); f.connect(g); g.connect(a.destination); s.start();
+    }
+    function tecla(){ ruido(0.035, 1800 + Math.random() * 900, 0.9); setTimeout(function(){ ruido(0.02, 600, 0.35); }, 12); }
+    function campana(){
+      var a = ctx(); if (!a) return;
+      [2093, 4186].forEach(function(fr, k){
+        var o = a.createOscillator(), g = a.createGain(); o.frequency.value = fr; o.type = 'sine';
+        g.gain.setValueAtTime(k ? 0.06 : 0.16, a.currentTime); g.gain.exponentialRampToValueAtTime(0.0001, a.currentTime + 0.9);
+        o.connect(g); g.connect(a.destination); o.start(); o.stop(a.currentTime + 0.95);
+      });
+    }
+    function regreso(){ ruido(0.18, 900, 0.5); }
+    function moverCarro(){
+      var antes = area.value.slice(0, area.selectionStart), linea = antes.split('\n').pop().length;
+      var max = carro.parentElement.clientWidth - carro.offsetWidth;
+      carro.style.left = (max * Math.min(linea, RENGLON) / RENGLON) + 'px';
+      var n = area.value.replace(/\s/g, '').length;
+      cuenta.textContent = n + (n === 1 ? ' letra' : ' letras');
+      return linea;
+    }
+    area.addEventListener('input', function(){
+      var nuevo = area.value.length, crece = nuevo > largo; largo = nuevo;
+      var linea = moverCarro();
+      if (!conSonido) return;
+      var ultima = area.value.charAt(area.selectionStart - 1);
+      if (crece && ultima === '\n') regreso();
+      else if (crece){ tecla(); if (linea === RENGLON - 4) setTimeout(campana, 40); }
+      else ruido(0.025, 1200, 0.4);
+    });
+    area.addEventListener('click', moverCarro);
+    area.addEventListener('keyup', moverCarro);
+  })();
 
   /* Copiar el correo */
   document.getElementById('copiar').addEventListener('click', function(){
