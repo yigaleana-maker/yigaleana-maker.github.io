@@ -5,7 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>yg4apps · Headpod y WhyType</title>
 <meta name="description" content="Headpod, la experiencia más increíble de podcast, y WhyType, tus notas en una máquina de escribir de verdad. Apps gratis para Android.">
-<meta name="theme-color" content="#0b0908">
+<meta name="theme-color" content="#0b0908" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#faf6f1" media="(prefers-color-scheme: light)">
+<link rel="alternate" hreflang="es" href="https://yigaleana-maker.github.io/">
+<link rel="alternate" hreflang="en" href="https://yigaleana-maker.github.io/en/">
 <link rel="icon" href="img/whytype-icono.png">
 <meta property="og:title" content="Una para escuchar. Otra para escribir.">
 <meta property="og:description" content="Headpod y WhyType: apps gratis para Android, sin anuncios y sin cuentas.">
@@ -33,6 +36,8 @@
   --tinta2:#6d655d;
   --rojo:#e5352a;           /* acento WhyType */
   --pizarra:#1c1c1e;
+  --pizarra2:#2a2a2d;
+  --gris:#a9a9ad;
   --f-marca:"Unbounded", "Arial Black", system-ui, sans-serif;
   --f-hp:"Nunito", system-ui, sans-serif;
   --f-maquina:"Special Elite", "Courier New", monospace;
@@ -221,14 +226,14 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .final{background:var(--pizarra);padding-block:72px}
 .final h2{font-family:var(--f-marca);font-weight:700;font-size:clamp(26px, 4vw, 38px);letter-spacing:-.03em}
 .pasos{list-style:none;padding:0;margin:28px 0 0;display:grid;grid-template-columns:repeat(3, minmax(0,1fr));gap:14px;counter-reset:paso}
-.pasos li{background:#2a2a2d;border-radius:24px;padding:22px;counter-increment:paso;min-width:0}
+.pasos li{background:var(--pizarra2);border-radius:24px;padding:22px;counter-increment:paso;min-width:0}
 .pasos li::before{content:counter(paso);display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--crema);color:var(--pizarra);font-family:var(--f-marca);font-weight:800;margin-bottom:14px}
 .pasos b{display:block;font-size:17px;margin-bottom:4px}
-.pasos span{color:#a9a9ad;font-size:15px}
+.pasos span{color:var(--gris);font-size:15px}
 .extra{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
 .extra > div{border-radius:24px;padding:22px;border:1px solid #ffffff14;min-width:0}
 .extra b{display:block;font-size:17px;margin-bottom:6px}
-.extra p{color:#a9a9ad;font-size:15px}
+.extra p{color:var(--gris);font-size:15px}
 .correo{display:flex;gap:8px;align-items:center;margin-top:12px;flex-wrap:wrap}
 .correo code{font-family:var(--f-ui);font-weight:600;font-size:16px;color:var(--crema);user-select:all;background:#ffffff10;padding:8px 12px;border-radius:12px}
 .correo button{font:inherit;font-weight:600;font-size:14px;background:var(--crema);color:var(--pizarra);border:0;border-radius:99px;padding:8px 14px;cursor:pointer}
@@ -239,6 +244,23 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
 
 :focus-visible{outline:2px solid var(--rosa);outline-offset:3px}
 .whynote :focus-visible{outline-color:var(--rojo)}
+
+
+/* ——— Modo claro: la portada, la barra y el final se aclaran. Headpod sigue de noche (es su mundo)
+   y WhyType sigue en su papel. ——— */
+@media (prefers-color-scheme: light){
+  :root{color-scheme:light;--noche:#faf6f1;--crema:#2a1e19;--crema2:#6d5d50;--rosa:#c8466a;--pizarra:#f1ece6;--pizarra2:#ffffff;--gris:#6d655d}
+  .headpod,.p-hp{color-scheme:dark;--crema:#f5e9dc;--crema2:#bfae9f;--rosa:#ffb3b3;--cafe:#1d1411;--cafe2:#2a1e19}
+  .p-hp,.headpod{color:var(--crema)}
+  .portada h1 .esc2{color:var(--tinta)}
+  .barra{border-bottom-color:#2a1e1914}
+  .barra nav a:hover,.barra nav a:focus-visible{background:#2a1e190f}
+  .puerta.p-wn{box-shadow:0 10px 30px #5a4a3a1f}
+  .pasos li{box-shadow:0 6px 18px #5a4a3a12}
+  .extra > div{border-color:#2a1e1914}
+  .correo code{background:#2a1e190d}
+  footer{border-top-color:#2a1e1914;color:#7d746c}
+}
 
 @media (max-width: 760px){
   .puertas{grid-template-columns:1fr}
@@ -252,6 +274,9 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
   .sello-grande{margin-left:0}
 }
 @media (max-width: 460px){
+  .barra nav{gap:0}
+  .barra nav a{padding:8px 7px;font-size:13px}
+  .marca{font-size:16px}
   .cosas{grid-template-columns:1fr}
   .portada{padding-block:44px 36px}
 }
@@ -270,6 +295,7 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
       <a href="#headpod">Headpod</a>
       <a href="#whynote">WhyType</a>
       <a href="#instalar">Instalar</a>
+      <a href="en/" lang="en" hreflang="en" aria-label="English">EN</a>
     </nav>
   </div>
 </header>

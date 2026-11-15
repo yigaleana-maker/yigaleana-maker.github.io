@@ -1,0 +1,772 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>yg4apps · Headpod and WhyType</title>
+<meta name="description" content="Headpod, the most amazing podcast experience, and WhyType, your notes on a real typewriter. Free apps for Android.">
+<meta name="theme-color" content="#0b0908" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#faf6f1" media="(prefers-color-scheme: light)">
+<link rel="alternate" hreflang="es" href="https://yigaleana-maker.github.io/">
+<link rel="alternate" hreflang="en" href="https://yigaleana-maker.github.io/en/">
+<link rel="icon" href="../img/whytype-icono.png">
+<meta property="og:title" content="One to listen. One to write.">
+<meta property="og:description" content="Headpod and WhyType: free Android apps, no ads and no accounts.">
+<meta property="og:image" content="https://yigaleana-maker.github.io/img/compartir-2.png">
+<meta property="og:url" content="https://yigaleana-maker.github.io/en/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Nunito:wght@500;700;800&family=Special+Elite&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Una sola página, oscura de entrada: portada con dos puertas, luego el mundo de Headpod (negro y onda rosa)
+   y después el de WhyType (la hoja de papel crema con su máquina). Cada sección se viste como su app. */
+:root{
+  color-scheme: dark;
+  --noche:#0b0908;          /* fondo general y Headpod */
+  --cafe:#1d1411;           /* tarjetas Headpod */
+  --cafe2:#2a1e19;
+  --crema:#f5e9dc;          /* texto claro */
+  --crema2:#bfae9f;
+  --rosa:#ffb3b3;           /* acento Headpod */
+  --ambar:#ffb547;
+  --papel:#efe8da;          /* fondo WhyType */
+  --tinta:#2a2623;
+  --tinta2:#6d655d;
+  --rojo:#e5352a;           /* acento WhyType */
+  --pizarra:#1c1c1e;
+  --pizarra2:#2a2a2d;
+  --gris:#a9a9ad;
+  --f-marca:"Unbounded", "Arial Black", system-ui, sans-serif;
+  --f-hp:"Nunito", system-ui, sans-serif;
+  --f-maquina:"Special Elite", "Courier New", monospace;
+  --f-serif:"Source Serif 4", Georgia, serif;
+  --f-ui:"Inter", system-ui, sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--noche);color:var(--crema);font-family:var(--f-ui);font-size:16px;line-height:1.55;overflow-x:hidden}
+a{color:inherit}
+.envoltura{max-width:1080px;margin:0 auto;padding-left:max(20px, env(safe-area-inset-left, 0px));padding-right:max(20px, env(safe-area-inset-right, 0px))}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+
+/* ——— Barra ——— */
+.barra{position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:color-mix(in srgb, var(--noche) 82%, transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid #ffffff10}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:21;background:var(--noche)}
+.barra .envoltura{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+.marca{font-family:var(--f-marca);font-weight:800;font-size:18px;letter-spacing:-.02em;text-decoration:none}
+.marca span{color:var(--rosa)}
+.barra nav{display:flex;gap:6px}
+.barra nav a{text-decoration:none;font-weight:600;font-size:14px;padding:8px 14px;border-radius:99px;color:var(--crema2)}
+.barra nav a:hover,.barra nav a:focus-visible{background:#ffffff12;color:var(--crema)}
+
+/* ——— Portada ——— */
+.portada{padding-block:72px 56px}
+.portada .eti{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--crema2);font-weight:600}
+.portada h1{font-family:var(--f-marca);font-weight:700;font-size:clamp(34px, 6.4vw, 68px);line-height:1.04;letter-spacing:-.035em;margin-top:14px;max-width:15ch}
+.portada h1 .esc{color:var(--rosa)}
+.portada h1 .esc2{font-family:var(--f-maquina);font-weight:400;letter-spacing:0;color:var(--papel)}
+.portada .bajada{color:var(--crema2);font-size:18px;max-width:52ch;margin-top:18px}
+.puertas{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:40px}
+.puerta{position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:28px;min-height:250px;border-radius:30px;padding:24px;text-decoration:none;overflow:hidden;transition:transform .35s cubic-bezier(.2,.9,.3,1.3)}
+.puerta:hover,.puerta:focus-visible{transform:translateY(-4px) scale(1.01)}
+.puerta:active{transform:scale(.98)}
+.puerta img.ico{width:110px;height:110px;margin:-23px;filter:drop-shadow(0 6px 12px #0005)}
+.puerta h2{font-size:28px}
+.puerta p{margin-top:4px}
+.puerta .ir{font-weight:700;font-size:14px;margin-top:10px;display:inline-block}
+.p-hp{background:radial-gradient(120% 90% at 100% 0%, #3a2420 0%, var(--cafe) 55%);border:1px solid #ffb3b322}
+.p-hp h2{font-family:var(--f-marca);font-weight:800;letter-spacing:-.03em}
+.p-hp p{font-family:var(--f-hp);font-weight:700;color:var(--crema2)}
+.p-hp .ir{color:var(--rosa)}
+.p-hp svg{position:absolute;right:-10px;top:42px;width:62%;opacity:.9}
+.p-wn{background:var(--papel);color:var(--tinta);background-image:radial-gradient(#7a6a5524 1px, transparent 1.4px);background-size:9px 9px}
+.p-wn h2{font-family:var(--f-serif);font-weight:700}
+.p-wn p{font-family:var(--f-maquina);color:var(--tinta2)}
+.p-wn .ir{color:var(--rojo)}
+.p-wn .sello{position:absolute;cursor:pointer;right:22px;top:22px;width:86px;height:86px;border-radius:50%;border:3px solid #e5352a99;display:grid;place-items:center;transform:rotate(-12deg);font-family:var(--f-maquina);color:#e5352aaa;font-size:15px;box-shadow:inset 0 0 0 5px var(--papel), inset 0 0 0 6.5px #e5352a77}
+
+/* ——— Teléfonos ——— */
+.tira{display:flex;gap:6px;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px 4px 18px;margin-top:36px;scrollbar-width:thin}
+.tira figure{margin:0;flex:0 0 auto;width:210px;scroll-snap-align:center;text-align:center}
+.tira img{width:100%;height:auto;display:block}
+.tira figcaption{font-size:13px;font-weight:700;margin-top:4px;padding-inline:8px;text-wrap:balance}
+.tira-titulo{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-top:48px;flex-wrap:wrap}
+.tira-titulo h3{font-size:20px}
+.tira-titulo small{font-size:13px}
+.tira + .tira-titulo{margin-top:8px}
+.tira-titulo + .tira{margin-top:10px}
+
+/* ——— Lo que tiene ——— */
+.cosas{display:grid;grid-template-columns:repeat(3, minmax(0,1fr));gap:12px;margin-top:40px}
+.cosa{border-radius:22px;padding:18px 18px 20px;min-width:0}
+.cosa b{display:block;font-size:16px;margin-bottom:4px}
+.cosa span{font-size:14.5px}
+.botones{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;font-size:16px;padding:16px 26px;border-radius:99px;transition:transform .3s cubic-bezier(.2,.9,.3,1.4)}
+.btn:hover,.btn:focus-visible{transform:scale(1.04)}
+.btn:active{transform:scale(.96)}
+.btn small{font-weight:600;opacity:.75;font-size:13px}
+
+/* ——— Headpod ——— */
+.headpod{background:#000;padding-block:0 80px;position:relative}
+.escena{position:relative;display:grid;grid-template-columns:1.05fr 1fr;align-items:center;gap:12px;padding-top:40px}
+.escena video{width:100%;max-width:520px;aspect-ratio:1;display:block;justify-self:center;-webkit-mask-image:radial-gradient(closest-side, #000 70%, transparent 100%);mask-image:radial-gradient(closest-side, #000 70%, transparent 100%)}
+.escena .texto{min-width:0}
+.hp-nombre{font-family:var(--f-marca);font-weight:800;font-size:clamp(48px, 8vw, 92px);letter-spacing:-.045em;line-height:1;color:#fff}
+.onda{display:block;width:100%;height:28px;margin:18px 0 22px}
+.onda path{fill:none;stroke:var(--rosa);stroke-width:3;stroke-linecap:round;stroke-dasharray:900;stroke-dashoffset:0}
+.onda.dibuja path{animation:dibujar 2.2s cubic-bezier(.5,0,.2,1) both}
+@keyframes dibujar{from{stroke-dashoffset:900}to{stroke-dashoffset:0}}
+.hp-lema{font-family:var(--f-marca);font-weight:700;font-size:clamp(22px, 3vw, 32px);line-height:1.15;letter-spacing:-.025em;color:#fff}
+.hp-sub{font-family:var(--f-hp);font-weight:700;color:#b9b2ad;font-size:17px;margin-top:12px}
+.headpod .tira-titulo h3{font-family:var(--f-marca);font-weight:700;letter-spacing:-.02em}
+.headpod .tira-titulo small{color:#8f857d;font-family:var(--f-hp);font-weight:700}
+.headpod .tira figcaption{color:var(--crema2);font-family:var(--f-hp)}
+.headpod .cosa{background:var(--cafe);font-family:var(--f-hp)}
+.headpod .cosa b{font-weight:800;color:var(--crema)}
+.headpod .cosa span{color:var(--crema2);font-weight:600}
+.btn-hp{background:var(--rosa);color:#3a1715}
+.btn-hp2{background:var(--cafe2);color:var(--crema)}
+
+/* ——— WhyType ——— */
+.whynote{background:var(--papel);color:var(--tinta);background-image:radial-gradient(#7a6a5520 1px, transparent 1.5px);background-size:11px 11px;padding-block:80px;position:relative;overflow:hidden}
+.whynote::before{content:"";position:absolute;inset:0 0 auto;height:60px;background:linear-gradient(#000, transparent);opacity:.35}
+.maquina{position:relative;max-width:720px}
+.wn-fecha{font-family:var(--f-maquina);color:var(--tinta2);font-size:15px}
+.wn-nombre{font-family:var(--f-serif);font-weight:700;font-size:clamp(52px, 8.5vw, 96px);letter-spacing:-.02em;line-height:1;margin-top:10px}
+.wn-raya{width:110px;height:4px;background:var(--rojo);border-radius:2px;margin:16px 0 22px}
+.tecleado{font-family:var(--f-maquina);font-size:clamp(20px, 2.6vw, 27px);line-height:1.55;min-height:3.2em;max-width:30ch}
+.tecleado .cursor{display:inline-block;width:2px;height:1.05em;background:var(--rojo);vertical-align:-3px;margin-left:2px;animation:parpadeo 1s steps(1) infinite}
+@keyframes parpadeo{50%{opacity:0}}
+.riel{position:relative;height:40px;margin-top:26px;max-width:620px}
+.riel::before{content:"";position:absolute;left:0;right:0;top:15px;height:10px;border-radius:6px;background:linear-gradient(#55524f,#1d1c1b 60%,#3b3936)}
+.carro{position:absolute;top:0;left:0;width:112px;height:40px;border-radius:22px;background:linear-gradient(#f4f1ea,#cfcac1);box-shadow:0 6px 14px #0003, inset 0 1px 0 #fff;display:flex;align-items:center;justify-content:center;gap:5px;transition:left .09s linear}
+.carro i{width:6px;height:6px;border-radius:50%;background:#2a2623}
+.carro i:first-child{background:#3fae54}.carro i:last-child{background:var(--rojo)}
+.whynote .tira-titulo h3{font-family:var(--f-serif);font-weight:700}
+.whynote .tira-titulo small{font-family:var(--f-maquina);color:var(--tinta2)}
+.whynote .tira figcaption{font-family:var(--f-maquina);font-weight:400;color:var(--tinta)}
+.whynote .tira img{filter:drop-shadow(0 10px 18px #5a4a3a33)}
+.whynote .cosa{background:#fffaf1;border:1px solid #2a262312}
+.whynote .cosa b{font-family:var(--f-serif);font-weight:700;font-size:17px}
+.whynote .cosa span{color:var(--tinta2)}
+.btn-wn{background:var(--rojo);color:#fff}
+.btn-wn2{background:var(--tinta);color:var(--papel)}
+.sello-grande{width:120px;height:120px;border-radius:50%;border:3px solid #e5352aa8;display:grid;place-items:center;text-align:center;font-family:var(--f-maquina);color:#e5352ab8;font-size:18px;line-height:1.1;transform:rotate(-14deg);box-shadow:inset 0 0 0 7px var(--papel), inset 0 0 0 9px #e5352a80;margin-left:auto}
+.sello-grande{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.p-wn .sello{--giro:-12deg}
+.sello-grande{--giro:-14deg}
+/* El sellado: baja desde arriba, golpea (se aplasta un poco), rebota y la tinta se asienta */
+.estampa{animation:sellar .7s cubic-bezier(.2,.7,.3,1) both}
+@keyframes sellar{
+  0%{transform:rotate(calc(var(--giro) + 8deg)) scale(2.3);opacity:0;filter:blur(3px)}
+  45%{transform:rotate(var(--giro)) scale(.9);opacity:1;filter:blur(0)}
+  62%{transform:rotate(var(--giro)) scale(1.06)}
+  78%{transform:rotate(var(--giro)) scale(.98)}
+  100%{transform:rotate(var(--giro)) scale(1);opacity:.92}
+}
+/* El golpe deja una onda de tinta alrededor */
+.estampa::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid #e5352a;opacity:0;animation:tinta .7s ease-out .3s both;pointer-events:none}
+@keyframes tinta{0%{transform:scale(.85);opacity:.55}100%{transform:scale(1.45);opacity:0}}
+/* Y lo de alrededor tiembla un instante */
+.golpe{animation:golpe .32s ease-out .3s both}
+@keyframes golpe{0%,100%{translate:0 0}25%{translate:0 2px}50%{translate:-1px -1px}75%{translate:1px 1px}}
+/* Al deslizar: lo que se acerca a la orilla de arriba o de abajo se difumina y se encoge un poco */
+.desvanece{opacity:var(--o,1);scale:var(--s,1);will-change:opacity,scale}
+/* Las tiras de pantallas se difuminan en sus orillas, como en las apps */
+.tira{-webkit-mask-image:linear-gradient(90deg,transparent,#000 22px,#000 calc(100% - 22px),transparent);mask-image:linear-gradient(90deg,transparent,#000 22px,#000 calc(100% - 22px),transparent)}
+@keyframes estampar{0%{transform:rotate(-14deg) scale(1.8);opacity:0}100%{transform:rotate(-14deg) scale(1);opacity:1}}
+
+
+/* ——— Pruébala, novedades y QR ——— */
+.extra-app{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:14px;margin-top:14px}
+.extra-app > *{min-width:0}
+.eti-prueba{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:12px}
+.prueba-hp,.headpod .novedades{background:var(--cafe);border-radius:26px;padding:20px}
+.prueba-hp .eti-prueba,.headpod .novedades h3{color:var(--rosa);font-family:var(--f-hp)}
+.mini{display:flex;align-items:center;gap:14px}
+.mini-portada{width:58px;height:58px;flex:0 0 auto;background:linear-gradient(135deg,#f1953e,#ffb3b3);display:grid;place-items:center;font-family:var(--f-marca);font-weight:800;color:#3a1715;font-size:22px}
+.mini-texto{flex:1;min-width:0;font-family:var(--f-hp)}
+.mini-texto small{display:block;font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--crema2)}
+.mini-texto b{display:block;font-weight:800;font-size:16px;color:var(--crema);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mini-play{flex:0 0 auto;width:62px;height:62px;border:0;background:var(--rosa);color:#3a1715;border-radius:31px;display:grid;place-items:center;cursor:pointer;transition:border-radius .5s cubic-bezier(.34,1.56,.64,1),transform .3s cubic-bezier(.34,1.56,.64,1)}
+.mini-play:active{transform:scale(.92)}
+.mini-play.sonando{border-radius:18px}
+.mini-play svg{width:26px;height:26px}
+.mini-onda{display:block;width:100%;height:44px;margin-top:14px;cursor:pointer;touch-action:none}
+.mini-tiempos{display:flex;justify-content:space-between;font-family:var(--f-hp);font-weight:700;font-size:13px;color:var(--crema2);font-variant-numeric:tabular-nums}
+.novedades h3{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin:0 0 12px}
+.novedades ol{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.novedades li b{display:block;font-size:15px}
+.novedades li small{font-size:12.5px;opacity:.7}
+.novedades li ul{margin:6px 0 0;padding-left:18px;font-size:14px;line-height:1.45}
+.headpod .novedades{font-family:var(--f-hp);color:var(--crema2)}
+.headpod .novedades b{color:var(--crema);font-weight:800}
+.whynote .novedades,.prueba-wn{background:#fffaf1;border:1px solid #2a262312;border-radius:26px;padding:20px}
+.whynote .novedades h3,.prueba-wn .eti-prueba{color:var(--rojo)}
+.whynote .novedades{color:var(--tinta2)}
+.whynote .novedades b{color:var(--tinta);font-family:var(--f-serif)}
+.prueba-wn textarea{width:100%;min-height:118px;resize:none;border:0;outline:0;background:transparent;font-family:var(--f-maquina);font-size:19px;line-height:1.55;color:var(--tinta);padding:4px 0;caret-color:var(--rojo)}
+.prueba-wn textarea::placeholder{color:#2a262355}
+.prueba-wn .riel{margin-top:10px}
+.prueba-wn .pie-prueba{display:flex;justify-content:space-between;align-items:center;margin-top:12px;gap:10px;flex-wrap:wrap}
+.prueba-wn button{font:inherit;font-family:var(--f-maquina);font-size:14px;background:transparent;border:1px solid #2a262330;color:var(--tinta);border-radius:99px;padding:6px 14px;cursor:pointer}
+.prueba-wn small{font-family:var(--f-maquina);color:var(--tinta2)}
+.qr-caja{display:none;align-items:center;gap:12px;padding:10px 14px 10px 10px;border-radius:20px;font-size:13px;line-height:1.35;max-width:270px}
+.qr-caja .qr{background:#fff;padding:6px;border-radius:12px;line-height:0}
+.qr-caja .qr img,.qr-caja .qr canvas{width:84px!important;height:84px!important}
+.headpod .qr-caja{background:var(--cafe);color:var(--crema2);font-family:var(--f-hp);font-weight:700}
+.whynote .qr-caja{background:#fffaf1;color:var(--tinta2);font-family:var(--f-maquina)}
+@media (min-width: 900px){ .qr-caja{display:flex} }
+
+/* ——— Cómo instalar / privacidad ——— */
+.final{background:var(--pizarra);padding-block:72px}
+.final h2{font-family:var(--f-marca);font-weight:700;font-size:clamp(26px, 4vw, 38px);letter-spacing:-.03em}
+.pasos{list-style:none;padding:0;margin:28px 0 0;display:grid;grid-template-columns:repeat(3, minmax(0,1fr));gap:14px;counter-reset:paso}
+.pasos li{background:var(--pizarra2);border-radius:24px;padding:22px;counter-increment:paso;min-width:0}
+.pasos li::before{content:counter(paso);display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--crema);color:var(--pizarra);font-family:var(--f-marca);font-weight:800;margin-bottom:14px}
+.pasos b{display:block;font-size:17px;margin-bottom:4px}
+.pasos span{color:var(--gris);font-size:15px}
+.extra{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.extra > div{border-radius:24px;padding:22px;border:1px solid #ffffff14;min-width:0}
+.extra b{display:block;font-size:17px;margin-bottom:6px}
+.extra p{color:var(--gris);font-size:15px}
+.correo{display:flex;gap:8px;align-items:center;margin-top:12px;flex-wrap:wrap}
+.correo code{font-family:var(--f-ui);font-weight:600;font-size:16px;color:var(--crema);user-select:all;background:#ffffff10;padding:8px 12px;border-radius:12px}
+.correo button{font:inherit;font-weight:600;font-size:14px;background:var(--crema);color:var(--pizarra);border:0;border-radius:99px;padding:8px 14px;cursor:pointer}
+footer{background:var(--pizarra);border-top:1px solid #ffffff10;padding-block:26px;color:#8a8a8f;font-size:14px}
+footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+.aviso-maqueta{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom, 0px));transform:translateX(-50%);z-index:30;background:#000c;border:1px solid #ffffff22;color:#ddd;font-size:12.5px;padding:7px 14px;border-radius:99px;backdrop-filter:blur(8px);white-space:nowrap}
+
+:focus-visible{outline:2px solid var(--rosa);outline-offset:3px}
+.whynote :focus-visible{outline-color:var(--rojo)}
+
+
+/* ——— Modo claro: la portada, la barra y el final se aclaran. Headpod sigue de noche (es su mundo)
+   y WhyType sigue en su papel. ——— */
+@media (prefers-color-scheme: light){
+  :root{color-scheme:light;--noche:#faf6f1;--crema:#2a1e19;--crema2:#6d5d50;--rosa:#c8466a;--pizarra:#f1ece6;--pizarra2:#ffffff;--gris:#6d655d}
+  .headpod,.p-hp{color-scheme:dark;--crema:#f5e9dc;--crema2:#bfae9f;--rosa:#ffb3b3;--cafe:#1d1411;--cafe2:#2a1e19}
+  .p-hp,.headpod{color:var(--crema)}
+  .portada h1 .esc2{color:var(--tinta)}
+  .barra{border-bottom-color:#2a1e1914}
+  .barra nav a:hover,.barra nav a:focus-visible{background:#2a1e190f}
+  .puerta.p-wn{box-shadow:0 10px 30px #5a4a3a1f}
+  .pasos li{box-shadow:0 6px 18px #5a4a3a12}
+  .extra > div{border-color:#2a1e1914}
+  .correo code{background:#2a1e190d}
+  footer{border-top-color:#2a1e1914;color:#7d746c}
+}
+
+@media (max-width: 760px){
+  .puertas{grid-template-columns:1fr}
+  .escena{grid-template-columns:1fr;padding-top:10px}
+  .escena video{max-width:360px}
+  .cosas{grid-template-columns:1fr 1fr}
+  .pasos{grid-template-columns:1fr}
+  .extra{grid-template-columns:1fr}
+  .tira figure{width:180px}
+  .barra nav a{padding:8px 10px}
+  .sello-grande{margin-left:0}
+}
+@media (max-width: 460px){
+  .barra nav{gap:0}
+  .barra nav a{padding:8px 7px;font-size:13px}
+  .marca{font-size:16px}
+  .cosas{grid-template-columns:1fr}
+  .portada{padding-block:44px 36px}
+}
+@media (prefers-reduced-motion: reduce){
+  *{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<header class="barra">
+  <div class="envoltura">
+    <a class="marca" href="#inicio">yg4<span>apps</span></a>
+    <nav aria-label="Apps">
+      <a href="#headpod">Headpod</a>
+      <a href="#whynote">WhyType</a>
+      <a href="#instalar">Install</a>
+      <a href="../" lang="es" hreflang="es" aria-label="Español">ES</a>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="portada envoltura">
+    <p class="eti">Android apps · free</p>
+    <h1>One to <span class="esc">listen</span>. One to <span class="esc2">write</span>.</h1>
+    <p class="bajada">Two apps made with care, with no ads and no accounts. Your stuff stays on your phone.</p>
+
+    <div class="puertas">
+      <a class="puerta p-hp" href="#headpod">
+        <svg viewBox="0 0 300 40" aria-hidden="true"><path id="onda-puerta" d="M0 20 Q 18 6 36 20 T 72 20 T 108 20 T 144 20 T 180 20 T 216 20 T 252 20 T 288 20" fill="none" stroke="#ffb3b3" stroke-width="3" stroke-linecap="round"/></svg>
+        <img class="ico" src="../img/hp-icono.png" alt="">
+        <div>
+          <h2>Headpod</h2>
+          <p>Your podcasts, your progress, your way of listening.</p>
+          <span class="ir">Meet Headpod ↓</span>
+        </div>
+      </a>
+      <a class="puerta p-wn" href="#whynote">
+        <span class="sello" id="sello-puerta" aria-hidden="true">WhyType</span>
+        <img class="ico" src="../img/whytype-icono.png" alt="">
+        <div>
+          <h2>WhyType</h2>
+          <p>Your notes on a real typewriter.</p>
+          <span class="ir">Meet WhyType ↓</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ——— HEADPOD ——— -->
+  <section class="headpod" id="headpod">
+    <div class="envoltura">
+      <div class="escena">
+        <video src="../audifonos.mp4" poster="../img/audifonos.jpg" autoplay muted loop playsinline aria-label="The Headpod headphones spinning"></video>
+        <div class="texto">
+          <h2 class="hp-nombre">Headpod</h2>
+          <svg class="onda" id="onda" viewBox="0 0 600 28" preserveAspectRatio="none" aria-hidden="true"><path id="onda-hp" d="M2 14 C 27 2, 52 2, 77 14 S 127 26, 152 14 S 202 2, 227 14 S 277 26, 302 14 S 352 2, 377 14 S 427 26, 452 14 S 502 2, 527 14 S 577 26, 598 14"/></svg>
+          <p class="hp-lema">Welcome to the most amazing podcast experience</p>
+          <p class="hp-sub">Your shows, your progress, your way of listening.</p>
+          <div class="botones">
+            <a class="btn btn-hp" href="https://github.com/yigaleana-maker/headpod-actualizaciones/releases/latest/download/headpod.apk">⬇ Download Headpod <small>APK</small></a>
+            <a class="btn btn-hp2" href="https://apps.obtainium.imranr.dev/redirect?r=obtainium://add/https://github.com/yigaleana-maker/headpod-actualizaciones">➕ Obtainium</a>
+            <div class="qr-caja"><div class="qr" data-url="https://yigaleana-maker.github.io/en/#headpod"></div><span>On a computer? Scan it with your phone to download.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tira-titulo"><h3>The first time you open it</h3><small>swipe →</small></div>
+      <div class="tira" tabindex="0" aria-label="Headpod welcome screens">
+        <figure><img src="../img/hp/1-bienvenida.webp" alt="Headpod welcome with the headphones" loading="lazy"><figcaption>Welcome</figcaption></figure>
+        <figure><img src="../img/hp/2-programas.webp" alt="Your name and search shows" loading="lazy"><figcaption>Your name and your shows</figcaption></figure>
+        <figure><img src="../img/hp/3-escucha.webp" alt="Listen your way" loading="lazy"><figcaption>Listen your way</figcaption></figure>
+        <figure><img src="../img/hp/4-avisos.webp" alt="Alerts and downloads" loading="lazy"><figcaption>Never miss a thing</figcaption></figure>
+        <figure><img src="../img/hp/5-tema.webp" alt="Choose a theme" loading="lazy"><figcaption>Your theme</figcaption></figure>
+        <figure><img src="../img/hp/6-respaldo.webp" alt="Restore or import" loading="lazy"><figcaption>Bring your stuff</figcaption></figure>
+      </div>
+      <div class="tira-titulo"><h3>How it looks</h3></div>
+      <div class="tira" tabindex="0" aria-label="Headpod screens">
+        <figure><img src="../img/hp/inicio.webp" alt="Home with your daily mix" loading="lazy"><figcaption>Home and your daily mix</figcaption></figure>
+        <figure><img src="../img/hp/descubrir.webp" alt="Discover" loading="lazy"><figcaption>Discover</figcaption></figure>
+        <figure><img src="../img/hp/biblioteca.webp" alt="Library" loading="lazy"><figcaption>Library</figcaption></figure>
+      </div>
+
+      <div class="cosas">
+        <div class="cosa"><b>🎶 Your daily mix</b><span>What you left halfway and what’s new from your favorites, in one tap.</span></div>
+        <div class="cosa"><b>🗣️ Clear voice</b><span>Equalizer, speed per show and skip silences.</span></div>
+        <div class="cosa"><b>⏭️ No intros</b><span>Skips each show’s intro and outro on its own.</span></div>
+        <div class="cosa"><b>🌙 Gentle sleep timer</b><span>Fades the volume little by little. Shake your phone for 5 more minutes.</span></div>
+        <div class="cosa"><b>📝 Transcripts</b><span>Read along and tap a line to jump there.</span></div>
+        <div class="cosa"><b>🔵 Your headphones</b><span>Connect them and it picks up where you left off.</span></div>
+      </div>
+
+      <div class="extra-app">
+        <div class="prueba-hp">
+          <span class="eti-prueba">Try it here</span>
+          <div class="mini">
+            <div class="mini-portada" id="mini-portada">H</div>
+            <div class="mini-texto"><small>YOUR SHOW</small><b>This is how the player feels</b></div>
+            <button class="mini-play" id="mini-play" type="button" aria-label="Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path id="mini-icono" d="M8 5v14l11-7z" fill="currentColor"/></svg></button>
+          </div>
+          <canvas class="mini-onda" id="mini-onda" aria-label="Progress bar: tap or drag it"></canvas>
+          <div class="mini-tiempos"><span id="t-ya">0:00</span><span id="t-falta">-42:00</span></div>
+        </div>
+        <div class="novedades" data-repo="headpod-actualizaciones" data-boton=".btn-hp" data-app="Headpod">
+          <h3>What’s new in Headpod</h3>
+          <ol><li><small>Loading the latest versions… (release notes are in Spanish)</small></li></ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ——— WHYNOTE ——— -->
+  <section class="whynote" id="whynote">
+    <div class="envoltura">
+      <div class="maquina">
+        <p class="wn-fecha" id="fecha">Sunday, November 15</p>
+        <h2 class="wn-nombre">WhyType</h2>
+        <div class="wn-raya"></div>
+        <p class="tecleado" id="tecleado" aria-label="From one writer to another. Your notes on a real typewriter.">From one writer to another. Your notes on a real typewriter.</p>
+        <div class="riel" aria-hidden="true"><div class="carro" id="carro"><i></i><i></i><i></i></div></div>
+      </div>
+
+      <div class="tira-titulo"><h3>The first time you open it</h3><small>swipe →</small></div>
+      <div class="tira" tabindex="0" aria-label="WhyType welcome screens">
+        <figure><img src="../img/wn/1-whynote.webp" alt="WhyType welcome" loading="lazy"><figcaption>WhyType</figcaption></figure>
+        <figure><img src="../img/wn/2-escribe.webp" alt="Type like on a typewriter" loading="lazy"><figcaption>Type like on a typewriter</figcaption></figure>
+        <figure><img src="../img/wn/3-hoja.webp" alt="Read like a sheet" loading="lazy"><figcaption>Read like a sheet</figcaption></figure>
+        <figure><img src="../img/wn/4-usuario.webp" alt="Your name and PIN" loading="lazy"><figcaption>Your name and PIN</figcaption></figure>
+        <figure><img src="../img/wn/5-bienvenido.webp" alt="Start writing" loading="lazy"><figcaption>Start writing!</figcaption></figure>
+      </div>
+      <div class="tira-titulo"><h3>How it looks</h3></div>
+      <div class="tira" tabindex="0" aria-label="WhyType screens">
+        <figure><img src="../img/wn/maquina.webp" alt="The sheet in the typewriter" loading="lazy"><figcaption>Your sheet in the typewriter</figcaption></figure>
+        <figure><img src="../img/wn/tu-maquina.webp" alt="Customize your typewriter" loading="lazy"><figcaption>Customize your typewriter</figcaption></figure>
+        <figure><img src="../img/wn/recordatorios.webp" alt="Reminders" loading="lazy"><figcaption>Reminders</figcaption></figure>
+        <figure><img src="../img/wn/opciones.webp" alt="Note options" loading="lazy"><figcaption>Scan, share and more</figcaption></figure>
+      </div>
+
+      <div class="cosas">
+        <div class="cosa"><b>Type like on a typewriter</b><span>Every key clacks, the carriage moves and the bell rings at the end of the line.</span></div>
+        <div class="cosa"><b>Your own typewriter</b><span>Carriage, rail, charm, stamp, paper, ink and font. Even your own handwriting.</span></div>
+        <div class="cosa"><b>Scan text</b><span>Snap a photo of a page and the typewriter types it out. No internet needed.</span></div>
+        <div class="cosa"><b>Reminders</b><span>Write them the way you’d say them (in Spanish). A marimba plays when you finish one.</span></div>
+        <div class="cosa"><b>Private notes</b><span>They only open with your fingerprint.</span></div>
+        <div class="cosa"><b>Share as a sheet</b><span>A typewritten image, ready for Instagram or WhatsApp.</span></div>
+      </div>
+
+      <div class="extra-app">
+        <div class="prueba-wn">
+          <span class="eti-prueba">Try it: type here</span>
+          <textarea id="maquinita" maxlength="600" placeholder="Type something and hear the typewriter…" aria-label="Type to try the typewriter"></textarea>
+          <div class="riel" aria-hidden="true"><div class="carro" id="carro2"><i></i><i></i><i></i></div></div>
+          <div class="pie-prueba"><small id="cuenta">0 letters</small><button type="button" id="sonido">🔊 Sound: on</button></div>
+        </div>
+        <div class="novedades" data-repo="whynote-actualizaciones" data-boton=".btn-wn" data-app="WhyType">
+          <h3>What’s new in WhyType</h3>
+          <ol><li><small>Loading the latest versions… (release notes are in Spanish)</small></li></ol>
+        </div>
+      </div>
+
+      <div class="botones">
+        <a class="btn btn-wn" href="https://github.com/yigaleana-maker/whynote-actualizaciones/releases/latest/download/whynote.apk">⬇ Download WhyType <small>APK</small></a>
+        <a class="btn btn-wn2" href="https://apps.obtainium.imranr.dev/redirect?r=obtainium://add/https://github.com/yigaleana-maker/whynote-actualizaciones">➕ Obtainium</a>
+        <div class="qr-caja"><div class="qr" data-url="https://yigaleana-maker.github.io/en/#whynote"></div><span>On a computer? Scan it with your phone.</span></div>
+        <div class="sello-grande" id="sello" aria-hidden="true">WhyType<br>free</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ——— INSTALAR ——— -->
+  <section class="final" id="instalar">
+    <div class="envoltura">
+      <h2>How to install them</h2>
+      <ol class="pasos">
+        <li><b>Download</b><span>Tap the download button of the app you want, from your phone.</span></li>
+        <li><b>Allow the install</b><span>The first time, Android asks you to allow installs from your browser. If Play Protect shows up, tap "Install anyway".</span></li>
+        <li><b>Done, it updates itself</b><span>When there’s a new version, the app lets you know and updates without losing anything.</span></li>
+      </ol>
+      <div class="extra">
+        <div>
+          <b>Your privacy</b>
+          <p>Headpod and WhyType need no account, have no ads and don’t collect your data. Your notes, shows and progress stay on your phone, and on your Google Drive only if you turn on backup. <a href="privacy/">Read the full privacy notice</a>.</p>
+        </div>
+        <div>
+          <b>Something broke or got an idea?</b>
+          <p>The apps offer to send a report when something fails. You can also write to:</p>
+          <div class="correo"><code id="correo">yg4apps@gmail.com</code><button type="button" id="copiar">Copy</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="envoltura"><span>Made in Mexico with ❤️ by Yehu</span><span>Headpod · WhyType · <a href="privacy/">Privacy</a></span></div>
+</footer>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+(function(){
+  var quieto = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Fecha de hoy, como en la hoja de WhyType */
+  try{
+    var f = new Date().toLocaleDateString('en-US',{weekday:'long', day:'numeric', month:'long'});
+    document.getElementById('fecha').textContent = f;
+  }catch(e){}
+
+  /* La onda de Headpod se dibuja al llegar */
+  var onda = document.getElementById('onda');
+  var sello = document.getElementById('sello');
+  var tecleado = document.getElementById('tecleado');
+  var carro = document.getElementById('carro');
+  var texto = tecleado.textContent;
+  var yaTecleo = false;
+
+  function teclear(){
+    if (yaTecleo || quieto) return;
+    yaTecleo = true;
+    var riel = carro.parentElement;
+    tecleado.textContent = '';
+    var cursor = document.createElement('span'); cursor.className = 'cursor';
+    var nodo = document.createTextNode('');
+    tecleado.appendChild(nodo); tecleado.appendChild(cursor);
+    var i = 0;
+    (function paso(){
+      i++;
+      nodo.textContent = texto.slice(0, i);
+      var max = riel.clientWidth - carro.offsetWidth;
+      var renglon = i % 34;
+      carro.style.left = (max * renglon / 34) + 'px';
+      if (i < texto.length) setTimeout(paso, texto[i-1] === ' ' ? 70 : 38 + Math.random()*40);
+      else carro.style.left = '0px';
+    })();
+  }
+
+  if ('IntersectionObserver' in window && !quieto){
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if (!e.isIntersecting) return;
+        if (e.target === onda){ onda.classList.remove('dibuja'); void onda.getBoundingClientRect(); onda.classList.add('dibuja'); }
+        if (e.target === tecleado) teclear();
+        if (e.target === sello) sellar(sello);
+        io.unobserve(e.target);
+      });
+    }, {threshold:.5});
+    io.observe(onda); io.observe(tecleado); io.observe(sello);
+  }
+
+  /* El sellado: se puede volver a sellar tocándolo */
+  function sellar(el){
+    if (quieto) return;
+    el.classList.remove('estampa'); void el.offsetWidth; el.classList.add('estampa');
+    var caja = el.closest('.puerta, .botones');
+    if (caja){ caja.classList.remove('golpe'); void caja.offsetWidth; caja.classList.add('golpe'); }
+  }
+  var selloPuerta = document.getElementById('sello-puerta');
+  if (!quieto) setTimeout(function(){ sellar(selloPuerta); }, 700);
+  selloPuerta.addEventListener('mouseenter', function(){ sellar(selloPuerta); });
+  sello.addEventListener('click', function(){ sellar(sello); });
+
+  /* Las ondas de Headpod se mueven solas, como en la app (solo mientras se ven) */
+  var ondas = [
+    {el: document.getElementById('onda-puerta'), w: 300, h: 40, a: 8, largo: 72, x0: 0, visible: true},
+    {el: document.getElementById('onda-hp'), w: 600, h: 28, a: 9, largo: 150, x0: 2, visible: false}
+  ];
+  function dibujarOnda(o, fase){
+    var d = '', mitad = o.h / 2, fin = o.w - o.x0;
+    var aliento = 0.72 + 0.28 * Math.sin(fase * 0.35);
+    for (var x = o.x0; x <= fin; x += 4){
+      /* Las puntas llegan suaves */
+      var borde = Math.min(1, (x - o.x0) / 40, (fin - x) / 40);
+      var y = mitad + Math.sin(x / o.largo * 2 * Math.PI + fase) * o.a * aliento * borde;
+      d += (x === o.x0 ? 'M' : 'L') + x.toFixed(1) + ' ' + y.toFixed(2) + ' ';
+    }
+    o.el.setAttribute('d', d);
+  }
+  if (!quieto){
+    if ('IntersectionObserver' in window){
+      var vo = new IntersectionObserver(function(es){
+        es.forEach(function(e){ ondas.forEach(function(o){ if (o.el.ownerSVGElement === e.target) o.visible = e.isIntersecting; }); });
+      });
+      ondas.forEach(function(o){ vo.observe(o.el.ownerSVGElement); });
+    } else ondas.forEach(function(o){ o.visible = true; });
+    (function mover(ts){
+      var fase = ts / 1000 * 2.6;
+      ondas.forEach(function(o){ if (o.visible) dibujarOnda(o, fase); });
+      requestAnimationFrame(mover);
+    })(0);
+  }
+
+  /* Al deslizar, lo que llega a las orillas se difumina */
+  if (!quieto){
+    var piezas = Array.prototype.slice.call(document.querySelectorAll(
+      '.portada .eti, .portada h1, .portada .bajada, .puerta, .escena video, .escena .texto > *, .tira-titulo, .tira, .cosa, .extra-app > *, .maquina > *, .whynote .botones, .final h2, .pasos li, .extra > div'));
+    piezas.forEach(function(p){ p.classList.add('desvanece'); });
+    var barra = document.querySelector('.barra');
+    var pendiente = false;
+    function orillas(){
+      pendiente = false;
+      var alto = window.innerHeight, arriba = barra ? barra.getBoundingClientRect().bottom : 0;
+      var zona = Math.max(90, Math.min(190, alto * 0.24));
+      piezas.forEach(function(p){
+        var r = p.getBoundingClientRect();
+        if (r.bottom < -50 || r.top > alto + 50) return;
+        var c = r.top + Math.min(r.height, zona) / 2;
+        var c2 = r.bottom - Math.min(r.height, zona) / 2;
+        /* Arriba solo se difumina cuando ya deslizaste: la primera vista se ve completa */
+        var fuerza = Math.min(1, window.scrollY / 140);
+        var tArriba = 1 - (1 - Math.max(0, Math.min(1, (c - arriba) / zona))) * fuerza;
+        var t = Math.min(tArriba, (alto - c2) / zona);
+        t = Math.max(0, Math.min(1, t));
+        var e = t * t * (3 - 2 * t);
+        p.style.setProperty('--o', (0.06 + 0.94 * e).toFixed(3));
+        p.style.setProperty('--s', (0.95 + 0.05 * e).toFixed(3));
+      });
+    }
+    function pedir(){ if (!pendiente){ pendiente = true; requestAnimationFrame(orillas); } }
+    window.addEventListener('scroll', pedir, {passive: true});
+    window.addEventListener('resize', pedir);
+    orillas();
+  }
+
+
+  /* ——— Novedades automáticas desde GitHub, y la versión en el botón ——— */
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  Array.prototype.forEach.call(document.querySelectorAll('.novedades'), function(caja){
+    var repo = caja.getAttribute('data-repo'), app = caja.getAttribute('data-app');
+    fetch('https://api.github.com/repos/yigaleana-maker/' + repo + '/releases?per_page=3')
+      .then(function(r){ if (!r.ok) throw 0; return r.json(); })
+      .then(function(lista){
+        if (!lista.length) throw 0;
+        var ol = caja.querySelector('ol'); ol.innerHTML = '';
+        lista.forEach(function(v){
+          var fecha = new Date(v.published_at).toLocaleDateString('en-US', {day:'numeric', month:'long', year:'numeric'});
+          var puntos = (v.body || '').split('\n').map(function(l){ return l.replace(/^\s*[•\-*]\s*/, '').replace(/\*\*/g, '').trim(); }).filter(Boolean).slice(0, 5);
+          var li = document.createElement('li');
+          li.innerHTML = '<b>' + esc(v.name || v.tag_name) + '</b><small>' + esc(fecha) + '</small>' +
+            (puntos.length ? '<ul>' + puntos.map(function(p){ return '<li>' + esc(p) + '</li>'; }).join('') + '</ul>' : '');
+          ol.appendChild(li);
+        });
+        var boton = document.querySelector(caja.getAttribute('data-boton'));
+        var version = (lista[0].name || '').replace(app, '').trim();
+        if (boton && version) boton.innerHTML = '⬇ Download ' + esc(app) + ' <small>' + esc(version) + '</small>';
+      })
+      .catch(function(){ caja.hidden = true; });
+  });
+
+  /* ——— QR para descargar desde la computadora ——— */
+  if (window.QRCode){
+    Array.prototype.forEach.call(document.querySelectorAll('.qr'), function(q){
+      new QRCode(q, {text: q.getAttribute('data-url'), width: 168, height: 168, colorDark: '#1d1411', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.M});
+    });
+  } else Array.prototype.forEach.call(document.querySelectorAll('.qr-caja'), function(c){ c.hidden = true; });
+
+  /* ——— Pruébalo: el mini reproductor de Headpod ——— */
+  (function(){
+    var boton = document.getElementById('mini-play'), icono = document.getElementById('mini-icono');
+    var lienzo = document.getElementById('mini-onda'), portada = document.getElementById('mini-portada');
+    var tYa = document.getElementById('t-ya'), tFalta = document.getElementById('t-falta');
+    if (!boton || !lienzo) return;
+    var DUR = 42 * 60, pos = 9 * 60, sonando = false, amp = 0, galleta = 0, fase = 0, ultimo = 0, arrastrando = false;
+    function mmss(s){ s = Math.max(0, Math.round(s)); return Math.floor(s / 60) + ':' + ('0' + s % 60).slice(-2); }
+    function forma(){
+      /* Cuadro redondeado en pausa, galleta de orillas onduladas al sonar (como en la app) */
+      var pts = [], n = 72;
+      for (var i = 0; i < n; i++){
+        var a = i / n * 2 * Math.PI, ca = Math.cos(a), sa = Math.sin(a);
+        var rs = 1 / Math.pow(Math.pow(Math.abs(ca), 5) + Math.pow(Math.abs(sa), 5), 1 / 5);
+        var rg = 1 - 0.05 + 0.05 * Math.cos(9 * a);
+        var r = rs + (rg - rs) * galleta;
+        pts.push((50 + 50 * r * ca).toFixed(1) + '% ' + (50 + 50 * r * sa).toFixed(1) + '%');
+      }
+      portada.style.clipPath = 'polygon(' + pts.join(',') + ')';
+    }
+    function dibujar(){
+      var dpr = window.devicePixelRatio || 1, w = lienzo.clientWidth, h = lienzo.clientHeight;
+      if (lienzo.width !== Math.round(w * dpr)){ lienzo.width = Math.round(w * dpr); lienzo.height = Math.round(h * dpr); }
+      var c = lienzo.getContext('2d'); c.setTransform(dpr, 0, 0, dpr, 0, 0); c.clearRect(0, 0, w, h);
+      var mid = h / 2, x = Math.max(4, Math.min(w - 8, pos / DUR * w)), hueco = 7, grosor = 4;
+      c.lineCap = 'round'; c.lineWidth = grosor;
+      c.strokeStyle = '#57402c'; c.beginPath(); c.moveTo(x + hueco, mid); c.lineTo(w - 8, mid); c.stroke();
+      c.fillStyle = '#ffb3b3'; c.beginPath(); c.arc(w - 3, mid, 2.2, 0, 7); c.fill();
+      c.strokeStyle = '#ffb3b3'; c.beginPath();
+      for (var px = 2; px <= x - hueco; px += 2){
+        var calma = Math.min(1, (x - hueco - px) / 26);
+        var y = mid + Math.sin(px / 6.5 + fase) * 3.6 * amp * calma;
+        if (px === 2) c.moveTo(px, y); else c.lineTo(px, y);
+      }
+      c.stroke();
+      var am = arrastrando ? 6 : 4, al = arrastrando ? 32 : 22;
+      c.fillStyle = '#ffb3b3'; c.beginPath();
+      if (c.roundRect) c.roundRect(x - am / 2, mid - al / 2, am, al, am / 2); else c.rect(x - am / 2, mid - al / 2, am, al);
+      c.fill();
+      tYa.textContent = mmss(pos); tFalta.textContent = '-' + mmss(DUR - pos);
+    }
+    function cuadro(ts){
+      var dt = ultimo ? Math.min(0.05, (ts - ultimo) / 1000) : 0; ultimo = ts;
+      var meta = sonando ? 1 : 0;
+      amp += (meta - amp) * Math.min(1, dt * 4);
+      galleta += (meta - galleta) * Math.min(1, dt * 5);
+      if (sonando){ fase += dt * 5.2; pos = Math.min(DUR, pos + dt); }
+      forma(); dibujar();
+      if (sonando || Math.abs(amp - meta) > 0.01 || Math.abs(galleta - meta) > 0.01 || arrastrando) requestAnimationFrame(cuadro);
+      else { ultimo = 0; }
+    }
+    function animar(){ if (!ultimo) requestAnimationFrame(cuadro); }
+    boton.addEventListener('click', function(){
+      sonando = !sonando;
+      boton.classList.toggle('sonando', sonando);
+      boton.setAttribute('aria-label', sonando ? 'Pause' : 'Play');
+      icono.setAttribute('d', sonando ? 'M7 5h3.6v14H7zM13.4 5H17v14h-3.6z' : 'M8 5v14l11-7z');
+      animar();
+    });
+    function ir(e){ var r = lienzo.getBoundingClientRect(); pos = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)) * DUR; }
+    lienzo.addEventListener('pointerdown', function(e){ arrastrando = true; lienzo.setPointerCapture(e.pointerId); ir(e); animar(); });
+    lienzo.addEventListener('pointermove', function(e){ if (arrastrando){ ir(e); if (!sonando) dibujar(); } });
+    lienzo.addEventListener('pointerup', function(){ arrastrando = false; animar(); });
+    lienzo.addEventListener('pointercancel', function(){ arrastrando = false; animar(); });
+    window.addEventListener('resize', dibujar);
+    forma(); dibujar();
+  })();
+
+  /* ——— Pruébala: la máquinita de WhyType, con su sonido ——— */
+  (function(){
+    var area = document.getElementById('maquinita'), carro = document.getElementById('carro2');
+    var cuenta = document.getElementById('cuenta'), botonSonido = document.getElementById('sonido');
+    if (!area) return;
+    var conSonido = true, audio = null, largo = 0, RENGLON = 38;
+    try { if (localStorage.getItem('wt-sonido') === 'no') conSonido = false; } catch(e){}
+    function marcar(){ botonSonido.textContent = conSonido ? '🔊 Sound: on' : '🔇 Sound: off'; }
+    marcar();
+    botonSonido.addEventListener('click', function(){ conSonido = !conSonido; marcar(); try { localStorage.setItem('wt-sonido', conSonido ? 'si' : 'no'); } catch(e){} });
+    function ctx(){
+      if (!audio){ var A = window.AudioContext || window.webkitAudioContext; if (!A) return null; audio = new A(); }
+      if (audio.state === 'suspended') audio.resume();
+      return audio;
+    }
+    function ruido(dur, freq, vol){
+      var a = ctx(); if (!a) return;
+      var n = Math.floor(a.sampleRate * dur), buf = a.createBuffer(1, n, a.sampleRate), d = buf.getChannelData(0);
+      for (var i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / n, 3);
+      var s = a.createBufferSource(); s.buffer = buf;
+      var f = a.createBiquadFilter(); f.type = 'bandpass'; f.frequency.value = freq; f.Q.value = 0.9;
+      var g = a.createGain(); g.gain.value = vol;
+      s.connect(f); f.connect(g); g.connect(a.destination); s.start();
+    }
+    function tecla(){ ruido(0.035, 1800 + Math.random() * 900, 0.9); setTimeout(function(){ ruido(0.02, 600, 0.35); }, 12); }
+    function campana(){
+      var a = ctx(); if (!a) return;
+      [2093, 4186].forEach(function(fr, k){
+        var o = a.createOscillator(), g = a.createGain(); o.frequency.value = fr; o.type = 'sine';
+        g.gain.setValueAtTime(k ? 0.06 : 0.16, a.currentTime); g.gain.exponentialRampToValueAtTime(0.0001, a.currentTime + 0.9);
+        o.connect(g); g.connect(a.destination); o.start(); o.stop(a.currentTime + 0.95);
+      });
+    }
+    function regreso(){ ruido(0.18, 900, 0.5); }
+    function moverCarro(){
+      var antes = area.value.slice(0, area.selectionStart), linea = antes.split('\n').pop().length;
+      var max = carro.parentElement.clientWidth - carro.offsetWidth;
+      carro.style.left = (max * Math.min(linea, RENGLON) / RENGLON) + 'px';
+      var n = area.value.replace(/\s/g, '').length;
+      cuenta.textContent = n + (n === 1 ? ' letter' : ' letters');
+      return linea;
+    }
+    area.addEventListener('input', function(){
+      var nuevo = area.value.length, crece = nuevo > largo; largo = nuevo;
+      var linea = moverCarro();
+      if (!conSonido) return;
+      var ultima = area.value.charAt(area.selectionStart - 1);
+      if (crece && ultima === '\n') regreso();
+      else if (crece){ tecla(); if (linea === RENGLON - 4) setTimeout(campana, 40); }
+      else ruido(0.025, 1200, 0.4);
+    });
+    area.addEventListener('click', moverCarro);
+    area.addEventListener('keyup', moverCarro);
+  })();
+
+  /* Copiar el correo */
+  document.getElementById('copiar').addEventListener('click', function(){
+    var b = this, t = document.getElementById('correo').textContent;
+    function hecho(){ b.textContent = 'Copiado'; setTimeout(function(){ b.textContent = 'Copiar'; }, 1600); }
+    function seleccionar(){ var r = document.createRange(); r.selectNodeContents(document.getElementById('correo')); var s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+    try{ navigator.clipboard.writeText(t).then(hecho, seleccionar); }catch(e){ seleccionar(); }
+  });
+})();
+</script>
+
+</body>
+</html>
