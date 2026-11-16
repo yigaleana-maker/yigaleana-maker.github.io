@@ -222,6 +222,19 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .whynote .qr-caja{background:#fffaf1;color:var(--tinta2);font-family:var(--f-maquina)}
 @media (min-width: 900px){ .qr-caja{display:flex} }
 
+
+/* Elige tu reproductor */
+.tira figcaption span{display:block;font-weight:600;opacity:.72;font-size:12px;margin-top:2px;line-height:1.35}
+/* El dial de prueba */
+.dial-prueba{display:block;width:100%;aspect-ratio:2/1.08;cursor:pointer;touch-action:none;margin-top:6px}
+.dial-pie{display:flex;justify-content:space-between;font-family:var(--f-hp);font-weight:700;font-size:13px;color:var(--crema2);margin-top:6px}
+/* Las capturas entran con un deslizado suave al aparecer (solo si hay JavaScript) */
+.js-anima .tira figure{opacity:0;transform:translateY(22px) scale(.95);transition:opacity .5s ease, transform .7s cubic-bezier(.34,1.56,.64,1)}
+.js-anima .tira figure.visto{opacity:1;transform:none}
+/* Los botones de descarga rebotan como los de la app */
+.btn:active{transform:scale(.92)}
+.btn{transition:transform .45s cubic-bezier(.34,1.8,.64,1)}
+
 /* ——— Cómo instalar / privacidad ——— */
 .final{background:var(--pizarra);padding-block:72px}
 .final h2{font-family:var(--f-marca);font-weight:700;font-size:clamp(26px, 4vw, 38px);letter-spacing:-.03em}
@@ -335,7 +348,7 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
   <section class="headpod" id="headpod">
     <div class="envoltura">
       <div class="escena">
-        <video src="audifonos.mp4" poster="img/audifonos.jpg" autoplay muted loop playsinline aria-label="Los audífonos de Headpod girando"></video>
+        <video data-src="audifonos.mp4" preload="none" poster="img/audifonos.jpg" muted loop playsinline aria-label="Los audífonos de Headpod girando"></video>
         <div class="texto">
           <h2 class="hp-nombre">Headpod</h2>
           <svg class="onda" id="onda" viewBox="0 0 600 28" preserveAspectRatio="none" aria-hidden="true"><path id="onda-hp" d="M2 14 C 27 2, 52 2, 77 14 S 127 26, 152 14 S 202 2, 227 14 S 277 26, 302 14 S 352 2, 377 14 S 427 26, 452 14 S 502 2, 527 14 S 577 26, 598 14"/></svg>
@@ -365,6 +378,14 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
         <figure><img src="img/hp/biblioteca.webp" alt="Biblioteca" loading="lazy"><figcaption>Biblioteca</figcaption></figure>
       </div>
 
+      <div class="tira-titulo"><h3>Elige tu reproductor</h3><small>en Ajustes → Reproductor</small></div>
+      <div class="tira" tabindex="0" aria-label="Los cuatro estilos de reproductor">
+        <figure><img src="img/hp/rep-material3.webp" alt="Material 3" loading="lazy"><figcaption>Material 3<span>Expresivo, con botones que se deforman</span></figcaption></figure>
+        <figure><img src="img/hp/rep-disco.webp" alt="Disco" loading="lazy"><figcaption>Disco<span>Un tocadiscos: el brazo marca el avance</span></figcaption></figure>
+        <figure><img src="img/hp/rep-portada.webp" alt="Portada completa" loading="lazy"><figcaption>Portada completa<span>La portada en grande y un dial</span></figcaption></figure>
+        <figure><img src="img/hp/rep-clasico.webp" alt="Clásico" loading="lazy"><figcaption>Clásico<span>El diseño original de Headpod</span></figcaption></figure>
+      </div>
+
       <div class="cosas">
         <div class="cosa"><b>🎶 Tu mezcla del día</b><span>Lo que dejaste a medias y lo nuevo de tus favoritos, en un solo play.</span></div>
         <div class="cosa"><b>🗣️ Voz clara</b><span>Ecualizador, velocidad por programa y saltar silencios.</span></div>
@@ -372,18 +393,16 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
         <div class="cosa"><b>🌙 Temporizador suave</b><span>Baja el volumen poco a poco. Sacude el teléfono y suma 5 minutos.</span></div>
         <div class="cosa"><b>📝 Transcripción</b><span>Lee lo que se dice y toca una frase para ir ahí.</span></div>
         <div class="cosa"><b>🔵 Tus audífonos</b><span>Al conectarlos, sigue donde te quedaste.</span></div>
+        <div class="cosa"><b>🎛️ Cuatro reproductores</b><span>Material 3, Disco, Portada completa o Clásico: elige el que te guste.</span></div>
+        <div class="cosa"><b>🌙 Modo Dormir</b><span>Pantalla casi negra, brillo al mínimo y un botón grande.</span></div>
+        <div class="cosa"><b>💬 Frase en vivo</b><span>Debajo del título va lo que se está diciendo, si el programa tiene transcripción.</span></div>
       </div>
 
       <div class="extra-app">
         <div class="prueba-hp">
           <span class="eti-prueba">Pruébalo aquí</span>
-          <div class="mini">
-            <div class="mini-portada" id="mini-portada">H</div>
-            <div class="mini-texto"><small>TU PROGRAMA</small><b>Así se siente el reproductor</b></div>
-            <button class="mini-play" id="mini-play" type="button" aria-label="Reproducir"><svg viewBox="0 0 24 24" aria-hidden="true"><path id="mini-icono" d="M8 5v14l11-7z" fill="currentColor"/></svg></button>
-          </div>
-          <canvas class="mini-onda" id="mini-onda" aria-label="Barra de progreso: tócala o arrástrala"></canvas>
-          <div class="mini-tiempos"><span id="t-ya">0:00</span><span id="t-falta">-42:00</span></div>
+          <canvas class="dial-prueba" id="dial-prueba" aria-label="Dial de prueba: toca el play, retrocede o adelanta, o arrastra la escala"></canvas>
+          <div class="dial-pie"><span>Toca el play o arrastra la escala</span><span id="dial-vel">1×</span></div>
         </div>
         <div class="novedades" data-repo="headpod-actualizaciones" data-boton=".btn-hp" data-app="Headpod">
           <h3>Lo nuevo en Headpod</h3>
@@ -638,73 +657,147 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
     });
   } else Array.prototype.forEach.call(document.querySelectorAll('.qr-caja'), function(c){ c.hidden = true; });
 
-  /* ——— Pruébalo: el mini reproductor de Headpod ——— */
+  /* ——— Pruébalo: el dial de la Portada completa ——— */
   (function(){
-    var boton = document.getElementById('mini-play'), icono = document.getElementById('mini-icono');
-    var lienzo = document.getElementById('mini-onda'), portada = document.getElementById('mini-portada');
-    var tYa = document.getElementById('t-ya'), tFalta = document.getElementById('t-falta');
-    if (!boton || !lienzo) return;
-    var DUR = 42 * 60, pos = 9 * 60, sonando = false, amp = 0, galleta = 0, fase = 0, ultimo = 0, arrastrando = false;
+    var lienzo = document.getElementById('dial-prueba'), vel = document.getElementById('dial-vel');
+    if (!lienzo) return;
+    var DUR = 42 * 60, pos = 9 * 60, sonando = false, meGusta = false, velocidades = [1, 1.25, 1.5, 2], iv = 0;
+    var luz = 0, aguja = pos / DUR, presion = -1, destello = 0, ultimo = 0, arrastrando = false;
+    var A0 = -170, A1 = -10, N = 5, PLAY = 2;
     function mmss(s){ s = Math.max(0, Math.round(s)); return Math.floor(s / 60) + ':' + ('0' + s % 60).slice(-2); }
-    function forma(){
-      /* Cuadro redondeado en pausa, galleta de orillas onduladas al sonar (como en la app) */
-      var pts = [], n = 72;
-      for (var i = 0; i < n; i++){
-        var a = i / n * 2 * Math.PI, ca = Math.cos(a), sa = Math.sin(a);
-        var rs = 1 / Math.pow(Math.pow(Math.abs(ca), 5) + Math.pow(Math.abs(sa), 5), 1 / 5);
-        var rg = 1 - 0.05 + 0.05 * Math.cos(9 * a);
-        var r = rs + (rg - rs) * galleta;
-        pts.push((50 + 50 * r * ca).toFixed(1) + '% ' + (50 + 50 * r * sa).toFixed(1) + '%');
-      }
-      portada.style.clipPath = 'polygon(' + pts.join(',') + ')';
+    function rad(g){ return g * Math.PI / 180; }
+    function geo(){
+      var w = lienzo.clientWidth, h = lienzo.clientHeight, rF = Math.min(w / 2 - 4, h - 8), rD = rF - Math.max(40, rF * 0.3);
+      return {w: w, h: h, cx: w / 2, cy: rF + 4, rF: rF, rD: rD, rEF: rD - 6, rED: rD - 6 - Math.max(18, rF * 0.16)};
+    }
+    function segmento(c, g, i, relleno){
+      var paso = (A1 - A0) / N, a = rad(A0 + paso * i), b = rad(A0 + paso * (i + 1));
+      c.beginPath(); c.arc(g.cx, g.cy, g.rF, a, b); c.arc(g.cx, g.cy, g.rD, b, a, true); c.closePath();
+      c.fillStyle = relleno; c.fill();
     }
     function dibujar(){
-      var dpr = window.devicePixelRatio || 1, w = lienzo.clientWidth, h = lienzo.clientHeight;
-      if (lienzo.width !== Math.round(w * dpr)){ lienzo.width = Math.round(w * dpr); lienzo.height = Math.round(h * dpr); }
-      var c = lienzo.getContext('2d'); c.setTransform(dpr, 0, 0, dpr, 0, 0); c.clearRect(0, 0, w, h);
-      var mid = h / 2, x = Math.max(4, Math.min(w - 8, pos / DUR * w)), hueco = 7, grosor = 4;
-      c.lineCap = 'round'; c.lineWidth = grosor;
-      c.strokeStyle = '#57402c'; c.beginPath(); c.moveTo(x + hueco, mid); c.lineTo(w - 8, mid); c.stroke();
-      c.fillStyle = '#ffb3b3'; c.beginPath(); c.arc(w - 3, mid, 2.2, 0, 7); c.fill();
-      c.strokeStyle = '#ffb3b3'; c.beginPath();
-      for (var px = 2; px <= x - hueco; px += 2){
-        var calma = Math.min(1, (x - hueco - px) / 26);
-        var y = mid + Math.sin(px / 6.5 + fase) * 3.6 * amp * calma;
-        if (px === 2) c.moveTo(px, y); else c.lineTo(px, y);
+      var dpr = window.devicePixelRatio || 1, g = geo();
+      if (lienzo.width !== Math.round(g.w * dpr)){ lienzo.width = Math.round(g.w * dpr); lienzo.height = Math.round(g.h * dpr); }
+      var c = lienzo.getContext('2d'); c.setTransform(dpr, 0, 0, dpr, 0, 0); c.clearRect(0, 0, g.w, g.h);
+      var linea = 'rgba(255,255,255,.16)', paso = (A1 - A0) / N;
+      /* Arco de acciones */
+      c.lineWidth = 1.2; c.strokeStyle = linea;
+      c.beginPath(); c.arc(g.cx, g.cy, g.rF, rad(A0), rad(A1)); c.stroke();
+      c.beginPath(); c.arc(g.cx, g.cy, g.rD, rad(A0), rad(A1)); c.stroke();
+      for (var k = 0; k <= N; k++){ var a = rad(A0 + paso * k); c.beginPath(); c.moveTo(g.cx + Math.cos(a) * g.rD, g.cy + Math.sin(a) * g.rD); c.lineTo(g.cx + Math.cos(a) * g.rF, g.cy + Math.sin(a) * g.rF); c.stroke(); }
+      segmento(c, g, PLAY, 'rgba(255,255,255,' + (0.08 + 0.06 * luz) + ')');
+      if (presion >= 0 || destello > 0.01) segmento(c, g, presion >= 0 ? presion : ultimoSeg, 'rgba(255,255,255,' + (0.2 * (presion >= 0 ? 1 : destello)) + ')');
+      /* La luz del play se alarga al sonar */
+      var centroP = A0 + paso * (PLAY + 0.5), largo = (paso - 4) * (0.45 + 0.55 * luz);
+      c.strokeStyle = 'rgba(255,255,255,' + (0.45 + 0.4 * luz) + ')'; c.lineWidth = 2.5; c.lineCap = 'round';
+      c.beginPath(); c.arc(g.cx, g.cy, g.rF - 1, rad(centroP - largo / 2), rad(centroP + largo / 2)); c.stroke();
+      /* Íconos */
+      var rI = (g.rF + g.rD) / 2;
+      for (var i = 0; i < N; i++){
+        var ai = rad(A0 + paso * (i + 0.5)), x = g.cx + Math.cos(ai) * rI, y = g.cy + Math.sin(ai) * rI;
+        var e = (i === presion) ? 0.8 : 1;
+        c.save(); c.translate(x, y); c.scale(e, e); c.fillStyle = 'rgba(255,255,255,.88)';
+        c.textAlign = 'center'; c.textBaseline = 'middle';
+        if (i === PLAY){
+          if (sonando){ c.fillRect(-9, -11, 6, 22); c.fillRect(3, -11, 6, 22); }
+          else { c.beginPath(); c.moveTo(-7, -12); c.lineTo(12, 0); c.lineTo(-7, 12); c.closePath(); c.fill(); }
+        } else if (i === 0){ c.font = '22px system-ui'; c.fillStyle = meGusta ? '#ffb3b3' : 'rgba(255,255,255,.88)'; c.fillText(meGusta ? '♥' : '♡', 0, 1); }
+        else if (i === 1){ c.font = '700 14px system-ui'; c.fillText('−15', 0, 1); }
+        else if (i === 3){ c.font = '700 14px system-ui'; c.fillText('+15', 0, 1); }
+        else { c.font = '700 16px system-ui'; c.fillText('•••', 0, 0); }
+        c.restore();
       }
-      c.stroke();
-      var am = arrastrando ? 6 : 4, al = arrastrando ? 32 : 22;
-      c.fillStyle = '#ffb3b3'; c.beginPath();
-      if (c.roundRect) c.roundRect(x - am / 2, mid - al / 2, am, al, am / 2); else c.rect(x - am / 2, mid - al / 2, am, al);
-      c.fill();
-      tYa.textContent = mmss(pos); tFalta.textContent = '-' + mmss(DUR - pos);
+      /* Escala con rayitas */
+      for (var d = -180; d <= 0; d += 3){
+        var grande = d % 15 === 0, r1 = grande ? g.rED : g.rEF - 9, ad = rad(d), pasada = (d + 180) / 180 <= aguja;
+        c.strokeStyle = 'rgba(255,255,255,' + (grande ? (pasada ? .75 : .4) : (pasada ? .5 : .22)) + ')';
+        c.lineWidth = grande ? 2 : 1.2;
+        c.beginPath(); c.moveTo(g.cx + Math.cos(ad) * r1, g.cy + Math.sin(ad) * r1); c.lineTo(g.cx + Math.cos(ad) * g.rEF, g.cy + Math.sin(ad) * g.rEF); c.stroke();
+      }
+      /* Aguja roja */
+      var ga = rad(-180 + 180 * aguja), ini = g.rED - 18;
+      c.strokeStyle = '#ff3b30'; c.lineWidth = 2.6;
+      c.beginPath(); c.moveTo(g.cx + Math.cos(ga) * ini, g.cy + Math.sin(ga) * ini); c.lineTo(g.cx + Math.cos(ga) * (g.rEF + 2), g.cy + Math.sin(ga) * (g.rEF + 2)); c.stroke();
+      c.fillStyle = '#ff3b30'; c.beginPath(); c.arc(g.cx + Math.cos(ga) * ini, g.cy + Math.sin(ga) * ini, arrastrando ? 6 : 4.5, 0, 7); c.fill();
+      /* El tiempo */
+      c.fillStyle = '#fff'; c.textAlign = 'center'; c.font = '700 ' + Math.round(g.rF * 0.15) + 'px Unbounded, system-ui'; c.textBaseline = 'alphabetic';
+      var mostrado = arrastrando ? aguja * DUR : pos;
+      c.fillText(mmss(mostrado), g.cx, g.cy - 24);
+      c.fillStyle = 'rgba(255,255,255,.6)'; c.font = '700 13px system-ui';
+      c.fillText('-' + mmss(DUR - mostrado), g.cx, g.cy - 4);
     }
+    var ultimoSeg = 0;
     function cuadro(ts){
       var dt = ultimo ? Math.min(0.05, (ts - ultimo) / 1000) : 0; ultimo = ts;
-      var meta = sonando ? 1 : 0;
-      amp += (meta - amp) * Math.min(1, dt * 4);
-      galleta += (meta - galleta) * Math.min(1, dt * 5);
-      if (sonando){ fase += dt * 5.2; pos = Math.min(DUR, pos + dt); }
-      forma(); dibujar();
-      if (sonando || Math.abs(amp - meta) > 0.01 || Math.abs(galleta - meta) > 0.01 || arrastrando) requestAnimationFrame(cuadro);
-      else { ultimo = 0; }
+      luz += ((sonando ? 1 : 0) - luz) * Math.min(1, dt * 6);
+      destello += (0 - destello) * Math.min(1, dt * 5);
+      if (sonando){ pos = Math.min(DUR, pos + dt * velocidades[iv]); }
+      if (!arrastrando) aguja += (pos / DUR - aguja) * Math.min(1, dt * 8);
+      dibujar();
+      if (sonando || arrastrando || destello > 0.01 || Math.abs(luz - (sonando ? 1 : 0)) > 0.01 || Math.abs(aguja - pos / DUR) > 0.001) requestAnimationFrame(cuadro);
+      else ultimo = 0;
     }
     function animar(){ if (!ultimo) requestAnimationFrame(cuadro); }
-    boton.addEventListener('click', function(){
-      sonando = !sonando;
-      boton.classList.toggle('sonando', sonando);
-      boton.setAttribute('aria-label', sonando ? 'Pausar' : 'Reproducir');
-      icono.setAttribute('d', sonando ? 'M7 5h3.6v14H7zM13.4 5H17v14h-3.6z' : 'M8 5v14l11-7z');
-      animar();
+    function donde(e){
+      var r = lienzo.getBoundingClientRect(), g = geo(), x = e.clientX - r.left - g.cx, y = e.clientY - r.top - g.cy;
+      var d = Math.sqrt(x * x + y * y), ang = Math.atan2(y, x) * 180 / Math.PI;
+      if (d >= g.rD && d <= g.rF && ang >= A0 && ang <= A1) return {seg: Math.min(N - 1, Math.floor((ang - A0) / ((A1 - A0) / N)))};
+      if (d >= g.rED - 30 && d <= g.rEF + 8 && y <= 10){ var a = ang > 0 ? (x < 0 ? -180 : 0) : ang; return {frac: (a + 180) / 180}; }
+      return null;
+    }
+    lienzo.addEventListener('pointerdown', function(e){
+      var p = donde(e); if (!p) return;
+      lienzo.setPointerCapture(e.pointerId);
+      if (p.seg !== undefined){ presion = p.seg; ultimoSeg = p.seg; dibujar(); }
+      else { arrastrando = true; aguja = p.frac; animar(); }
     });
-    function ir(e){ var r = lienzo.getBoundingClientRect(); pos = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)) * DUR; }
-    lienzo.addEventListener('pointerdown', function(e){ arrastrando = true; lienzo.setPointerCapture(e.pointerId); ir(e); animar(); });
-    lienzo.addEventListener('pointermove', function(e){ if (arrastrando){ ir(e); if (!sonando) dibujar(); } });
-    lienzo.addEventListener('pointerup', function(){ arrastrando = false; animar(); });
-    lienzo.addEventListener('pointercancel', function(){ arrastrando = false; animar(); });
+    lienzo.addEventListener('pointermove', function(e){
+      if (!arrastrando) return;
+      var p = donde(e); if (p && p.frac !== undefined) aguja = Math.max(0, Math.min(1, p.frac));
+      if (!sonando) dibujar();
+    });
+    function soltar(e){
+      if (arrastrando){ arrastrando = false; pos = aguja * DUR; animar(); return; }
+      if (presion < 0) return;
+      var p = e && donde(e), i = presion; presion = -1; destello = 1;
+      if (p && p.seg === i){
+        if (i === PLAY) sonando = !sonando;
+        else if (i === 0) meGusta = !meGusta;
+        else if (i === 1) pos = Math.max(0, pos - 15);
+        else if (i === 3) pos = Math.min(DUR, pos + 15);
+        else { iv = (iv + 1) % velocidades.length; vel.textContent = velocidades[iv] + '×'; }
+      }
+      animar();
+    }
+    lienzo.addEventListener('pointerup', soltar);
+    lienzo.addEventListener('pointercancel', function(){ presion = -1; arrastrando = false; animar(); });
     window.addEventListener('resize', dibujar);
-    forma(); dibujar();
+    dibujar();
   })();
+
+  /* ——— El video de los audífonos carga hasta que llegas a él ——— */
+  (function(){
+    var v = document.querySelector('video[data-src]'); if (!v) return;
+    function cargar(){ if (!v.src){ v.src = v.getAttribute('data-src'); v.play && v.play().catch(function(){}); } }
+    if ('IntersectionObserver' in window){
+      var o = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ cargar(); o.disconnect(); } }); }, {rootMargin: '200px'});
+      o.observe(v);
+    } else cargar();
+  })();
+
+  /* ——— Las capturas entran con un deslizado suave al aparecer ——— */
+  if (!quieto && 'IntersectionObserver' in window){
+    document.documentElement.classList.add('js-anima');
+    var vistas = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('visto'); vistas.unobserve(e.target); } });
+    }, {threshold: 0.15});
+    Array.prototype.forEach.call(document.querySelectorAll('.tira'), function(tira){
+      Array.prototype.forEach.call(tira.querySelectorAll('figure'), function(fig, n){
+        fig.style.transitionDelay = (n * 70) + 'ms';
+        vistas.observe(fig);
+      });
+    });
+  }
 
   /* ——— Pruébala: la máquinita de WhyType, con su sonido ——— */
   (function(){
