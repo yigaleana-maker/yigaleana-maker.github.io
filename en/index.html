@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>yg4apps · Headpod and WhyType</title>
 <meta name="description" content="Headpod, the most amazing podcast experience, and WhyType, your notes on a real typewriter. Free apps for Android.">
-<meta name="theme-color" content="#0b0908" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#faf6f1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1c1c1e" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#efe8da" media="(prefers-color-scheme: light)">
 <link rel="alternate" hreflang="es" href="https://yigaleana-maker.github.io/">
 <link rel="alternate" hreflang="en" href="https://yigaleana-maker.github.io/en/">
 <link rel="stylesheet" href="../demo.css?v=4">
@@ -21,11 +21,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Nunito:wght@500;700;800&family=Special+Elite&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600&display=swap">
 <style>
-/* Una sola página, oscura de entrada: portada con dos puertas, luego el mundo de Headpod (negro y onda rosa)
-   y después el de WhyType (la hoja de papel crema con su máquina). Cada sección se viste como su app. */
+/* Una sola página: un fondo para toda la página en cada modo (gris muy oscuro de noche,
+   papel crema de día). Cada sección se viste como su app en sus tarjetas y acentos. */
 :root{
   color-scheme: dark;
-  --noche:#0b0908;          /* fondo general y Headpod */
+  --noche:#1c1c1e;          /* fondo de toda la página */
   --cafe:#1d1411;           /* tarjetas Headpod */
   --cafe2:#2a1e19;
   --crema:#f5e9dc;          /* texto claro */
@@ -93,7 +93,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 /* ——— Teléfonos ——— */
 .tira{display:flex;gap:6px;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px 4px 18px;margin-top:36px;scrollbar-width:thin}
 .tira figure{margin:0;flex:0 0 auto;width:210px;scroll-snap-align:center;text-align:center}
-.tira img{width:100%;height:auto;display:block}
+.tira img{width:100%;height:auto;display:block;border-radius:28px}
 .tira figcaption{font-size:13px;font-weight:700;margin-top:4px;padding-inline:8px;text-wrap:balance}
 .tira-titulo{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-top:48px;flex-wrap:wrap}
 .tira-titulo h3{font-size:20px}
@@ -113,7 +113,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .btn small{font-weight:600;opacity:.75;font-size:13px}
 
 /* ——— Headpod ——— */
-.headpod{background:#000;padding-block:0 80px;position:relative}
+.headpod{background:var(--noche);padding-block:0 80px;position:relative}
 .escena{position:relative;display:grid;grid-template-columns:1.05fr 1fr;align-items:center;gap:12px;padding-top:40px}
 .escena video{width:100%;max-width:520px;aspect-ratio:1;display:block;justify-self:center;-webkit-mask-image:radial-gradient(closest-side, #000 78%, transparent 96%);mask-image:radial-gradient(closest-side, #000 78%, transparent 96%)}
 .escena .texto{min-width:0}
@@ -127,17 +127,17 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .headpod .tira-titulo h3{font-family:var(--f-marca);font-weight:700;letter-spacing:-.02em}
 .headpod .tira-titulo small{color:#8f857d;font-family:var(--f-hp);font-weight:700}
 .headpod .tira figcaption{color:var(--crema2);font-family:var(--f-hp)}
-.headpod .cosa{background:var(--cafe);font-family:var(--f-hp)}
+.headpod .cosa{background:var(--pizarra2);font-family:var(--f-hp)}
 .headpod .cosa b{font-weight:800;color:var(--crema)}
 .headpod .cosa span{color:var(--crema2);font-weight:600}
 .btn-hp{background:var(--rosa);color:#3a1715}
-.btn-hp2{background:var(--cafe2);color:var(--crema)}
+.btn-hp2{background:var(--pizarra2);color:var(--crema)}
 
 /* ——— WhyType ——— */
-.whynote{background:var(--papel);color:var(--tinta);background-image:radial-gradient(#7a6a5520 1px, transparent 1.5px);background-size:11px 11px;padding-block:80px;position:relative;overflow:hidden}
+.whynote{background:var(--noche);color:var(--crema);background-image:radial-gradient(#ffffff14 1px, transparent 1.5px);background-size:11px 11px;padding-block:80px;position:relative;overflow:hidden}
 .whynote::before{content:"";position:absolute;inset:0 0 auto;height:60px;background:linear-gradient(#000, transparent);opacity:.35}
 .maquina{position:relative;max-width:720px}
-.wn-fecha{font-family:var(--f-maquina);color:var(--tinta2);font-size:15px}
+.wn-fecha{font-family:var(--f-maquina);color:var(--crema2);font-size:15px}
 .wn-nombre{font-family:var(--f-serif);font-weight:700;font-size:clamp(52px, 8.5vw, 96px);letter-spacing:-.02em;line-height:1;margin-top:10px}
 .wn-raya{width:110px;height:4px;background:var(--rojo);border-radius:2px;margin:16px 0 22px}
 .tecleado{font-family:var(--f-maquina);font-size:clamp(20px, 2.6vw, 27px);line-height:1.55;min-height:3.2em;max-width:30ch}
@@ -149,15 +149,15 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .carro i{width:6px;height:6px;border-radius:50%;background:#2a2623}
 .carro i:first-child{background:#3fae54}.carro i:last-child{background:var(--rojo)}
 .whynote .tira-titulo h3{font-family:var(--f-serif);font-weight:700}
-.whynote .tira-titulo small{font-family:var(--f-maquina);color:var(--tinta2)}
-.whynote .tira figcaption{font-family:var(--f-maquina);font-weight:400;color:var(--tinta)}
-.whynote .tira img{filter:drop-shadow(0 10px 18px #5a4a3a33)}
-.whynote .cosa{background:#fffaf1;border:1px solid #2a262312}
+.whynote .tira-titulo small{font-family:var(--f-maquina);color:var(--crema2)}
+.whynote .tira figcaption{font-family:var(--f-maquina);font-weight:400;color:var(--crema)}
+.whynote .tira img{filter:drop-shadow(0 10px 18px #0008)}
+.whynote .cosa{background:var(--pizarra2);border:1px solid #ffffff14}
 .whynote .cosa b{font-family:var(--f-serif);font-weight:700;font-size:17px}
-.whynote .cosa span{color:var(--tinta2)}
+.whynote .cosa span{color:var(--crema2)}
 .btn-wn{background:var(--rojo);color:#fff}
-.btn-wn2{background:var(--tinta);color:var(--papel)}
-.sello-grande{width:120px;height:120px;border-radius:50%;border:3px solid #e5352aa8;display:grid;place-items:center;text-align:center;font-family:var(--f-maquina);color:#e5352ab8;font-size:18px;line-height:1.1;transform:rotate(-14deg);box-shadow:inset 0 0 0 7px var(--papel), inset 0 0 0 9px #e5352a80;margin-left:auto}
+.btn-wn2{background:var(--pizarra2);color:var(--papel)}
+.sello-grande{width:120px;height:120px;border-radius:50%;border:3px solid #e5352aa8;display:grid;place-items:center;text-align:center;font-family:var(--f-maquina);color:#e5352ab8;font-size:18px;line-height:1.1;transform:rotate(-14deg);box-shadow:inset 0 0 0 7px var(--noche), inset 0 0 0 9px #e5352a80;margin-left:auto}
 .sello-grande{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .p-wn .sello{--giro:-12deg}
 .sello-grande{--giro:-14deg}
@@ -189,7 +189,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .extra-app{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:14px;margin-top:14px}
 .extra-app > *{min-width:0}
 .eti-prueba{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:12px}
-.prueba-hp,.headpod .novedades{background:var(--cafe);border-radius:26px;padding:20px}
+.prueba-hp,.headpod .novedades{background:var(--pizarra2);border-radius:26px;padding:20px}
 .prueba-hp .eti-prueba,.headpod .novedades h3{color:var(--rosa);font-family:var(--f-hp)}
 .mini{display:flex;align-items:center;gap:14px}
 .mini-portada{width:58px;height:58px;flex:0 0 auto;background:linear-gradient(135deg,#f1953e,#ffb3b3);display:grid;place-items:center;font-family:var(--f-marca);font-weight:800;color:#3a1715;font-size:22px}
@@ -209,21 +209,21 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .novedades li ul{margin:6px 0 0;padding-left:18px;font-size:14px;line-height:1.45}
 .headpod .novedades{font-family:var(--f-hp);color:var(--crema2)}
 .headpod .novedades b{color:var(--crema);font-weight:800}
-.whynote .novedades,.prueba-wn{background:#fffaf1;border:1px solid #2a262312;border-radius:26px;padding:20px}
+.whynote .novedades,.prueba-wn{background:var(--pizarra2);border:1px solid #ffffff14;border-radius:26px;padding:20px}
 .whynote .novedades h3,.prueba-wn .eti-prueba{color:var(--rojo)}
-.whynote .novedades{color:var(--tinta2)}
-.whynote .novedades b{color:var(--tinta);font-family:var(--f-serif)}
-.prueba-wn textarea{width:100%;min-height:118px;resize:none;border:0;outline:0;background:transparent;font-family:var(--f-maquina);font-size:19px;line-height:1.55;color:var(--tinta);padding:4px 0;caret-color:var(--rojo)}
-.prueba-wn textarea::placeholder{color:#2a262355}
+.whynote .novedades{color:var(--crema2)}
+.whynote .novedades b{color:var(--crema);font-family:var(--f-serif)}
+.prueba-wn textarea{width:100%;min-height:118px;resize:none;border:0;outline:0;background:transparent;font-family:var(--f-maquina);font-size:19px;line-height:1.55;color:var(--crema);padding:4px 0;caret-color:var(--rojo)}
+.prueba-wn textarea::placeholder{color:#f5e9dc55}
 .prueba-wn .riel{margin-top:10px}
 .prueba-wn .pie-prueba{display:flex;justify-content:space-between;align-items:center;margin-top:12px;gap:10px;flex-wrap:wrap}
-.prueba-wn button{font:inherit;font-family:var(--f-maquina);font-size:14px;background:transparent;border:1px solid #2a262330;color:var(--tinta);border-radius:99px;padding:6px 14px;cursor:pointer}
-.prueba-wn small{font-family:var(--f-maquina);color:var(--tinta2)}
+.prueba-wn button{font:inherit;font-family:var(--f-maquina);font-size:14px;background:transparent;border:1px solid #ffffff30;color:var(--crema);border-radius:99px;padding:6px 14px;cursor:pointer}
+.prueba-wn small{font-family:var(--f-maquina);color:var(--crema2)}
 .qr-caja{display:none;align-items:center;gap:12px;padding:10px 14px 10px 10px;border-radius:20px;font-size:13px;line-height:1.35;max-width:270px}
 .qr-caja .qr{background:#fff;padding:6px;border-radius:12px;line-height:0}
 .qr-caja .qr img,.qr-caja .qr canvas{width:84px!important;height:84px!important}
-.headpod .qr-caja{background:var(--cafe);color:var(--crema2);font-family:var(--f-hp);font-weight:700}
-.whynote .qr-caja{background:#fffaf1;color:var(--tinta2);font-family:var(--f-maquina)}
+.headpod .qr-caja{background:var(--pizarra2);color:var(--crema2);font-family:var(--f-hp);font-weight:700}
+.whynote .qr-caja{background:var(--pizarra2);color:var(--crema2);font-family:var(--f-maquina)}
 @media (min-width: 900px){ .qr-caja{display:flex} }
 
 
@@ -281,8 +281,8 @@ footer .envoltura{display:block}
 .whynote :focus-visible{outline-color:var(--rojo)}
 
 
-/* ——— Modo claro: la portada, la barra y el final se aclaran. Headpod sigue de noche (es su mundo)
-   y WhyType sigue en su papel. ——— */
+/* ——— Modo claro: toda la página en papel; Headpod con texto oscuro y tarjetas blancas,
+   WhyType en su papel crema. La puerta de Headpod sigue de noche, es su tarjeta. ——— */
 .bajada a{color:inherit;text-decoration:underline;text-decoration-color:var(--rosa);text-underline-offset:3px}
 /* ——— Crédito bajo las puertas, como una firma ——— */
 .firma{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:26px;font-size:14px;color:var(--gris)}
@@ -298,25 +298,25 @@ footer .envoltura{display:block}
 .bloque p{font-size:15.5px;line-height:1.45;margin-top:10px;max-width:34ch}
 .bloque .tel{margin-top:auto;align-self:center;width:230px;margin-bottom:-150px;padding-top:26px;transition:transform .8s cubic-bezier(.34,1.4,.64,1)}
 .bloque.ancho .tel{margin:0 40px -170px auto;padding-top:40px;align-self:flex-end}
-.bloque .tel img{width:100%;display:block;filter:drop-shadow(0 18px 30px #0007)}
+.bloque .tel img{width:100%;display:block;border-radius:31px;filter:drop-shadow(0 18px 30px #0007)}
 .bloque:hover .tel{transform:translateY(-10px) rotate(-1.5deg)}
 .bloque .texto-b{min-width:0}
 .headpod .bloque h3{font-family:var(--f-marca);font-weight:800}
 .headpod .bloque p{font-family:var(--f-hp);font-weight:700}
 .b-rosa{background:#ffb3b3;color:#2a1410}.b-rosa p{color:#5a2a24}
-.b-cafe{background:var(--cafe);color:var(--crema)}.b-cafe p{color:var(--crema2)}
+.b-cafe{background:var(--pizarra2);color:var(--crema)}.b-cafe p{color:var(--crema2)}
 .b-ambar{background:#dfa83f;color:#2a1410}.b-ambar p{color:#4a3010}
 .b-malva{background:#3b2a4a;color:#f3e6ff}.b-malva p{color:#cdb8e0}
 .whynote .bloque h3{font-family:var(--f-serif);font-weight:700;letter-spacing:-.02em}
 .whynote .bloque p{font-family:var(--f-maquina);font-size:15px}
 .b-hoja{background:#fffaf1;color:var(--tinta);box-shadow:0 10px 30px #5a4a3a14}.b-hoja p{color:var(--tinta2)}
 .b-rojo{background:var(--rojo);color:#fff}.b-rojo p{color:#ffe3df}
-.b-tinta{background:var(--tinta);color:var(--papel)}.b-tinta p{color:#cfc6b8}
+.b-tinta{background:var(--pizarra2);color:var(--papel)}.b-tinta p{color:#cfc6b8}
 .b-kraft{background:#d9c7a7;color:var(--tinta)}.b-kraft p{color:#5a4a3a}
 .etiquetas{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
 .etiquetas span{border-radius:99px;padding:8px 14px;font-size:14px;font-weight:700}
-.headpod .etiquetas span{background:var(--cafe);color:var(--crema2);font-family:var(--f-hp)}
-.whynote .etiquetas span{background:#fffaf1;color:var(--tinta2);font-family:var(--f-maquina);font-weight:400;box-shadow:0 2px 8px #5a4a3a12}
+.headpod .etiquetas span{background:var(--pizarra2);color:var(--crema2);font-family:var(--f-hp)}
+.whynote .etiquetas span{background:var(--pizarra2);color:var(--crema2);font-family:var(--f-maquina);font-weight:400;box-shadow:0 2px 8px #0006}
 @media (max-width: 760px){
   .bloques{grid-template-columns:1fr}
   .bloque{min-height:400px;padding:26px 22px 0}
@@ -359,6 +359,8 @@ footer .envoltura{display:block}
   .bloques::-webkit-scrollbar{display:none}
   .bloque,.bloque.ancho{flex:0 0 84%;scroll-snap-align:center;min-height:470px}
   .bloque .tel,.bloque.ancho .tel{width:190px;margin-bottom:-120px}
+  .tira img{border-radius:24px}
+  .bloque .tel img{border-radius:25px}
 }
 /* Quién hace las apps: una credencial con los dos mundos, Headpod de noche y WhyType en papel */
 .yo{padding-block:20px 64px;background:var(--noche)}
@@ -382,9 +384,9 @@ footer .envoltura{display:block}
 @media (max-width: 760px){ .tarjeta-yo{grid-template-columns:1fr} .yo-sello{width:70px;height:70px;font-size:11px;top:16px;right:16px} .yo-wn{padding-top:26px} }
 
 @media (prefers-color-scheme: light){
-  :root{color-scheme:light;--noche:#faf6f1;--crema:#2a1e19;--crema2:#6d5d50;--rosa:#c8466a;--pizarra:#f1ece6;--pizarra2:#ffffff;--gris:#6d655d}
-  .headpod,.p-hp{color-scheme:dark;--crema:#f5e9dc;--crema2:#bfae9f;--rosa:#ffb3b3;--cafe:#1d1411;--cafe2:#2a1e19}
-  .p-hp,.headpod{color:var(--crema)}
+  :root{color-scheme:light;--noche:#efe8da;--crema:#2a1e19;--crema2:#6d5d50;--rosa:#c8466a;--pizarra:#f1ece6;--pizarra2:#ffffff;--gris:#6d655d}
+  .p-hp{color-scheme:dark;--crema:#f5e9dc;--crema2:#bfae9f;--rosa:#ffb3b3;--cafe:#1d1411;--cafe2:#2a1e19}
+  .p-hp{color:var(--crema)}
   .portada h1 .esc2,.portada h1 .wn-linea{color:var(--tinta)}
   .barra{border-bottom-color:#2a1e1914}
   .barra nav a:hover,.barra nav a:focus-visible{background:#2a1e190f}
@@ -392,7 +394,40 @@ footer .envoltura{display:block}
   .pasos li{box-shadow:0 6px 18px #5a4a3a12}
   .extra > div{border-color:#2a1e1914}
   .correo code{background:#2a1e190d}
-  footer{border-top-color:#2a1e1914;color:#7d746c}
+  footer{border-top-color:#2a1e1914;color:#6d655d}
+  /* Headpod en claro: texto oscuro sobre papel, sus tarjetas quedan blancas */
+  .hp-nombre,.hp-lema{color:var(--tinta)}
+  .hp-sub{color:var(--tinta2)}
+  .headpod .tira-titulo small{color:var(--tinta2)}
+  .btn-hp{color:#fff}
+  .mini-play{color:#fff}
+  /* Tarjetas oscuras que siguen siéndolo en claro: su texto claro no puede usar --crema */
+  .b-cafe{background:var(--cafe);color:#f5e9dc}.b-cafe p{color:#bfae9f}
+  .invita-hp p{color:#bfae9f}
+  .yo-hp{color:#f5e9dc}
+  .yo-hp .eti{color:#ffb3b3}
+  .yo-hp .onda-yo{stroke:#ffb3b3}
+  .yo-hp .numeros small{color:#bfae9f}
+  /* WhyType en claro: vuelve a su papel crema */
+  .whynote{background:var(--papel);color:var(--tinta);background-image:radial-gradient(#7a6a5520 1px, transparent 1.5px)}
+  .whynote .tira-titulo small{color:var(--tinta2)}
+  .whynote .tira figcaption{color:var(--tinta)}
+  .whynote .tira img{filter:drop-shadow(0 10px 18px #5a4a3a33)}
+  .wn-fecha{color:var(--tinta2)}
+  .whynote .cosa{background:#fffaf1;border:1px solid #2a262312}
+  .whynote .cosa span{color:var(--tinta2)}
+  .whynote .novedades,.prueba-wn{background:#fffaf1;border:1px solid #2a262312}
+  .whynote .novedades{color:var(--tinta2)}
+  .whynote .novedades b{color:var(--tinta)}
+  .prueba-wn textarea{color:var(--tinta)}
+  .prueba-wn textarea::placeholder{color:#2a262355}
+  .prueba-wn button{border-color:#2a262330;color:var(--tinta)}
+  .prueba-wn small{color:var(--tinta2)}
+  .whynote .qr-caja{background:#fffaf1;color:var(--tinta2)}
+  .whynote .etiquetas span{background:#fffaf1;color:var(--tinta2);box-shadow:0 2px 8px #5a4a3a12}
+  .sello-grande{box-shadow:inset 0 0 0 7px var(--papel), inset 0 0 0 9px #e5352a80}
+  .b-tinta{background:var(--tinta)}
+  .btn-wn2{background:var(--tinta);color:var(--papel)}
 }
 
 @media (max-width: 760px){
@@ -488,6 +523,24 @@ footer .envoltura{display:block}
         <figure><img src="../img/wn/3-hoja.webp?v=3" alt="Read like a sheet" loading="lazy"><figcaption>Read like a sheet</figcaption></figure>
         <figure><img src="../img/wn/4-usuario.webp?v=3" alt="Your name and PIN" loading="lazy"><figcaption>Your name and PIN</figcaption></figure>
         <figure><img src="../img/wn/5-bienvenido.webp?v=3" alt="Start writing" loading="lazy"><figcaption>Start writing!</figcaption></figure>
+        <figure><img src="../img/wn/lista-vacia.webp?v=3" alt="Empty list: no notes yet" loading="lazy"><figcaption>No notes yet</figcaption></figure>
+        <figure><img src="../img/wn/lista-manana.webp?v=3" alt="Notes list with Mañana and Hoy, and search" loading="lazy"><figcaption>Your notes</figcaption></figure>
+        <figure><img src="../img/wn/recordatorios-vacio-1.webp?v=3" alt="Empty reminders: turn on notifications so they ring" loading="lazy"><figcaption>No reminders</figcaption></figure>
+        <figure><img src="../img/wn/recordatorios-vacio-2.webp?v=3" alt="Typing a reminder: milk at two in the afternoon" loading="lazy"><figcaption>Say it like you would</figcaption></figure>
+        <figure><img src="../img/wn/menu.webp?v=3" alt="Menu with categories, profile, backup and trash" loading="lazy"><figcaption>Everything in the menu</figcaption></figure>
+        <figure><img src="../img/wn/editor-sin-lampara.webp?v=3" alt="Typewriter editor with the lamp off" loading="lazy"><figcaption>The sheet, lamp off</figcaption></figure>
+        <figure><img src="../img/wn/guia-carro.webp?v=3" alt="Guide: the carriage moves the cursor and turns on the lamp" loading="lazy"><figcaption>The carriage</figcaption></figure>
+        <figure><img src="../img/wn/guia-boton.webp?v=3" alt="Guide: the button with title, category, photos and AI images" loading="lazy"><figcaption>The … button</figcaption></figure>
+        <figure><img src="../img/wn/guia-escanear.webp?v=3" alt="Guide: scan text from a photo, no internet" loading="lazy"><figcaption>Scan text</figcaption></figure>
+        <figure><img src="../img/wn/guia-compartir.webp?v=3" alt="Guide: share your note as an image" loading="lazy"><figcaption>Share as an image</figcaption></figure>
+        <figure><img src="../img/wn/guia-buscar.webp?v=3" alt="Guide: search for a word inside the note" loading="lazy"><figcaption>Search in the note</figcaption></figure>
+        <figure><img src="../img/wn/guia-recordatorios.webp?v=3" alt="Guide: reminders the way you would say them, with a marimba" loading="lazy"><figcaption>Reminders</figcaption></figure>
+        <figure><img src="../img/wn/guia-posponer.webp?v=3" alt="Guide: snooze an alert 15 min, 1 h or 1 day" loading="lazy"><figcaption>Snooze an alert</figcaption></figure>
+        <figure><img src="../img/wn/guia-papelera.webp?v=3" alt="Guide: the trash keeps your notes for 30 days" loading="lazy"><figcaption>The trash</figcaption></figure>
+        <figure><img src="../img/wn/guia-pdf.webp?v=3" alt="Guide: share your note as a PDF" loading="lazy"><figcaption>Share as a PDF</figcaption></figure>
+        <figure><img src="../img/wn/guia-respaldo.webp?v=3" alt="Guide: automatic daily backup in Google Drive" loading="lazy"><figcaption>Backup in Google Drive</figcaption></figure>
+        <figure><img src="../img/wn/guia-actualiza.webp?v=3" alt="Guide: the app updates itself without losing anything" loading="lazy"><figcaption>It updates itself</figcaption></figure>
+        <figure><img src="../img/wn/guia-widgets.webp?v=3" alt="Guide: quick note and reminders widgets" loading="lazy"><figcaption>Widgets on your home screen</figcaption></figure>
       </div>
 
 
@@ -549,6 +602,11 @@ footer .envoltura{display:block}
         <figure><img src="../img/hp/4-avisos.webp?v=3" alt="Alerts and downloads" loading="lazy"><figcaption>Never miss a thing</figcaption></figure>
         <figure><img src="../img/hp/5-tema.webp?v=3" alt="Choose a theme" loading="lazy"><figcaption>Your theme</figcaption></figure>
         <figure><img src="../img/hp/6-respaldo.webp?v=3" alt="Restore or import" loading="lazy"><figcaption>Bring your stuff</figcaption></figure>
+        <figure><img src="../img/hp/inicio-2.webp?v=3" alt="Home with your daily mix and April episodes" loading="lazy"><figcaption>Home, your mix and episodes</figcaption></figure>
+        <figure><img src="../img/hp/descubrir-2.webp?v=3" alt="Add a show by RSS and your shows" loading="lazy"><figcaption>Add by RSS</figcaption></figure>
+        <figure><img src="../img/hp/ajustes-1.webp?v=3" alt="Playback, headphones, alerts and downloads settings" loading="lazy"><figcaption>Settings: play and alerts</figcaption></figure>
+        <figure><img src="../img/hp/ajustes-2.webp?v=3" alt="Appearance, player style and your data settings" loading="lazy"><figcaption>Settings: how it looks</figcaption></figure>
+        <figure><img src="../img/hp/ajustes-3.webp?v=3" alt="Your data, help and version 2.5.112 settings" loading="lazy"><figcaption>Settings: your data</figcaption></figure>
       </div>
 
       <div class="tira-titulo"><h3>Pick your player</h3><small>or with the 🎨 button inside the player</small></div>
