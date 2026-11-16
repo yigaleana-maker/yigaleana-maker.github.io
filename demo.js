@@ -8,14 +8,14 @@
   var T = EN ? {
     estilos: ['Material 3', 'Turntable', 'Artwork', 'Classic'],
     pistas: ['Tap play: the cover changes shape and the wave comes alive. Press a button and it widens.',
-      'Tap play: the arm lands on the record. Drag the arm to move through the episode.',
+      'Tap play: the arm lands on the record. Drag the arm to move. Swipe the bottom card and try the new Style button.',
       'Swipe the cover sideways to change episodes. Drag the scale to move the red needle.',
       'The original design: the big play changes shape when it plays.'],
     de: 'of', eps: [['Your show', 'This is how Headpod feels'], ['Another show', 'An episode for the road'], ['Stories', 'Tales to hear at night']]
   } : {
     estilos: ['Material 3', 'Disco', 'Portada', 'Clásico'],
     pistas: ['Toca el play: la portada cambia de forma y la onda cobra vida. Al apretar un botón, se ensancha.',
-      'Toca el play: el brazo baja al disco. Arrastra el brazo para moverte en el episodio.',
+      'Toca el play: el brazo baja al disco. Arrastra el brazo para moverte. Desliza la tarjeta de abajo y prueba el botón nuevo de Estilo.',
       'Desliza la portada a los lados para cambiar de episodio. Arrastra la escala para mover la aguja roja.',
       'El diseño original: el play grande cambia de forma al sonar.'],
     de: 'de', eps: [['Tu programa', 'Así se siente Headpod'], ['Otro programa', 'Un episodio para el camino'], ['Relatos', 'Historias para escuchar de noche']]
@@ -164,27 +164,53 @@
   }
 
   /* ——— Disco ——— */
-  /* Ángulos del brazo: en reposo vertical; al sonar, la aguja va de la orilla del disco hacia adentro */
+  /* Igual que en la app: un disco grande que casi no se ve (por donde corre el brazo) y,
+     arriba a la izquierda, el vinilo con la portada como etiqueta. El brazo baja desde la base. */
+  var W = 262, RG = 0.8 * W, CG = { x: 0.22 * W, y: 0.8 * RG }, RD = 0.5 * W, CD = { x: 0.72 * W - RG, y: 0.62 * RG };
   var GEO = (function () {
-    var px = 280 - 18 - 36, py = 46, largo = 200, cx = -80 + 130, cy = 20 + 130;
-    function radio(t) { var a = t * Math.PI / 180; var x = px - Math.sin(a) * largo, y = py + Math.cos(a) * largo; return Math.hypot(x - cx, y - cy); }
+    var px = W - 29, py = 47, largo = 214;
+    function radio(t) { var a = t * Math.PI / 180; return Math.hypot(px - Math.sin(a) * largo - CG.x, py + Math.cos(a) * largo - CG.y); }
     var t0 = 0, t1 = 0;
-    for (var t = 0; t < 80; t += 0.5) { if (!t0 && radio(t) < 122) t0 = t; if (t0 && radio(t) < 70) { t1 = t; break; } }
-    return { t0: t0 || 22, t1: t1 || 45, px: px, py: py };
+    for (var t = -5; t < 80; t += 0.25) { if (!t0 && radio(t) < 0.92 * RG) t0 = t; if (t0 && radio(t) < 0.66 * RG) { t1 = t; break; } }
+    return { t0: t0 || 4, t1: t1 || 30, px: px, py: py, largo: largo };
   })();
+  var IC_ATRAS = '<svg viewBox="0 0 24 24"><path d="M12 5V2L8 5.5 12 9V6.6a6.4 6.4 0 1 1-6.4 6.4H4a8 8 0 1 0 8-8z"/><text x="12" y="16.4" font-size="8.5" font-weight="900" text-anchor="middle" font-family="sans-serif">15</text></svg>';
+  var IC_ADELANTE = '<svg viewBox="0 0 24 24"><path d="M12 5V2l4 3.5L12 9V6.6a6.4 6.4 0 1 0 6.4 6.4H20a8 8 0 1 1-8-8z"/><text x="12" y="16.4" font-size="8.5" font-weight="900" text-anchor="middle" font-family="sans-serif">15</text></svg>';
+  var IC_PALETA = '<svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0 0 18c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm3-4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm3 4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/></svg>';
+  var paginaDisco = 0;
   function construirDisco(v) {
-    var ep = T.eps[S.ep];
-    v.innerHTML = '<div class="disco"><div class="vinilo">' + cv(44) + '</div><div class="brillo"></div><div class="base"></div>' +
-      '<div class="brazo"><div class="tubo"></div><div class="cap"></div><div class="eje"></div></div>' +
-      '<div class="txt"><div class="dm-tit">' + ep[1] + '</div><div class="dm-show" style="margin-top:6px">' + ep[0] + ' · <span class="t2"></span></div></div>' +
-      '<div class="fila"><button class="dm-btn b-gusta">' + IC.corazon + '</button><button class="dm-btn">−15</button><button class="dm-btn play"></button><button class="dm-btn">+15</button><button class="dm-btn b-vel">1×</button></div></div>';
+    var ep = T.eps[S.ep], c = COLORES[S.ep];
+    var chips = EN ? ['Style', 'Notes', 'Text', 'Close'] : ['Estilo', 'Notas', 'Texto', 'Cerrar'];
+    v.innerHTML = '<div class="disco">' +
+      '<div class="grande" style="left:' + (CG.x - RG) + 'px;top:' + (CG.y - RG) + 'px;width:' + 2 * RG + 'px;height:' + 2 * RG + 'px"></div>' +
+      '<div class="vinilo" style="left:' + (CD.x - RD) + 'px;top:' + (CD.y - RD) + 'px;width:' + 2 * RD + 'px;height:' + 2 * RD + 'px">' +
+        '<div class="etiqueta dm-cv" style="--c1:' + c[0] + ';--c2:' + c[1] + '"><span>' + LETRAS[S.ep] + '</span></div></div>' +
+      '<div class="brillo" style="left:' + (CD.x - RD) + 'px;top:' + (CD.y - RD) + 'px;width:' + 2 * RD + 'px;height:' + 2 * RD + 'px"></div>' +
+      '<div class="base"><i></i></div>' +
+      '<div class="brazo" style="left:' + GEO.px + 'px;top:' + GEO.py + 'px"><div class="tubo" style="height:' + GEO.largo + 'px"></div><div class="cap" style="top:' + (GEO.largo - 8) + 'px"><b></b></div><div class="eje"></div></div>' +
+      '<div class="txt"><div class="dm-tit">' + ep[1] + '</div><div class="fila-show"><span class="dm-show">' + ep[0] + '</span><span class="chip"><span class="t2"></span> · <span class="cv-vel">1×</span></span></div></div>' +
+      '<div class="fila"><button class="dm-btn b-gusta">' + IC.corazon + '</button><button class="dm-btn">' + IC_ATRAS + '</button><button class="dm-btn play"></button><button class="dm-btn">' + IC_ADELANTE + '</button><button class="dm-btn b-vel">1×</button></div>' +
+      '<div class="tarjeta-pag"><div class="puntos"><i></i><i></i></div><div class="pista-pag"><div class="pag">' +
+        '<button class="dm-btn redondo b-bajar">' + IC.bajar + '</button><button class="dm-btn redondo b-timer">' + IC.reloj + '</button><button class="dm-btn redondo b-guardar">' + IC.guardar + '</button><button class="dm-btn redondo luna">🌙</button></div>' +
+        '<div class="pag"><button class="dm-btn chip-p estilo">' + IC_PALETA + chips[0] + '</button><button class="dm-btn chip-p">' + chips[1] + '</button><button class="dm-btn chip-p">' + chips[2] + '</button></div>' +
+      '</div></div></div>';
     var fila = v.querySelectorAll('.fila .dm-btn'), vinilo = v.querySelector('.vinilo'), brazo = v.querySelector('.brazo');
     tocar(fila[1], function () { saltar(-15); }); tocar(fila[2], playPausa); tocar(fila[3], function () { saltar(15); });
     acciones(v);
+    /* La tarjeta de abajo: dos páginas que se deslizan; en la segunda, el botón nuevo de Estilo */
+    var pistaPag = v.querySelector('.pista-pag'), puntos = v.querySelectorAll('.puntos i');
+    function irPagina(n) { paginaDisco = n; pistaPag.style.transform = 'translateX(' + (-50 * n) + '%)'; puntos[0].classList.toggle('on', n === 0); puntos[1].classList.toggle('on', n === 1); }
+    irPagina(paginaDisco);
+    var tp = v.querySelector('.tarjeta-pag'), xp = 0, enPag = false;
+    tp.addEventListener('pointerdown', function (e) { xp = e.clientX; enPag = true; });
+    tp.addEventListener('pointerup', function (e) { if (!enPag) return; enPag = false; var d = e.clientX - xp; if (Math.abs(d) > 30) { vibrar(8); irPagina(d < 0 ? 1 : 0); } });
+    Array.prototype.forEach.call(puntos, function (p, k) { p.addEventListener('click', function () { irPagina(k); }); });
+    tocar(v.querySelector('.estilo'), function () { cambiarEstilo((S.estilo + 1) % 4); });
+    tocar(v.querySelector('.luna'), function () {});
     /* El único gesto: arrastrar el brazo */
     var arrastre = false, ultima = -1;
     function anguloDe(e) {
-      var r = v.getBoundingClientRect(), x = e.clientX - r.left - GEO.px, y = e.clientY - r.top - GEO.py;
+      var r = v.getBoundingClientRect(), k = r.width / W, x = (e.clientX - r.left) / k - GEO.px, y = (e.clientY - r.top) / k - GEO.py;
       return Math.atan2(-x, y) * 180 / Math.PI;
     }
     brazo.querySelectorAll('.tubo,.cap').forEach(function (p) {
@@ -198,13 +224,17 @@
       p.addEventListener('pointerup', function () { arrastre = false; brazo.classList.remove('arrastre'); refrescar(); });
     });
     return {
-      refrescar: function () { fila[2].innerHTML = S.sonando ? IC.pausa : IC.play; fila[2].classList.toggle('son', S.sonando); v.querySelector('.t2').textContent = falta(); },
+      refrescar: function () {
+        fila[2].innerHTML = S.sonando ? IC.pausa : IC.play; fila[2].classList.toggle('son', S.sonando);
+        v.querySelector('.t2').textContent = falta(); v.querySelector('.cv-vel').textContent = VEL[S.iv] + '×';
+      },
       cuadro: function () {
         vinilo.style.transform = 'rotate(' + anim.giro.toFixed(2) + 'deg)';
         var apoyado = S.sonando || arrastre;
-        var ang = apoyado ? GEO.t0 + (GEO.t1 - GEO.t0) * (S.pos / S.dur) : -2;
+        var ang = apoyado ? GEO.t0 + (GEO.t1 - GEO.t0) * (S.pos / S.dur) : -1.7;
         brazo.style.transform = 'rotate(' + ang.toFixed(2) + 'deg)';
         v.querySelector('.t2').textContent = falta();
+        v.querySelector('.cv-vel').textContent = VEL[S.iv] + '×';
       }
     };
   }
@@ -353,7 +383,7 @@
     anim.galleta += (meta - anim.galleta) * (quieto ? 1 : Math.min(1, dt * 5));
     if (S.sonando) { anim.fase += dt * 5.2; S.pos = Math.min(S.dur, S.pos + dt * VEL[S.iv]); }
     /* El disco: sube a su velocidad y frena suave */
-    anim.vGiro += ((S.sonando ? 120 : 0) - anim.vGiro) * Math.min(1, dt * (S.sonando ? 3 : 1.5));
+    anim.vGiro += ((S.sonando ? 72 : 0) - anim.vGiro) * Math.min(1, dt * (S.sonando ? 3 : 1.5));
     anim.giro = (anim.giro + anim.vGiro * dt) % 360;
     if (actual && actual.cuadro) actual.cuadro();
     if (visible) requestAnimationFrame(cuadro); else ultimo = 0;
