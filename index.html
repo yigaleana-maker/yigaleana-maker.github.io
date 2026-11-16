@@ -145,7 +145,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 @keyframes parpadeo{50%{opacity:0}}
 .riel{position:relative;height:40px;margin-top:26px;max-width:620px}
 .riel::before{content:"";position:absolute;left:0;right:0;top:15px;height:10px;border-radius:6px;background:linear-gradient(#55524f,#1d1c1b 60%,#3b3936)}
-.carro{position:absolute;top:0;left:0;width:112px;height:40px;border-radius:22px;background:linear-gradient(#f4f1ea,#cfcac1);box-shadow:0 6px 14px #0003, inset 0 1px 0 #fff;display:flex;align-items:center;justify-content:center;gap:5px;transition:left .09s linear}
+.carro{position:absolute;top:0;left:0;width:112px;height:40px;border-radius:22px;background:linear-gradient(#f4f1ea,#cfcac1);box-shadow:0 6px 14px #0003, inset 0 1px 0 #fff;display:flex;align-items:center;justify-content:center;gap:5px}
 .carro i{width:6px;height:6px;border-radius:50%;background:#2a2623}
 .carro i:first-child{background:#3fae54}.carro i:last-child{background:var(--rojo)}
 .whynote .tira-titulo h3{font-family:var(--f-serif);font-weight:700}
@@ -428,8 +428,8 @@ footer .envoltura{display:block}
   <div class="envoltura">
     <a class="marca" href="#inicio" translate="no">yg4<span>apps</span></a>
     <nav aria-label="Apps">
-      <a href="#headpod" translate="no">Headpod</a>
       <a href="#whytype" translate="no">WhyType</a>
+      <a href="#headpod" translate="no">Headpod</a>
       <a href="#instalar">Instalar</a>
       <a href="en/" lang="en" hreflang="en" aria-label="English">EN</a>
     </nav>
@@ -439,19 +439,10 @@ footer .envoltura{display:block}
 <main id="inicio">
   <section class="portada envoltura">
     <p class="eti">Apps para Android · gratis</p>
-    <h1>Una para <span class="esc">escuchar</span>. <span class="wn-linea">Otra para <span class="esc2">escribir</span>.</span></h1>
+    <h1><span class="wn-linea">Una para <span class="esc2">escribir</span>.</span> Otra para <span class="esc">escuchar</span>.</h1>
     <p class="bajada">Dos apps de <span translate="no">yg4apps</span>, hechas con cuidado, sin anuncios y sin cuentas. Lo tuyo se queda en tu teléfono.</p>
 
     <div class="puertas">
-      <a class="puerta p-hp" href="#headpod">
-        <svg viewBox="0 0 300 40" aria-hidden="true"><path id="onda-puerta" d="M0 20 Q 18 6 36 20 T 72 20 T 108 20 T 144 20 T 180 20 T 216 20 T 252 20 T 288 20" fill="none" stroke="#ffb3b3" stroke-width="3" stroke-linecap="round"/></svg>
-        <img class="ico" src="img/hp-icono.png" alt="">
-        <div>
-          <h2 translate="no">Headpod</h2>
-          <p>Tus podcasts, tu avance, tu manera de escuchar.</p>
-          <span class="ir">Conocer <span translate="no">Headpod</span> ↓</span>
-        </div>
-      </a>
       <a class="puerta p-wn" href="#whytype">
         <span class="sello" id="sello-puerta" aria-hidden="true" translate="no">WhyType</span>
         <img class="ico" src="img/whytype-icono.png" alt="">
@@ -461,67 +452,17 @@ footer .envoltura{display:block}
           <span class="ir">Conocer <span translate="no">WhyType</span> ↓</span>
         </div>
       </a>
+      <a class="puerta p-hp" href="#headpod">
+        <svg viewBox="0 0 300 40" aria-hidden="true"><path id="onda-puerta" d="M0 20 Q 18 6 36 20 T 72 20 T 108 20 T 144 20 T 180 20 T 216 20 T 252 20 T 288 20" fill="none" stroke="#ffb3b3" stroke-width="3" stroke-linecap="round"/></svg>
+        <img class="ico" src="img/hp-icono.png" alt="">
+        <div>
+          <h2 translate="no">Headpod</h2>
+          <p>Tus podcasts, tu avance, tu manera de escuchar.</p>
+          <span class="ir">Conocer <span translate="no">Headpod</span> ↓</span>
+        </div>
+      </a>
     </div>
     <p class="firma"><span>Hechas en Kotlin por</span> <span class="firma-yo"><img src="img/yehu-chico.webp" alt=""> <a href="#yehu">Yehu</a></span> <span><span class="punto">· </span><span translate="no">Headpod</span>, además, con <span translate="no">Material 3 Expressive</span></span></p>
-  </section>
-
-  <!-- ——— HEADPOD ——— -->
-  <section class="headpod" id="headpod">
-    <div class="envoltura">
-      <div class="escena">
-        <video data-src="audifonos.mp4" preload="none" poster="img/audifonos.jpg" muted loop playsinline aria-label="Los audífonos de Headpod girando"></video>
-        <div class="texto">
-          <h2 class="hp-nombre" translate="no">Headpod</h2>
-          <svg class="onda" id="onda" viewBox="0 0 600 28" preserveAspectRatio="none" aria-hidden="true"><path id="onda-hp" d="M2 14 C 27 2, 52 2, 77 14 S 127 26, 152 14 S 202 2, 227 14 S 277 26, 302 14 S 352 2, 377 14 S 427 26, 452 14 S 502 2, 527 14 S 577 26, 598 14"/></svg>
-          <p class="hp-lema">Bienvenido a la experiencia más increíble de podcast</p>
-          <p class="hp-sub">Tus programas, tu avance, tu manera de escuchar.</p>
-          <div class="botones">
-            <a class="btn btn-hp" href="https://github.com/yigaleana-maker/headpod-actualizaciones/releases/latest/download/headpod.apk">⬇ Descargar <span translate="no">Headpod</span> <small>APK</small></a>
-            <a class="btn btn-hp2" href="https://apps.obtainium.imranr.dev/redirect?r=obtainium://add/https://github.com/yigaleana-maker/headpod-actualizaciones">➕ Obtainium</a>
-            <div class="qr-caja"><div class="qr" data-url="https://yigaleana-maker.github.io/headpod"></div><span>¿Estás en la computadora? Escanéalo con tu celular para descargarla.</span></div>
-            <button type="button" class="btn btn-hp2 compartir" data-url="https://yigaleana-maker.github.io/headpod">↗ Pásasela a alguien</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="tira-titulo"><h3>La primera vez que la abres</h3><small>desliza →</small></div>
-      <div class="tira" tabindex="0" aria-label="Pantallas de la bienvenida de Headpod">
-        <figure><img src="img/hp/1-bienvenida.webp" alt="Bienvenida de Headpod con los audífonos" loading="lazy"><figcaption>Bienvenida</figcaption></figure>
-        <figure><img src="img/hp/2-programas.webp" alt="Tu nombre y buscar programas" loading="lazy"><figcaption>Tu nombre y tus programas</figcaption></figure>
-        <figure><img src="img/hp/3-escucha.webp" alt="Escucha a tu manera" loading="lazy"><figcaption>Escucha a tu manera</figcaption></figure>
-        <figure><img src="img/hp/4-avisos.webp" alt="Avisos y descargas" loading="lazy"><figcaption>Que no se te pase nada</figcaption></figure>
-        <figure><img src="img/hp/5-tema.webp" alt="Elegir tema" loading="lazy"><figcaption>Tu tema</figcaption></figure>
-        <figure><img src="img/hp/6-respaldo.webp" alt="Restaurar o importar" loading="lazy"><figcaption>Trae lo tuyo</figcaption></figure>
-      </div>
-
-      <div class="tira-titulo"><h3>Elige tu reproductor</h3><small>o con el botón 🎨 dentro del reproductor</small></div>
-      <div class="tira" tabindex="0" aria-label="Los cuatro estilos de reproductor">
-        <figure><img src="img/hp/rep-material3.webp?v=2" alt="Material 3" loading="lazy"><figcaption>Material 3<span>Expresivo, con botones que se deforman</span></figcaption></figure>
-        <figure><img src="img/hp/rep-disco.webp?v=2" alt="Disco" loading="lazy"><figcaption>Disco<span>Un tocadiscos: el brazo marca el avance</span></figcaption></figure>
-        <figure><img src="img/hp/rep-portada.webp?v=2" alt="Portada completa" loading="lazy"><figcaption>Portada completa<span>La portada en grande y un dial</span></figcaption></figure>
-        <figure><img src="img/hp/rep-clasico.webp?v=2" alt="Clásico" loading="lazy"><figcaption>Clásico<span>El diseño original de Headpod</span></figcaption></figure>
-      </div>
-
-
-      <div class="bloques">
-        <div class="bloque b-rosa ancho"><div class="texto-b"><h3>Un reproductor que se siente.</h3><p>Un vinilo que gira, botones que se aprietan y rebotan, y una vibración suave en cada toque.</p></div><div class="tel"><img src="img/hp/rep-disco.webp?v=2" alt="Reproductor Disco" loading="lazy"></div></div>
-        <div class="bloque b-cafe"><h3>Tu mezcla, en un play.</h3><p>Lo que dejaste a medias y lo nuevo de tus favoritos, listo al abrir la app.</p><div class="tel"><img src="img/hp/inicio.webp?v=2" alt="Inicio con tu mezcla del día" loading="lazy"></div></div>
-        <div class="bloque b-ambar"><h3>Tu próximo favorito.</h3><p>Busca en Apple Podcasts y recibe ideas según lo que escuchas.</p><div class="tel"><img src="img/hp/descubrir.webp?v=2" alt="Descubrir" loading="lazy"></div></div>
-        <div class="bloque b-malva ancho"><div class="texto-b"><h3>Tu espacio tranquilo.</h3><p>Seguir escuchando, descargas, tus listas y cuánto escuchaste esta semana.</p></div><div class="tel"><img src="img/hp/biblioteca.webp?v=2" alt="Biblioteca" loading="lazy"></div></div>
-      </div>
-      <div class="etiquetas"><span>🗣️ Voz clara</span><span>⏭️ Sin intros</span><span>🌙 Temporizador suave</span><span>📝 Transcripción</span><span>💬 Frase en vivo</span><span>😴 Modo Dormir</span><span>🔵 Tus audífonos</span><span>⏩ Velocidad por programa</span></div>
-
-      <div class="extra-app">
-        <div class="prueba-hp prueba-demo">
-          <span class="eti-prueba">Prueba los reproductores</span>
-          <div id="demo-rep" class="demo-rep" data-lang="es"></div>
-        </div>
-        <div class="novedades" data-repo="headpod-actualizaciones" data-boton=".btn-hp" data-app="Headpod">
-          <h3>Lo nuevo en <span translate="no">Headpod</span></h3>
-          <ol><li><b>Headpod 2.5.112</b><small>15 de noviembre de 2026</small><ul><li>Nuevo: cambia el estilo del reproductor sin salir de él con el botón de la paleta. Elige Material 3, Disco, Portada o Clásico y el cambio se ve al instante.</li><li>La bienvenida ahora te deja elegir tu reproductor desde el principio.</li></ul></li><li><b>Headpod 2.5.110</b><small>15 de noviembre de 2026</small><ul><li>Portada completa con animaciones más vivas: la portada se desliza como una carta y se puede lanzar.</li></ul></li><li><b>Headpod 2.5.108</b><small>15 de noviembre de 2026</small><ul><li>Portada completa al estilo Apple Music: la portada es una tarjeta con esquinas redondeadas y sombra sobre su fondo desenfocado.</li></ul></li></ol>
-        </div>
-      </div>
-    </div>
   </section>
 
   <!-- ——— WHYNOTE ——— -->
@@ -542,19 +483,19 @@ footer .envoltura{display:block}
 
       <div class="tira-titulo"><h3>La primera vez que la abres</h3><small>desliza →</small></div>
       <div class="tira" tabindex="0" aria-label="Pantallas de la bienvenida de WhyType">
-        <figure><img src="img/wn/1-whynote.webp" alt="Bienvenida de WhyType" loading="lazy"><figcaption>WhyType</figcaption></figure>
-        <figure><img src="img/wn/2-escribe.webp" alt="Escribe como en una máquina" loading="lazy"><figcaption>Escribe como en una máquina</figcaption></figure>
-        <figure><img src="img/wn/3-hoja.webp" alt="Lee como una hoja" loading="lazy"><figcaption>Lee como una hoja</figcaption></figure>
-        <figure><img src="img/wn/4-usuario.webp" alt="Tu nombre y tu PIN" loading="lazy"><figcaption>Tu nombre y tu PIN</figcaption></figure>
-        <figure><img src="img/wn/5-bienvenido.webp" alt="Empezar a escribir" loading="lazy"><figcaption>¡A escribir!</figcaption></figure>
+        <figure><img src="img/wn/1-whynote.webp?v=3" alt="Bienvenida de WhyType" loading="lazy"><figcaption>WhyType</figcaption></figure>
+        <figure><img src="img/wn/2-escribe.webp?v=3" alt="Escribe como en una máquina" loading="lazy"><figcaption>Escribe como en una máquina</figcaption></figure>
+        <figure><img src="img/wn/3-hoja.webp?v=3" alt="Lee como una hoja" loading="lazy"><figcaption>Lee como una hoja</figcaption></figure>
+        <figure><img src="img/wn/4-usuario.webp?v=3" alt="Tu nombre y tu PIN" loading="lazy"><figcaption>Tu nombre y tu PIN</figcaption></figure>
+        <figure><img src="img/wn/5-bienvenido.webp?v=3" alt="Empezar a escribir" loading="lazy"><figcaption>¡A escribir!</figcaption></figure>
       </div>
 
 
       <div class="bloques">
-        <div class="bloque b-hoja ancho"><div class="texto-b"><h3>Escribe como en una máquina.</h3><p>Cada letra suena, el carro avanza y suena la campanita al final del renglón.</p></div><div class="tel"><img src="img/wn/maquina.webp" alt="La hoja en la máquina" loading="lazy"></div></div>
-        <div class="bloque b-rojo"><h3>Tu propia máquina.</h3><p>Carro, riel, dije, sello, papel, tinta y letra. Hasta tu propia letra.</p><div class="tel"><img src="img/wn/tu-maquina.webp" alt="Personaliza tu máquina" loading="lazy"></div></div>
-        <div class="bloque b-tinta"><h3>Recordatorios, como los dirías.</h3><p>"Llamar a mamá mañana a las 5". Suena una marimba al cumplirlos.</p><div class="tel"><img src="img/wn/recordatorios.webp" alt="Recordatorios" loading="lazy"></div></div>
-        <div class="bloque b-kraft ancho"><div class="texto-b"><h3>Escanea, crea y comparte.</h3><p>Toma una foto de una hoja y la máquina la teclea, sin internet. Compártela como una hoja escrita a máquina.</p></div><div class="tel"><img src="img/wn/opciones.webp" alt="Opciones de la nota" loading="lazy"></div></div>
+        <div class="bloque b-hoja ancho"><div class="texto-b"><h3>Escribe como en una máquina.</h3><p>Cada letra suena, el carro avanza y suena la campanita al final del renglón.</p></div><div class="tel"><img src="img/wn/maquina.webp?v=3" alt="La hoja en la máquina" loading="lazy"></div></div>
+        <div class="bloque b-rojo"><h3>Tu propia máquina.</h3><p>Carro, riel, dije, sello, papel, tinta y letra. Hasta tu propia letra.</p><div class="tel"><img src="img/wn/tu-maquina.webp?v=3" alt="Personaliza tu máquina" loading="lazy"></div></div>
+        <div class="bloque b-tinta"><h3>Recordatorios, como los dirías.</h3><p>"Llamar a mamá mañana a las 5". Suena una marimba al cumplirlos.</p><div class="tel"><img src="img/wn/recordatorios.webp?v=3" alt="Recordatorios" loading="lazy"></div></div>
+        <div class="bloque b-kraft ancho"><div class="texto-b"><h3>Escanea, crea y comparte.</h3><p>Toma una foto de una hoja y la máquina la teclea, sin internet. Compártela como una hoja escrita a máquina.</p></div><div class="tel"><img src="img/wn/opciones.webp?v=3" alt="Opciones de la nota" loading="lazy"></div></div>
       </div>
       <div class="etiquetas"><span>🔒 Notas privadas con tu huella</span><span>✨ Imágenes con IA (solo ahí usa internet)</span><span>📄 PDF</span><span>☁️ Respaldo en Google Drive</span><span>🗑️ Papelera</span><span>🔎 Buscar dentro de la nota</span></div>
 
@@ -581,13 +522,72 @@ footer .envoltura{display:block}
     </div>
   </section>
 
+  <!-- ——— HEADPOD ——— -->
+  <section class="headpod" id="headpod">
+    <div class="envoltura">
+      <div class="escena">
+        <video data-src="audifonos.mp4" preload="none" poster="img/audifonos.jpg" muted loop playsinline aria-label="Los audífonos de Headpod girando"></video>
+        <div class="texto">
+          <h2 class="hp-nombre" translate="no">Headpod</h2>
+          <svg class="onda" id="onda" viewBox="0 0 600 28" preserveAspectRatio="none" aria-hidden="true"><path id="onda-hp" d="M2 14 C 27 2, 52 2, 77 14 S 127 26, 152 14 S 202 2, 227 14 S 277 26, 302 14 S 352 2, 377 14 S 427 26, 452 14 S 502 2, 527 14 S 577 26, 598 14"/></svg>
+          <p class="hp-lema">Bienvenido a la experiencia más increíble de podcast</p>
+          <p class="hp-sub">Tus programas, tu avance, tu manera de escuchar.</p>
+          <div class="botones">
+            <a class="btn btn-hp" href="https://github.com/yigaleana-maker/headpod-actualizaciones/releases/latest/download/headpod.apk">⬇ Descargar <span translate="no">Headpod</span> <small>APK</small></a>
+            <a class="btn btn-hp2" href="https://apps.obtainium.imranr.dev/redirect?r=obtainium://add/https://github.com/yigaleana-maker/headpod-actualizaciones">➕ Obtainium</a>
+            <div class="qr-caja"><div class="qr" data-url="https://yigaleana-maker.github.io/headpod"></div><span>¿Estás en la computadora? Escanéalo con tu celular para descargarla.</span></div>
+            <button type="button" class="btn btn-hp2 compartir" data-url="https://yigaleana-maker.github.io/headpod">↗ Pásasela a alguien</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="tira-titulo"><h3>La primera vez que la abres</h3><small>desliza →</small></div>
+      <div class="tira" tabindex="0" aria-label="Pantallas de la bienvenida de Headpod">
+        <figure><img src="img/hp/1-bienvenida.webp?v=3" alt="Bienvenida de Headpod con los audífonos" loading="lazy"><figcaption>Bienvenida</figcaption></figure>
+        <figure><img src="img/hp/2-programas.webp?v=3" alt="Tu nombre y buscar programas" loading="lazy"><figcaption>Tu nombre y tus programas</figcaption></figure>
+        <figure><img src="img/hp/3-escucha.webp?v=3" alt="Escucha a tu manera" loading="lazy"><figcaption>Escucha a tu manera</figcaption></figure>
+        <figure><img src="img/hp/4-avisos.webp?v=3" alt="Avisos y descargas" loading="lazy"><figcaption>Que no se te pase nada</figcaption></figure>
+        <figure><img src="img/hp/5-tema.webp?v=3" alt="Elegir tema" loading="lazy"><figcaption>Tu tema</figcaption></figure>
+        <figure><img src="img/hp/6-respaldo.webp?v=3" alt="Restaurar o importar" loading="lazy"><figcaption>Trae lo tuyo</figcaption></figure>
+      </div>
+
+      <div class="tira-titulo"><h3>Elige tu reproductor</h3><small>o con el botón 🎨 dentro del reproductor</small></div>
+      <div class="tira" tabindex="0" aria-label="Los cuatro estilos de reproductor">
+        <figure><img src="img/hp/rep-material3.webp?v=3" alt="Material 3" loading="lazy"><figcaption>Material 3<span>Expresivo, con botones que se deforman</span></figcaption></figure>
+        <figure><img src="img/hp/rep-disco.webp?v=3" alt="Disco" loading="lazy"><figcaption>Disco<span>Un tocadiscos: el brazo marca el avance</span></figcaption></figure>
+        <figure><img src="img/hp/rep-portada.webp?v=3" alt="Portada completa" loading="lazy"><figcaption>Portada completa<span>La portada en grande y un dial</span></figcaption></figure>
+        <figure><img src="img/hp/rep-clasico.webp?v=3" alt="Clásico" loading="lazy"><figcaption>Clásico<span>El diseño original de Headpod</span></figcaption></figure>
+      </div>
+
+
+      <div class="bloques">
+        <div class="bloque b-rosa ancho"><div class="texto-b"><h3>Un reproductor que se siente.</h3><p>Un vinilo que gira, botones que se aprietan y rebotan, y una vibración suave en cada toque.</p></div><div class="tel"><img src="img/hp/rep-disco.webp?v=3" alt="Reproductor Disco" loading="lazy"></div></div>
+        <div class="bloque b-cafe"><h3>Tu mezcla, en un play.</h3><p>Lo que dejaste a medias y lo nuevo de tus favoritos, listo al abrir la app.</p><div class="tel"><img src="img/hp/inicio.webp?v=3" alt="Inicio con tu mezcla del día" loading="lazy"></div></div>
+        <div class="bloque b-ambar"><h3>Tu próximo favorito.</h3><p>Busca en Apple Podcasts y recibe ideas según lo que escuchas.</p><div class="tel"><img src="img/hp/descubrir.webp?v=3" alt="Descubrir" loading="lazy"></div></div>
+        <div class="bloque b-malva ancho"><div class="texto-b"><h3>Tu espacio tranquilo.</h3><p>Seguir escuchando, descargas, tus listas y cuánto escuchaste esta semana.</p></div><div class="tel"><img src="img/hp/biblioteca.webp?v=3" alt="Biblioteca" loading="lazy"></div></div>
+      </div>
+      <div class="etiquetas"><span>🗣️ Voz clara</span><span>⏭️ Sin intros</span><span>🌙 Temporizador suave</span><span>📝 Transcripción</span><span>💬 Frase en vivo</span><span>😴 Modo Dormir</span><span>🔵 Tus audífonos</span><span>⏩ Velocidad por programa</span></div>
+
+      <div class="extra-app">
+        <div class="prueba-hp prueba-demo">
+          <span class="eti-prueba">Prueba los reproductores</span>
+          <div id="demo-rep" class="demo-rep" data-lang="es"></div>
+        </div>
+        <div class="novedades" data-repo="headpod-actualizaciones" data-boton=".btn-hp" data-app="Headpod">
+          <h3>Lo nuevo en <span translate="no">Headpod</span></h3>
+          <ol><li><b>Headpod 2.5.112</b><small>15 de noviembre de 2026</small><ul><li>Nuevo: cambia el estilo del reproductor sin salir de él con el botón de la paleta. Elige Material 3, Disco, Portada o Clásico y el cambio se ve al instante.</li><li>La bienvenida ahora te deja elegir tu reproductor desde el principio.</li></ul></li><li><b>Headpod 2.5.110</b><small>15 de noviembre de 2026</small><ul><li>Portada completa con animaciones más vivas: la portada se desliza como una carta y se puede lanzar.</li></ul></li><li><b>Headpod 2.5.108</b><small>15 de noviembre de 2026</small><ul><li>Portada completa al estilo Apple Music: la portada es una tarjeta con esquinas redondeadas y sombra sobre su fondo desenfocado.</li></ul></li></ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ——— INSTALAR ——— -->
 
   <section class="envoltura invitacion" aria-label="Descargar">
-    <div class="invita invita-hp"><img class="ico" src="img/hp-icono.png" alt=""><h2>Dale play.</h2><p>Gratis, sin anuncios y sin cuentas.</p>
-      <div class="botones"><a class="btn btn-hp" href="https://github.com/yigaleana-maker/headpod-actualizaciones/releases/latest/download/headpod.apk">⬇ Descargar <span translate="no">Headpod</span> <small>APK</small></a></div></div>
     <div class="invita invita-wn"><img class="ico" src="img/whytype-icono.png" alt=""><h2>A escribir.</h2><p>Gratis, sin anuncios y sin cuentas.</p>
       <div class="botones"><a class="btn btn-wn" href="https://github.com/yigaleana-maker/whynote-actualizaciones/releases/latest/download/whynote.apk">⬇ Descargar <span translate="no">WhyType</span> <small>APK</small></a></div></div>
+    <div class="invita invita-hp"><img class="ico" src="img/hp-icono.png" alt=""><h2>Dale play.</h2><p>Gratis, sin anuncios y sin cuentas.</p>
+      <div class="botones"><a class="btn btn-hp" href="https://github.com/yigaleana-maker/headpod-actualizaciones/releases/latest/download/headpod.apk">⬇ Descargar <span translate="no">Headpod</span> <small>APK</small></a></div></div>
   </section>
 
   <section class="final" id="instalar">
@@ -1020,18 +1020,40 @@ footer .envoltura{display:block}
     }
     function buf(m){ var b = audio.createBuffer(1, m.length, TASA); b.getChannelData(0).set(normalizar(m)); return b; }
 
-    /* Se prepara al primer toque en la hoja, antes de la primera letra */
-    function preparar(){
+    /* Se prepara al primer toque en la hoja, antes de la primera letra.
+       Los sonidos se fabrican en trozos pequeños cuando la maquinita entra en
+       pantalla (precalentar), para que el primer toque no bloquee el hilo
+       principal y la primera letra suene al instante, con el carro. */
+    function asegurarAudio(){
       if (!audio){
-        var A = window.AudioContext || window.webkitAudioContext; if (!A) return;
+        var A = window.AudioContext || window.webkitAudioContext; if (!A) return false;
         try { audio = new A({latencyHint: 'interactive'}); } catch(e){ audio = new A(); }
       }
       if (audio.state === 'suspended') audio.resume();
-      if (!S){
-        S = { teclas: [], espacios: [], borrar: buf(borrar(azar(400))), retorno: buf(retorno(azar(500))), campana: buf(campanita()) };
-        for (var i = 0; i < 6; i++) S.teclas.push(buf(tecla(azar(100 + i * 7), i)));
-        for (i = 0; i < 2; i++) S.espacios.push(buf(espacio(azar(300 + i))));
-      }
+      return true;
+    }
+    function fabricarTeclas(){ if (S.teclas.length < 6) for (var i = S.teclas.length; i < 6; i++) S.teclas.push(buf(tecla(azar(100 + i * 7), i))); }
+    function fabricarEspacios(){ if (S.espacios.length < 2) for (var i = S.espacios.length; i < 2; i++) S.espacios.push(buf(espacio(azar(300 + i)))); }
+    function fabricarBorrarRetorno(){ if (!S.borrar) S.borrar = buf(borrar(azar(400))); if (!S.retorno) S.retorno = buf(retorno(azar(500))); }
+    function fabricarCampana(){ if (!S.campana) S.campana = buf(campanita()); }
+    function preparar(){
+      if (!asegurarAudio()) return;
+      if (!S) S = { teclas: [], espacios: [], borrar: null, retorno: null, campana: null };
+      fabricarTeclas(); fabricarEspacios(); fabricarBorrarRetorno(); fabricarCampana();
+    }
+    var precalentado = false;
+    function precalentar(){
+      if (precalentado) return; precalentado = true;
+      if (!asegurarAudio()) return;
+      if (!S) S = { teclas: [], espacios: [], borrar: null, retorno: null, campana: null };
+      var pasos = [fabricarTeclas, fabricarEspacios, fabricarBorrarRetorno, fabricarCampana], n = 0;
+      (function siguiente(){ if (n < pasos.length){ pasos[n++](); setTimeout(siguiente, 0); } })();
+    }
+    if ('IntersectionObserver' in window){
+      var ojoMaq = new IntersectionObserver(function(es){
+        es.forEach(function(e){ if (e.isIntersecting){ precalentar(); ojoMaq.disconnect(); } });
+      }, {threshold: 0.1});
+      ojoMaq.observe(area);
     }
     function tocar(b, vol, variar, retraso){
       if (!conSonido || !audio || !b) return;
