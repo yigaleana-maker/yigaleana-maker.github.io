@@ -9,7 +9,7 @@
 <meta name="theme-color" content="#faf6f1" media="(prefers-color-scheme: light)">
 <link rel="alternate" hreflang="es" href="https://yigaleana-maker.github.io/">
 <link rel="alternate" hreflang="en" href="https://yigaleana-maker.github.io/en/">
-<link rel="stylesheet" href="demo.css?v=2">
+<link rel="stylesheet" href="demo.css?v=3">
 <link rel="icon" href="img/whytype-icono.png">
 <meta property="og:title" content="Una para escuchar. Otra para escribir.">
 <meta property="og:description" content="Headpod y WhyType: apps gratis para Android, sin anuncios y sin cuentas.">
@@ -176,9 +176,11 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .golpe{animation:golpe .32s ease-out .3s both}
 @keyframes golpe{0%,100%{translate:0 0}25%{translate:0 2px}50%{translate:-1px -1px}75%{translate:1px 1px}}
 /* Al deslizar: lo que se acerca a la orilla de arriba o de abajo se difumina y se encoge un poco */
-.desvanece{opacity:var(--o,1);scale:var(--s,1);will-change:opacity,scale}
+.aparece{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .8s cubic-bezier(.34,1.4,.64,1)}
+.aparece.visto{opacity:1;transform:none}
 /* Las tiras de pantallas se difuminan en sus orillas, como en las apps */
-.tira{-webkit-mask-image:linear-gradient(90deg,transparent,#000 22px,#000 calc(100% - 22px),transparent);mask-image:linear-gradient(90deg,transparent,#000 22px,#000 calc(100% - 22px),transparent)}
+.tira{-webkit-mask-image:linear-gradient(90deg,transparent,#000 10px,#000 calc(100% - 10px),transparent);mask-image:linear-gradient(90deg,transparent,#000 10px,#000 calc(100% - 10px),transparent);scroll-padding-inline:16px}
+.tira::after{content:"";flex:0 0 14px}
 @keyframes estampar{0%{transform:rotate(-14deg) scale(1.8);opacity:0}100%{transform:rotate(-14deg) scale(1);opacity:1}}
 
 
@@ -237,6 +239,10 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .btn{transition:transform .45s cubic-bezier(.34,1.8,.64,1)}
 
 
+.headpod .novedades{grid-column:1/-1}
+.headpod .novedades ol{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));align-items:start}
+.compartir{display:none;font:inherit;cursor:pointer;border:0}
+@media (max-width: 899px){ .compartir{display:inline-flex} }
 .prueba-demo{grid-column:1/-1;display:flex;flex-direction:column;align-items:center}
 .prueba-demo .eti-prueba{align-self:flex-start}
 /* El título entra palabra por palabra con rebote */
@@ -324,7 +330,7 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
     <a class="marca" href="#inicio">yg4<span>apps</span></a>
     <nav aria-label="Apps">
       <a href="#headpod">Headpod</a>
-      <a href="#whynote">WhyType</a>
+      <a href="#whytype">WhyType</a>
       <a href="#instalar">Instalar</a>
       <a href="en/" lang="en" hreflang="en" aria-label="English">EN</a>
     </nav>
@@ -335,7 +341,7 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
   <section class="portada envoltura">
     <p class="eti">Apps para Android · gratis</p>
     <h1>Una para <span class="esc">escuchar</span>. Otra para <span class="esc2">escribir</span>.</h1>
-    <p class="bajada">Dos apps hechas con cuidado, sin anuncios y sin cuentas. Lo tuyo se queda en tu teléfono.</p>
+    <p class="bajada">Dos apps hechas con cuidado por Yehu, un desarrollador independiente de México. Sin anuncios y sin cuentas. Lo tuyo se queda en tu teléfono.</p>
 
     <div class="puertas">
       <a class="puerta p-hp" href="#headpod">
@@ -347,7 +353,7 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
           <span class="ir">Conocer Headpod ↓</span>
         </div>
       </a>
-      <a class="puerta p-wn" href="#whynote">
+      <a class="puerta p-wn" href="#whytype">
         <span class="sello" id="sello-puerta" aria-hidden="true">WhyType</span>
         <img class="ico" src="img/whytype-icono.png" alt="">
         <div>
@@ -373,6 +379,7 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
             <a class="btn btn-hp" href="https://github.com/yigaleana-maker/headpod-actualizaciones/releases/latest/download/headpod.apk">⬇ Descargar Headpod <small>APK</small></a>
             <a class="btn btn-hp2" href="https://apps.obtainium.imranr.dev/redirect?r=obtainium://add/https://github.com/yigaleana-maker/headpod-actualizaciones">➕ Obtainium</a>
             <div class="qr-caja"><div class="qr" data-url="https://yigaleana-maker.github.io/headpod"></div><span>¿Estás en la computadora? Escanéalo con tu celular para descargarla.</span></div>
+            <button type="button" class="btn btn-hp2 compartir" data-url="https://yigaleana-maker.github.io/headpod">↗ Pásasela a alguien</button>
           </div>
         </div>
       </div>
@@ -420,14 +427,14 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
         </div>
         <div class="novedades" data-repo="headpod-actualizaciones" data-boton=".btn-hp" data-app="Headpod">
           <h3>Lo nuevo en Headpod</h3>
-          <ol><li><small>Cargando las últimas versiones…</small></li></ol>
+          <ol><li><b>Headpod 2.5.112</b><small>16 de noviembre de 2026</small><ul><li>Nuevo: cambia el estilo del reproductor sin salir de él con el botón de la paleta. Elige Material 3, Disco, Portada o Clásico y el cambio se ve al instante.</li><li>La bienvenida ahora te deja elegir tu reproductor desde el principio.</li></ul></li><li><b>Headpod 2.5.110</b><small>16 de noviembre de 2026</small><ul><li>Portada completa con animaciones más vivas: la portada se desliza como una carta y se puede lanzar.</li></ul></li><li><b>Headpod 2.5.108</b><small>16 de noviembre de 2026</small><ul><li>Portada completa al estilo Apple Music: la portada es una tarjeta con esquinas redondeadas y sombra sobre su fondo desenfocado.</li></ul></li></ol>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ——— WHYNOTE ——— -->
-  <section class="whynote" id="whynote">
+  <section class="whynote" id="whytype"><span id="whynote" aria-hidden="true"></span>
     <div class="envoltura">
       <div class="maquina">
         <p class="wn-fecha" id="fecha">domingo, 15 de noviembre</p>
@@ -436,6 +443,11 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
         <p class="tecleado" id="tecleado" aria-label="De un escritor para otro escritor. Tus notas en una máquina de escribir de verdad.">De un escritor para otro escritor. Tus notas en una máquina de escribir de verdad.</p>
         <div class="riel" aria-hidden="true"><div class="carro" id="carro"><i></i><i></i><i></i></div></div>
       </div>
+      <div class="botones botones-arriba">
+        <a class="btn btn-wn" href="https://github.com/yigaleana-maker/whynote-actualizaciones/releases/latest/download/whynote.apk">⬇ Descargar WhyType <small>APK</small></a>
+        <a class="btn btn-wn2" href="https://apps.obtainium.imranr.dev/redirect?r=obtainium://add/https://github.com/yigaleana-maker/whynote-actualizaciones">➕ Obtainium</a>
+      </div>
+
 
       <div class="tira-titulo"><h3>La primera vez que la abres</h3><small>desliza →</small></div>
       <div class="tira" tabindex="0" aria-label="Pantallas de la bienvenida de WhyType">
@@ -459,6 +471,7 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
         <div class="cosa"><b>Escanea texto</b><span>Toma una foto de una hoja y la máquina lo teclea. Sin internet.</span></div>
         <div class="cosa"><b>Recordatorios</b><span>"Llamar a mamá mañana a las 5", como lo dirías. Suena una marimba al cumplirlos.</span></div>
         <div class="cosa"><b>Notas privadas</b><span>Solo se abren con tu huella.</span></div>
+        <div class="cosa"><b>Imágenes con IA</b><span>Crea gratis una imagen a partir de tu nota. Solo para eso se conecta a internet.</span></div>
         <div class="cosa"><b>Comparte como hoja</b><span>Una imagen escrita a máquina, lista para Instagram o WhatsApp.</span></div>
       </div>
 
@@ -471,7 +484,7 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
         </div>
         <div class="novedades" data-repo="whynote-actualizaciones" data-boton=".btn-wn" data-app="WhyType">
           <h3>Lo nuevo en WhyType</h3>
-          <ol><li><small>Cargando las últimas versiones…</small></li></ol>
+          <ol><li><b>WhyType 2.2.100</b><small>15 de noviembre de 2026</small><ul><li>Ícono nuevo de WhyType, con el mismo estilo que Headpod: renglones tecleados sobre un círculo rojo.</li></ul></li><li><b>WhyType 2.2.99</b><small>15 de noviembre de 2026</small><ul><li>En la bienvenida, "Ya tengo un respaldo" trae tus notas de una copia de WhyType o de WhyNote.</li></ul></li><li><b>WhyType 2.2.98</b><small>15 de noviembre de 2026</small><ul><li>WhyNote ahora se llama WhyType. Tus notas, recordatorios, privadas y ajustes siguen igual.</li></ul></li></ol>
         </div>
       </div>
 
@@ -479,6 +492,7 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
         <a class="btn btn-wn" href="https://github.com/yigaleana-maker/whynote-actualizaciones/releases/latest/download/whynote.apk">⬇ Descargar WhyType <small>APK</small></a>
         <a class="btn btn-wn2" href="https://apps.obtainium.imranr.dev/redirect?r=obtainium://add/https://github.com/yigaleana-maker/whynote-actualizaciones">➕ Obtainium</a>
         <div class="qr-caja"><div class="qr" data-url="https://yigaleana-maker.github.io/whytype"></div><span>¿En la computadora? Escanéalo con tu celular.</span></div>
+            <button type="button" class="btn btn-wn2 compartir" data-url="https://yigaleana-maker.github.io/whytype">↗ Pásasela a alguien</button>
         <div class="sello-grande" id="sello" aria-hidden="true">WhyType<br>gratis</div>
       </div>
     </div>
@@ -514,14 +528,14 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script src="demo.js?v=2" defer></script>
+<script src="demo.js?v=3" defer></script>
 <script>
 (function(){
   var quieto = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* Fecha de hoy, como en la hoja de WhyType */
   try{
-    var f = new Date().toLocaleDateString('es-MX',{weekday:'long', day:'numeric', month:'long'});
+    var f = new Date().toLocaleDateString('es-MX',{weekday:'long', day:'numeric', month:'long', year:'numeric'});
     document.getElementById('fecha').textContent = f;
   }catch(e){}
 
@@ -608,48 +622,36 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
     })(0);
   }
 
-  /* Al deslizar, lo que llega a las orillas se difumina */
-  if (!quieto){
+  /* Al llegar, cada parte aparece una sola vez y se queda visible */
+  if (!quieto && 'IntersectionObserver' in window){
     var piezas = Array.prototype.slice.call(document.querySelectorAll(
-      '.portada .eti, .portada h1, .portada .bajada, .puerta, .escena video, .escena .texto > *, .tira-titulo, .tira, .cosa, .extra-app > *:not(.prueba-demo), .maquina > *, .whynote .botones, .final h2, .pasos li, .extra > div'));
-    piezas.forEach(function(p){ p.classList.add('desvanece'); });
-    var barra = document.querySelector('.barra');
-    var pendiente = false;
-    function orillas(){
-      pendiente = false;
-      var alto = window.innerHeight, arriba = barra ? barra.getBoundingClientRect().bottom : 0;
-      var zona = Math.max(90, Math.min(190, alto * 0.24));
-      piezas.forEach(function(p){
-        var r = p.getBoundingClientRect();
-        if (r.bottom < -50 || r.top > alto + 50) return;
-        var c = r.top + Math.min(r.height, zona) / 2;
-        var c2 = r.bottom - Math.min(r.height, zona) / 2;
-        /* Arriba solo se difumina cuando ya deslizaste: la primera vista se ve completa */
-        var fuerza = Math.min(1, window.scrollY / 140);
-        var tArriba = 1 - (1 - Math.max(0, Math.min(1, (c - arriba) / zona))) * fuerza;
-        var t = Math.min(tArriba, (alto - c2) / zona);
-        t = Math.max(0, Math.min(1, t));
-        var e = t * t * (3 - 2 * t);
-        p.style.setProperty('--o', (0.06 + 0.94 * e).toFixed(3));
-        p.style.setProperty('--s', (0.95 + 0.05 * e).toFixed(3));
-      });
-    }
-    function pedir(){ if (!pendiente){ pendiente = true; requestAnimationFrame(orillas); } }
-    window.addEventListener('scroll', pedir, {passive: true});
-    window.addEventListener('resize', pedir);
-    orillas();
+      '.puerta, .escena .texto > *, .tira-titulo, .cosa, .extra-app > *:not(.prueba-demo), .maquina > *, .botones, .final h2, .pasos li, .extra > div'));
+    var alto0 = window.innerHeight;
+    var ojo = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('visto'); ojo.unobserve(e.target); } });
+    }, {threshold: 0.12, rootMargin: '0px 0px -6% 0px'});
+    piezas.forEach(function(p){
+      /* Lo que ya se ve al abrir no se anima */
+      if (p.getBoundingClientRect().top < alto0) return;
+      p.classList.add('aparece'); ojo.observe(p);
+    });
+    /* Por si algo no llega a avisar, todo se ve a los 4 segundos de deslizar */
+    var red = null;
+    window.addEventListener('scroll', function(){ if (!red) red = setTimeout(function(){ piezas.forEach(function(p){ var r = p.getBoundingClientRect(); if (r.top < window.innerHeight) p.classList.add('visto'); }); red = null; }, 900); }, {passive: true});
   }
-
 
   /* ——— Novedades automáticas desde GitHub, y la versión en el botón ——— */
   function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
   Array.prototype.forEach.call(document.querySelectorAll('.novedades'), function(caja){
     var repo = caja.getAttribute('data-repo'), app = caja.getAttribute('data-app');
-    fetch('https://api.github.com/repos/yigaleana-maker/' + repo + '/releases?per_page=3')
+    fetch('https://api.github.com/repos/yigaleana-maker/' + repo + '/releases?per_page=6')
       .then(function(r){ if (!r.ok) throw 0; return r.json(); })
       .then(function(lista){
         if (!lista.length) throw 0;
         var ol = caja.querySelector('ol'); ol.innerHTML = '';
+        /* Sin repetir versiones que dicen lo mismo, y hasta cinco */
+        var vistos = {};
+        lista = lista.filter(function(v){ var k = (v.body || '').replace(/\*\*/g, '').trim(); if (vistos[k]) return false; vistos[k] = 1; return true; }).slice(0, 5);
         lista.forEach(function(v){
           var fecha = new Date(v.published_at).toLocaleDateString('es-MX', {day:'numeric', month:'long', year:'numeric'});
           var puntos = (v.body || '').split('\n').map(function(l){ return l.replace(/^\s*[•\-*]\s*/, '').replace(/\*\*/g, '').trim(); }).filter(Boolean).slice(0, 5);
@@ -658,11 +660,19 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
             (puntos.length ? '<ul>' + puntos.map(function(p){ return '<li>' + esc(p) + '</li>'; }).join('') + '</ul>' : '');
           ol.appendChild(li);
         });
-        var boton = document.querySelector(caja.getAttribute('data-boton'));
         var version = (lista[0].name || '').replace(app, '').trim();
-        if (boton && version) boton.innerHTML = '⬇ Descargar ' + esc(app) + ' <small>' + esc(version) + '</small>';
+        if (version) Array.prototype.forEach.call(document.querySelectorAll(caja.getAttribute('data-boton')), function(boton){ boton.innerHTML = '⬇ Descargar ' + esc(app) + ' <small>' + esc(version) + '</small>'; });
       })
-      .catch(function(){ caja.hidden = true; });
+      .catch(function(){ /* Sin GitHub se quedan las novedades escritas en la página */ });
+  });
+
+  /* En el celular: pasarle la app a alguien */
+  Array.prototype.forEach.call(document.querySelectorAll('.compartir'), function(b){
+    b.addEventListener('click', function(){
+      var url = b.getAttribute('data-url');
+      if (navigator.share) navigator.share({url: url}).catch(function(){});
+      else if (navigator.clipboard) navigator.clipboard.writeText(url).then(function(){ var t = b.textContent; b.textContent = '✓ Enlace copiado'; setTimeout(function(){ b.textContent = t; }, 1800); });
+    });
   });
 
   /* ——— QR para descargar desde la computadora ——— */
@@ -882,6 +892,8 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
             if (!p) return;
             if (/^\s+$/.test(p)){ h1.appendChild(document.createTextNode(p)); return; }
             var s = document.createElement('span'); s.className = 'pal'; s.textContent = p; s.style.animationDelay = (n++ * 90) + 'ms'; h1.appendChild(s);
+            /* El punto no se separa de la palabra de antes */
+            if (/^[.,;:!?]+$/.test(p) && s.previousSibling && s.previousSibling.nodeType === 1){ var j = document.createElement('span'); j.style.whiteSpace = 'nowrap'; h1.insertBefore(j, s.previousSibling); j.appendChild(j.nextSibling); j.appendChild(s); }
           });
         } else { nodo.classList.add('pal'); nodo.style.animationDelay = (n++ * 90) + 'ms'; h1.appendChild(nodo); }
       });
