@@ -272,7 +272,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .correo code{font-family:var(--f-ui);font-weight:600;font-size:16px;color:var(--crema);user-select:all;background:#ffffff10;padding:8px 12px;border-radius:12px}
 .correo button{font:inherit;font-weight:600;font-size:14px;background:var(--crema);color:var(--pizarra);border:0;border-radius:99px;padding:8px 14px;cursor:pointer}
 footer{background:var(--pizarra);border-top:1px solid #ffffff10;padding-block:26px;color:#8a8a8f;font-size:14px}
-footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+footer .envoltura{display:block}
 
 .aviso-maqueta{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom, 0px));transform:translateX(-50%);z-index:30;background:#000c;border:1px solid #ffffff22;color:#ddd;font-size:12.5px;padding:7px 14px;border-radius:99px;backdrop-filter:blur(8px);white-space:nowrap}
 
@@ -283,6 +283,82 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
 /* ——— Modo claro: la portada, la barra y el final se aclaran. Headpod sigue de noche (es su mundo)
    y WhyType sigue en su papel. ——— */
 .bajada a{color:inherit;text-decoration:underline;text-decoration-color:var(--rosa);text-underline-offset:3px}
+/* ——— Barra de aviso: lo nuevo, arriba de todo ——— */
+.aviso{display:flex;align-items:center;justify-content:center;gap:8px;padding:9px 44px 9px 16px;background:linear-gradient(90deg,#3a1d22,#2a1a14);color:#ffd9d3;font-size:13.5px;font-weight:600;text-decoration:none;position:relative;text-align:center;line-height:1.35}
+.aviso b{color:#fff}
+.aviso .flecha{transition:transform .4s cubic-bezier(.34,1.8,.64,1)}
+.aviso:hover .flecha{transform:translateX(4px)}
+.aviso-cerrar{position:absolute;right:8px;top:50%;translate:0 -50%;width:30px;height:30px;border:0;border-radius:50%;background:#ffffff14;color:inherit;font-size:15px;cursor:pointer}
+@media (prefers-color-scheme: light){ .aviso{background:linear-gradient(90deg,#ffe3dd,#fbeee6);color:#7a2a35} .aviso b{color:#3a1418} .aviso-cerrar{background:#00000010} }
+/* ——— Crédito bajo las puertas, como una firma ——— */
+.firma{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:26px;font-size:14px;color:var(--gris)}
+.firma-yo{display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.firma img{width:28px;height:28px;border-radius:50%;background:var(--pizarra2)}
+.firma a{color:var(--crema);font-weight:700;text-decoration:underline;text-decoration-color:var(--rosa);text-underline-offset:3px}
+/* ——— Bloques: una idea grande con su pantalla ——— */
+.bloques{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:44px}
+.bloque{position:relative;overflow:hidden;border-radius:30px;padding:30px 28px 0;min-height:430px;display:flex;flex-direction:column}
+.bloque.ancho{grid-column:1/-1;flex-direction:row;align-items:center;gap:30px;padding:0 0 0 36px;min-height:380px}
+.bloque h3{font-size:clamp(26px,3.2vw,38px);line-height:1.02;letter-spacing:-.035em;margin:0}
+.bloque p{font-size:15.5px;line-height:1.45;margin-top:10px;max-width:34ch}
+.bloque .tel{margin-top:auto;align-self:center;width:230px;margin-bottom:-150px;padding-top:26px;transition:transform .8s cubic-bezier(.34,1.4,.64,1)}
+.bloque.ancho .tel{margin:0 40px -170px auto;padding-top:40px;align-self:flex-end}
+.bloque .tel img{width:100%;display:block;filter:drop-shadow(0 18px 30px #0007)}
+.bloque:hover .tel{transform:translateY(-10px) rotate(-1.5deg)}
+.bloque .texto-b{min-width:0}
+.headpod .bloque h3{font-family:var(--f-marca);font-weight:800}
+.headpod .bloque p{font-family:var(--f-hp);font-weight:700}
+.b-rosa{background:#ffb3b3;color:#2a1410}.b-rosa p{color:#5a2a24}
+.b-cafe{background:var(--cafe);color:var(--crema)}.b-cafe p{color:var(--crema2)}
+.b-ambar{background:#dfa83f;color:#2a1410}.b-ambar p{color:#4a3010}
+.b-malva{background:#3b2a4a;color:#f3e6ff}.b-malva p{color:#cdb8e0}
+.whynote .bloque h3{font-family:var(--f-serif);font-weight:700;letter-spacing:-.02em}
+.whynote .bloque p{font-family:var(--f-maquina);font-size:15px}
+.b-hoja{background:#fffaf1;color:var(--tinta);box-shadow:0 10px 30px #5a4a3a14}.b-hoja p{color:var(--tinta2)}
+.b-rojo{background:var(--rojo);color:#fff}.b-rojo p{color:#ffe3df}
+.b-tinta{background:var(--tinta);color:var(--papel)}.b-tinta p{color:#cfc6b8}
+.b-kraft{background:#d9c7a7;color:var(--tinta)}.b-kraft p{color:#5a4a3a}
+.etiquetas{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.etiquetas span{border-radius:99px;padding:8px 14px;font-size:14px;font-weight:700}
+.headpod .etiquetas span{background:var(--cafe);color:var(--crema2);font-family:var(--f-hp)}
+.whynote .etiquetas span{background:#fffaf1;color:var(--tinta2);font-family:var(--f-maquina);font-weight:400;box-shadow:0 2px 8px #5a4a3a12}
+@media (max-width: 760px){
+  .bloques{grid-template-columns:1fr}
+  .bloque{min-height:400px;padding:26px 22px 0}
+  .bloque.ancho{flex-direction:column;align-items:stretch;padding:26px 22px 0;min-height:400px}
+  .bloque.ancho .tel{margin:auto auto -150px;align-self:center;padding-top:26px}
+}
+/* ——— La invitación final ——— */
+.invitacion{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding-block:20px 64px}
+.invita{border-radius:34px;padding:44px 32px;display:flex;flex-direction:column;align-items:flex-start;gap:18px;position:relative;overflow:hidden}
+.invita h2{font-size:clamp(40px,6vw,68px);line-height:.95;letter-spacing:-.045em;margin:0}
+.invita p{font-size:16px;margin:0}
+.invita img.ico{width:64px;height:64px;border-radius:18px}
+.invita-hp{background:radial-gradient(120% 90% at 100% 0%,#5a2630,#1d1411 60%);color:#fff}
+.invita-hp h2{font-family:var(--f-marca);font-weight:800}
+.invita-hp p{font-family:var(--f-hp);font-weight:700;color:var(--crema2)}
+.invita-wn{background:var(--papel);color:var(--tinta)}
+.invita-wn h2{font-family:var(--f-serif);font-weight:700}
+.invita-wn p{font-family:var(--f-maquina);color:var(--tinta2)}
+.invita .botones{margin-top:4px}
+@media (max-width: 760px){ .invitacion{grid-template-columns:1fr} .invita{padding:34px 24px} }
+/* ——— Números ——— */
+.numeros{display:flex;gap:26px;flex-wrap:wrap;margin-top:16px}
+.numeros div{display:flex;flex-direction:column}
+.numeros b{font-family:var(--f-marca);font-weight:800;font-size:28px;letter-spacing:-.03em;color:var(--crema);line-height:1}
+.numeros small{font-size:12.5px;color:var(--gris);margin-top:4px}
+/* ——— Pie de página ——— */
+.pie{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:24px;align-items:start}
+.pie .col b{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--crema);margin-bottom:10px}
+.pie .col a{display:block;color:inherit;text-decoration:none;padding:3px 0}
+.pie .col a:hover{color:var(--crema)}
+.pie .marca-pie{font-family:var(--f-marca);font-weight:800;font-size:20px;color:var(--crema)}
+.pie .marca-pie span{color:var(--rosa)}
+.pie p{margin-top:8px;max-width:30ch}
+.pie-fin{margin-top:26px;padding-top:18px;border-top:1px solid #ffffff10;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media (max-width: 760px){ .pie{grid-template-columns:1fr 1fr} .pie .col:first-child{grid-column:1/-1} }
+@media (prefers-color-scheme: light){ .pie-fin{border-top-color:#2a1e1914} .firma img{background:#fff} }
+.yo .avatar img{display:block;width:100%;height:100%;border-radius:50%;background:var(--pizarra);object-fit:cover}
 /* Quién hace las apps */
 .yo{padding-block:64px;background:var(--noche)}
 .yo .tarjeta-yo{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center;border-radius:30px;padding:28px;background:linear-gradient(135deg,#ffffff0c,#ffffff04);border:1px solid #ffffff14;position:relative;overflow:hidden}
@@ -345,6 +421,7 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
 </head>
 <body>
 
+<a class="aviso" data-cerrar="Cerrar aviso" id="aviso" href="#headpod"><span>✨ <b>Nuevo en Headpod:</b> <span id="aviso-txt">cambia el estilo del reproductor desde el propio reproductor con el botón de la paleta</span></span><span class="flecha">→</span></a>
 <header class="barra">
   <div class="envoltura">
     <a class="marca" href="#inicio">yg4<span>apps</span></a>
@@ -383,6 +460,7 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
         </div>
       </a>
     </div>
+    <p class="firma">Hecho con Kotlin y Material 3 Expressive por <span class="firma-yo"><img src="img/yehu-chico.webp" alt=""> <a href="#yehu">Yehu</a></span></p>
   </section>
 
   <!-- ——— HEADPOD ——— -->
@@ -413,12 +491,6 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
         <figure><img src="img/hp/5-tema.webp" alt="Elegir tema" loading="lazy"><figcaption>Tu tema</figcaption></figure>
         <figure><img src="img/hp/6-respaldo.webp" alt="Restaurar o importar" loading="lazy"><figcaption>Trae lo tuyo</figcaption></figure>
       </div>
-      <div class="tira-titulo"><h3>Así se ve</h3></div>
-      <div class="tira" tabindex="0" aria-label="Pantallas de Headpod">
-        <figure><img src="img/hp/inicio.webp?v=2" alt="Inicio con tu mezcla del día" loading="lazy"><figcaption>Inicio y tu mezcla del día</figcaption></figure>
-        <figure><img src="img/hp/descubrir.webp?v=2" alt="Descubrir" loading="lazy"><figcaption>Descubrir</figcaption></figure>
-        <figure><img src="img/hp/biblioteca.webp?v=2" alt="Biblioteca" loading="lazy"><figcaption>Biblioteca</figcaption></figure>
-      </div>
 
       <div class="tira-titulo"><h3>Elige tu reproductor</h3><small>o con el botón 🎨 dentro del reproductor</small></div>
       <div class="tira" tabindex="0" aria-label="Los cuatro estilos de reproductor">
@@ -428,17 +500,14 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
         <figure><img src="img/hp/rep-clasico.webp?v=2" alt="Clásico" loading="lazy"><figcaption>Clásico<span>El diseño original de Headpod</span></figcaption></figure>
       </div>
 
-      <div class="cosas">
-        <div class="cosa"><b>🎶 Tu mezcla del día</b><span>Lo que dejaste a medias y lo nuevo de tus favoritos, en un solo play.</span></div>
-        <div class="cosa"><b>🗣️ Voz clara</b><span>Ecualizador, velocidad por programa y saltar silencios.</span></div>
-        <div class="cosa"><b>⏭️ Sin intros</b><span>Salta la presentación y la despedida de cada programa, sola.</span></div>
-        <div class="cosa"><b>🌙 Temporizador suave</b><span>Baja el volumen poco a poco. Sacude el teléfono y suma 5 minutos.</span></div>
-        <div class="cosa"><b>📝 Transcripción</b><span>Lee lo que se dice y toca una frase para ir ahí.</span></div>
-        <div class="cosa"><b>🔵 Tus audífonos</b><span>Al conectarlos, sigue donde te quedaste.</span></div>
-        <div class="cosa"><b>🎨 Cuatro reproductores</b><span>Material 3, Disco, Portada completa o Clásico. Nuevo: cámbialo ahí mismo con el botón de la paleta.</span></div>
-        <div class="cosa"><b>🌙 Modo Dormir</b><span>Pantalla casi negra, brillo al mínimo y un botón grande.</span></div>
-        <div class="cosa"><b>💬 Frase en vivo</b><span>Debajo del título va lo que se está diciendo, si el programa tiene transcripción.</span></div>
+
+      <div class="bloques">
+        <div class="bloque b-rosa ancho"><div class="texto-b"><h3>Un reproductor que se siente.</h3><p>Botones que se aprietan y rebotan, una onda que se mueve con la voz y una vibración suave en cada toque.</p></div><div class="tel"><img src="img/hp/rep-material3.webp?v=2" alt="Reproductor Material 3" loading="lazy"></div></div>
+        <div class="bloque b-cafe"><h3>Tu mezcla, en un play.</h3><p>Lo que dejaste a medias y lo nuevo de tus favoritos, listo al abrir la app.</p><div class="tel"><img src="img/hp/inicio.webp?v=2" alt="Inicio con tu mezcla del día" loading="lazy"></div></div>
+        <div class="bloque b-ambar"><h3>Tu próximo favorito.</h3><p>Busca en Apple Podcasts y recibe ideas según lo que escuchas.</p><div class="tel"><img src="img/hp/descubrir.webp?v=2" alt="Descubrir" loading="lazy"></div></div>
+        <div class="bloque b-malva ancho"><div class="texto-b"><h3>Tu espacio tranquilo.</h3><p>Seguir escuchando, descargas, tus listas y cuánto escuchaste esta semana.</p></div><div class="tel"><img src="img/hp/biblioteca.webp?v=2" alt="Biblioteca" loading="lazy"></div></div>
       </div>
+      <div class="etiquetas"><span>🗣️ Voz clara</span><span>⏭️ Sin intros</span><span>🌙 Temporizador suave</span><span>📝 Transcripción</span><span>💬 Frase en vivo</span><span>😴 Modo Dormir</span><span>🔵 Tus audífonos</span><span>⏩ Velocidad por programa</span></div>
 
       <div class="extra-app">
         <div class="prueba-hp prueba-demo">
@@ -477,23 +546,15 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
         <figure><img src="img/wn/4-usuario.webp" alt="Tu nombre y tu PIN" loading="lazy"><figcaption>Tu nombre y tu PIN</figcaption></figure>
         <figure><img src="img/wn/5-bienvenido.webp" alt="Empezar a escribir" loading="lazy"><figcaption>¡A escribir!</figcaption></figure>
       </div>
-      <div class="tira-titulo"><h3>Así se ve</h3></div>
-      <div class="tira" tabindex="0" aria-label="Pantallas de WhyType">
-        <figure><img src="img/wn/maquina.webp" alt="La hoja en la máquina" loading="lazy"><figcaption>Tu hoja en la máquina</figcaption></figure>
-        <figure><img src="img/wn/tu-maquina.webp" alt="Personaliza tu máquina" loading="lazy"><figcaption>Personaliza tu máquina</figcaption></figure>
-        <figure><img src="img/wn/recordatorios.webp" alt="Recordatorios" loading="lazy"><figcaption>Recordatorios</figcaption></figure>
-        <figure><img src="img/wn/opciones.webp" alt="Opciones de la nota" loading="lazy"><figcaption>Escanear, compartir y más</figcaption></figure>
-      </div>
 
-      <div class="cosas">
-        <div class="cosa"><b>Escribe como en una máquina</b><span>Cada letra suena, el carro avanza y suena la campanita al final del renglón.</span></div>
-        <div class="cosa"><b>Tu propia máquina</b><span>Carro, riel, dije, sello, papel, tinta y letra. Hasta tu propia letra.</span></div>
-        <div class="cosa"><b>Escanea texto</b><span>Toma una foto de una hoja y la máquina lo teclea. Sin internet.</span></div>
-        <div class="cosa"><b>Recordatorios</b><span>"Llamar a mamá mañana a las 5", como lo dirías. Suena una marimba al cumplirlos.</span></div>
-        <div class="cosa"><b>Notas privadas</b><span>Solo se abren con tu huella.</span></div>
-        <div class="cosa"><b>Imágenes con IA</b><span>Crea gratis una imagen a partir de tu nota. Solo para eso se conecta a internet.</span></div>
-        <div class="cosa"><b>Comparte como hoja</b><span>Una imagen escrita a máquina, lista para Instagram o WhatsApp.</span></div>
+
+      <div class="bloques">
+        <div class="bloque b-hoja ancho"><div class="texto-b"><h3>Escribe como en una máquina.</h3><p>Cada letra suena, el carro avanza y suena la campanita al final del renglón.</p></div><div class="tel"><img src="img/wn/maquina.webp" alt="La hoja en la máquina" loading="lazy"></div></div>
+        <div class="bloque b-rojo"><h3>Tu propia máquina.</h3><p>Carro, riel, dije, sello, papel, tinta y letra. Hasta tu propia letra.</p><div class="tel"><img src="img/wn/tu-maquina.webp" alt="Personaliza tu máquina" loading="lazy"></div></div>
+        <div class="bloque b-tinta"><h3>Recordatorios, como los dirías.</h3><p>"Llamar a mamá mañana a las 5". Suena una marimba al cumplirlos.</p><div class="tel"><img src="img/wn/recordatorios.webp" alt="Recordatorios" loading="lazy"></div></div>
+        <div class="bloque b-kraft ancho"><div class="texto-b"><h3>Escanea, crea y comparte.</h3><p>Toma una foto de una hoja y la máquina la teclea, sin internet. Compártela como una hoja escrita a máquina.</p></div><div class="tel"><img src="img/wn/opciones.webp" alt="Opciones de la nota" loading="lazy"></div></div>
       </div>
+      <div class="etiquetas"><span>🔒 Notas privadas con tu huella</span><span>✨ Imágenes con IA (solo ahí usa internet)</span><span>📄 PDF</span><span>☁️ Respaldo en Google Drive</span><span>🗑️ Papelera</span><span>🔎 Buscar dentro de la nota</span></div>
 
       <div class="extra-app">
         <div class="prueba-wn">
@@ -519,6 +580,14 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
   </section>
 
   <!-- ——— INSTALAR ——— -->
+
+  <section class="envoltura invitacion" aria-label="Descargar">
+    <div class="invita invita-hp"><img class="ico" src="img/hp-icono.png" alt=""><h2>Dale play.</h2><p>Gratis, sin anuncios y sin cuentas.</p>
+      <div class="botones"><a class="btn btn-hp" href="https://github.com/yigaleana-maker/headpod-actualizaciones/releases/latest/download/headpod.apk">⬇ Descargar Headpod <small>APK</small></a></div></div>
+    <div class="invita invita-wn"><img class="ico" src="img/whytype-icono.png" alt=""><h2>A escribir.</h2><p>Gratis, sin anuncios y sin cuentas.</p>
+      <div class="botones"><a class="btn btn-wn" href="https://github.com/yigaleana-maker/whynote-actualizaciones/releases/latest/download/whynote.apk">⬇ Descargar WhyType <small>APK</small></a></div></div>
+  </section>
+
   <section class="final" id="instalar">
     <div class="envoltura">
       <h2>Cómo instalarlas</h2>
@@ -544,11 +613,12 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
   <section class="yo" id="yehu">
     <div class="envoltura">
       <div class="tarjeta-yo">
-        <div class="avatar"><span>Y</span></div>
+        <div class="avatar"><img src="img/yehu.webp" alt="Yehu" width="128" height="128"></div>
         <div>
           <span class="eti">Quién las hace</span>
           <h2>Hola, soy Yehu 👋</h2>
           <p>Soy fotógrafo y cuido cada detalle. Disfruta WhyType y Headpod.</p>
+          <div class="numeros"><div><b>0</b><small>anuncios</small></div><div><b>0</b><small>cuentas</small></div><div><b id="n-act">61</b><small>actualizaciones publicadas</small></div></div>
           <a class="btn-ig" href="https://www.instagram.com/yehu_gal/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1.1.4 2.2.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1.1.4-2.2.4-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1.1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1.1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 4.6a5.2 5.2 0 1 0 0 10.4 5.2 5.2 0 0 0 0-10.4zm0 8.6a3.4 3.4 0 1 1 0-6.8 3.4 3.4 0 0 1 0 6.8zm5.4-9.9a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4z"/></svg>Ver mis fotos en @yehu_gal</a>
         </div>
       </div>
@@ -557,7 +627,15 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
 </main>
 
 <footer>
-  <div class="envoltura"><span>Hecho en México con ❤️ por <a href="https://www.instagram.com/yehu_gal/" target="_blank" rel="noopener">Yehu</a></span><span>Headpod · WhyType · <a href="privacidad/">Privacidad</a></span></div>
+  <div class="envoltura">
+    <div class="pie">
+      <div class="col"><span class="marca-pie">yg4<span>apps</span></span><p>Apps para Android hechas con cuidado, sin anuncios y sin cuentas.</p></div>
+      <div class="col"><b>Apps</b><a href="#headpod">Headpod</a><a href="#whytype">WhyType</a><a href="#instalar">Cómo instalarlas</a></div>
+      <div class="col"><b>Ayuda</b><a href="mailto:yg4apps@gmail.com">yg4apps@gmail.com</a><a href="privacidad/">Privacidad</a><a href="en/" lang="en">English</a></div>
+      <div class="col"><b>Yehu</b><a href="https://www.instagram.com/yehu_gal/" target="_blank" rel="noopener">Instagram</a><a href="#yehu">Quién las hace</a></div>
+    </div>
+    <div class="pie-fin"><span>Hecho en México con ❤️ por Yehu</span><span>Headpod · WhyType</span></div>
+  </div>
 </footer>
 
 
@@ -659,7 +737,7 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
   /* Al llegar, cada parte aparece una sola vez y se queda visible */
   if (!quieto && 'IntersectionObserver' in window){
     var piezas = Array.prototype.slice.call(document.querySelectorAll(
-      '.puerta, .escena .texto > *, .tira-titulo, .cosa, .extra-app > *:not(.prueba-demo), .maquina > *, .botones, .final h2, .pasos li, .extra > div, .tarjeta-yo'));
+      '.puerta, .escena .texto > *, .tira-titulo, .extra-app > *:not(.prueba-demo), .maquina > *, .botones, .final h2, .pasos li, .extra > div, .tarjeta-yo, .bloque, .invita, .etiquetas'));
     var alto0 = window.innerHeight;
     var ojo = new IntersectionObserver(function(es){
       es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('visto'); ojo.unobserve(e.target); } });
@@ -673,6 +751,22 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
     var red = null;
     window.addEventListener('scroll', function(){ if (!red) red = setTimeout(function(){ piezas.forEach(function(p){ var r = p.getBoundingClientRect(); if (r.top < window.innerHeight) p.classList.add('visto'); }); red = null; }, 900); }, {passive: true});
   }
+
+  /* ——— Barra de aviso: la frase sale de la última versión de Headpod; si la cierras, no vuelve hasta la siguiente ——— */
+  (function(){
+    var aviso = document.getElementById('aviso'); if (!aviso) return;
+    var cerrar = document.createElement('button'); cerrar.type = 'button'; cerrar.className = 'aviso-cerrar'; cerrar.textContent = '✕'; cerrar.setAttribute('aria-label', aviso.getAttribute('data-cerrar') || 'Cerrar');
+    aviso.appendChild(cerrar);
+    function clave(){ return 'aviso-' + (aviso.getAttribute('data-version') || 'base'); }
+    function visto(){ try { return localStorage.getItem(clave()) === '1'; } catch(e){ return false; } }
+    if (visto()) aviso.hidden = true;
+    cerrar.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); aviso.hidden = true; try { localStorage.setItem(clave(), '1'); } catch(_){} });
+    window.__aviso = function(version, frase){
+      aviso.setAttribute('data-version', version);
+      if (frase) document.getElementById('aviso-txt').textContent = frase;
+      aviso.hidden = visto();
+    };
+  })();
 
   /* ——— Novedades automáticas desde GitHub, y la versión en el botón ——— */
   function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
@@ -695,6 +789,7 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
           ol.appendChild(li);
         });
         var version = (lista[0].name || '').replace(app, '').trim();
+        if (app === 'Headpod' && window.__aviso){ var f = (lista[0].body || '').split('\n')[0].replace(/^\s*[•\-*]\s*/, '').replace(/\*\*/g, '').replace(/^Nuevo:\s*/i, '').split(/\.\s/)[0].replace(/\.$/, ''); window.__aviso(version, f); }
         if (version) Array.prototype.forEach.call(document.querySelectorAll(caja.getAttribute('data-boton')), function(boton){ boton.innerHTML = '⬇ Descargar ' + esc(app) + ' <small>' + esc(version) + '</small>'; });
       })
       .catch(function(){ /* Sin GitHub se quedan las novedades escritas en la página */ });
@@ -708,6 +803,11 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
       else if (navigator.clipboard) navigator.clipboard.writeText(url).then(function(){ var t = b.textContent; b.textContent = '✓ Enlace copiado'; setTimeout(function(){ b.textContent = t; }, 1800); });
     });
   });
+
+  /* Cuántas actualizaciones llevan las dos apps, contadas en GitHub */
+  Promise.all(['headpod-actualizaciones', 'whynote-actualizaciones'].map(function(r){
+    return fetch('https://api.github.com/repos/yigaleana-maker/' + r + '/releases?per_page=100').then(function(x){ if (!x.ok) throw 0; return x.json(); });
+  })).then(function(ls){ var n = ls[0].length + ls[1].length; if (n) document.getElementById('n-act').textContent = n; }).catch(function(){});
 
   /* ——— QR para descargar desde la computadora ——— */
   if (window.QRCode){
