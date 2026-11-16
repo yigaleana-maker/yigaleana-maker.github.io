@@ -292,6 +292,9 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
 .yo .eti{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--rosa)}
 .yo h2{font-family:var(--f-marca);font-weight:700;font-size:clamp(24px,3.6vw,34px);letter-spacing:-.03em;margin:4px 0 8px}
 .yo p{color:var(--gris);font-size:15.5px;max-width:60ch}
+.yo p.yo-ig{margin-top:10px;font-size:14.5px}
+.yo .avatar{position:relative}
+.yo .avatar::after{content:"📷";position:absolute;right:-4px;bottom:-2px;font-size:22px;filter:drop-shadow(0 2px 4px #0006)}
 .btn-ig{display:inline-flex;align-items:center;gap:10px;margin-top:16px;padding:13px 20px;border-radius:99px;color:#fff;font-weight:800;text-decoration:none;background:linear-gradient(90deg,#f58529,#dd2a7b 45%,#8134af 75%,#515bd4);box-shadow:0 10px 26px #dd2a7b40;transition:transform .45s cubic-bezier(.34,1.8,.64,1)}
 .btn-ig:hover{transform:translateY(-2px) scale(1.03)}
 .btn-ig:active{transform:scale(.95)}
@@ -358,7 +361,7 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
   <section class="portada envoltura">
     <p class="eti">Apps para Android · gratis</p>
     <h1>Una para <span class="esc">escuchar</span>. Otra para <span class="esc2">escribir</span>.</h1>
-    <p class="bajada">Dos apps hechas con cuidado por <a href="#yehu">Yehu</a>, un desarrollador independiente de México. Sin anuncios y sin cuentas. Lo tuyo se queda en tu teléfono.</p>
+    <p class="bajada">Dos apps hechas con cuidado por <a href="#yehu">Yehu</a>, un fotógrafo de México que también hace apps. Sin anuncios y sin cuentas. Lo tuyo se queda en tu teléfono.</p>
 
     <div class="puertas">
       <a class="puerta p-hp" href="#headpod">
@@ -545,8 +548,9 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
         <div>
           <span class="eti">Quién las hace</span>
           <h2>Hola, soy Yehu 👋</h2>
-          <p>Hago Headpod y WhyType por mi cuenta, desde México, porque quería apps que me encantara usar a mí. En Instagram comparto en qué estoy trabajando, lo que viene y cómo se hacen. Pásate a saludar.</p>
-          <a class="btn-ig" href="https://www.instagram.com/yehu_gal/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1.1.4 2.2.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1.1.4-2.2.4-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1.1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1.1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 4.6a5.2 5.2 0 1 0 0 10.4 5.2 5.2 0 0 0 0-10.4zm0 8.6a3.4 3.4 0 1 1 0-6.8 3.4 3.4 0 0 1 0 6.8zm5.4-9.9a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4z"/></svg>Sígueme en @yehu_gal</a>
+          <p>Soy fotógrafo. Me paso el día cuidando la luz, el encuadre y esos detalles que casi nadie nota, y con ese mismo ojo hice Headpod y WhyType: apps que yo quería usar y no encontraba. No son mi trabajo, son mi gusto.</p>
+          <p class="yo-ig">Mi Instagram es personal: ahí no hay apps, hay fotos. Si quieres ver cómo miro las cosas, pásate.</p>
+          <a class="btn-ig" href="https://www.instagram.com/yehu_gal/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1.1.4 2.2.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1.1.4-2.2.4-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1.1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1.1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 4.6a5.2 5.2 0 1 0 0 10.4 5.2 5.2 0 0 0 0-10.4zm0 8.6a3.4 3.4 0 1 1 0-6.8 3.4 3.4 0 0 1 0 6.8zm5.4-9.9a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4z"/></svg>Ver mis fotos en @yehu_gal</a>
         </div>
       </div>
     </div>
