@@ -282,6 +282,23 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
 
 /* ——— Modo claro: la portada, la barra y el final se aclaran. Headpod sigue de noche (es su mundo)
    y WhyType sigue en su papel. ——— */
+.bajada a{color:inherit;text-decoration:underline;text-decoration-color:var(--rosa);text-underline-offset:3px}
+/* Quién hace las apps */
+.yo{padding-block:64px;background:var(--noche)}
+.yo .tarjeta-yo{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center;border-radius:30px;padding:28px;background:linear-gradient(135deg,#ffffff0c,#ffffff04);border:1px solid #ffffff14;position:relative;overflow:hidden}
+.yo .tarjeta-yo::before{content:"";position:absolute;width:260px;height:260px;right:-80px;top:-110px;border-radius:50%;background:radial-gradient(circle,#dd2a7b55,transparent 70%);pointer-events:none}
+.yo .avatar{width:84px;height:84px;border-radius:50%;padding:3px;background:conic-gradient(from 200deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5,#feda75)}
+.yo .avatar span{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;background:var(--pizarra);font-family:var(--f-marca);font-weight:700;font-size:34px;color:var(--crema)}
+.yo .eti{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--rosa)}
+.yo h2{font-family:var(--f-marca);font-weight:700;font-size:clamp(24px,3.6vw,34px);letter-spacing:-.03em;margin:4px 0 8px}
+.yo p{color:var(--gris);font-size:15.5px;max-width:60ch}
+.btn-ig{display:inline-flex;align-items:center;gap:10px;margin-top:16px;padding:13px 20px;border-radius:99px;color:#fff;font-weight:800;text-decoration:none;background:linear-gradient(90deg,#f58529,#dd2a7b 45%,#8134af 75%,#515bd4);box-shadow:0 10px 26px #dd2a7b40;transition:transform .45s cubic-bezier(.34,1.8,.64,1)}
+.btn-ig:hover{transform:translateY(-2px) scale(1.03)}
+.btn-ig:active{transform:scale(.95)}
+.btn-ig svg{width:20px;height:20px;fill:currentColor}
+@media (max-width: 600px){ .yo .tarjeta-yo{grid-template-columns:1fr;text-align:left;padding:22px} }
+@media (prefers-color-scheme: light){ .yo .tarjeta-yo{background:#fff;border-color:#2a1e1914;box-shadow:0 10px 30px #5a4a3a14} }
+
 @media (prefers-color-scheme: light){
   :root{color-scheme:light;--noche:#faf6f1;--crema:#2a1e19;--crema2:#6d5d50;--rosa:#c8466a;--pizarra:#f1ece6;--pizarra2:#ffffff;--gris:#6d655d}
   .headpod,.p-hp{color-scheme:dark;--crema:#f5e9dc;--crema2:#bfae9f;--rosa:#ffb3b3;--cafe:#1d1411;--cafe2:#2a1e19}
@@ -341,7 +358,7 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
   <section class="portada envoltura">
     <p class="eti">Apps para Android · gratis</p>
     <h1>Una para <span class="esc">escuchar</span>. Otra para <span class="esc2">escribir</span>.</h1>
-    <p class="bajada">Dos apps hechas con cuidado por Yehu, un desarrollador independiente de México. Sin anuncios y sin cuentas. Lo tuyo se queda en tu teléfono.</p>
+    <p class="bajada">Dos apps hechas con cuidado por <a href="#yehu">Yehu</a>, un desarrollador independiente de México. Sin anuncios y sin cuentas. Lo tuyo se queda en tu teléfono.</p>
 
     <div class="puertas">
       <a class="puerta p-hp" href="#headpod">
@@ -520,10 +537,24 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
       </div>
     </div>
   </section>
+
+  <section class="yo" id="yehu">
+    <div class="envoltura">
+      <div class="tarjeta-yo">
+        <div class="avatar"><span>Y</span></div>
+        <div>
+          <span class="eti">Quién las hace</span>
+          <h2>Hola, soy Yehu 👋</h2>
+          <p>Hago Headpod y WhyType por mi cuenta, desde México, porque quería apps que me encantara usar a mí. En Instagram comparto en qué estoy trabajando, lo que viene y cómo se hacen. Pásate a saludar.</p>
+          <a class="btn-ig" href="https://www.instagram.com/yehu_gal/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1.1.4 2.2.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1.1.4-2.2.4-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1.1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1.1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 4.6a5.2 5.2 0 1 0 0 10.4 5.2 5.2 0 0 0 0-10.4zm0 8.6a3.4 3.4 0 1 1 0-6.8 3.4 3.4 0 0 1 0 6.8zm5.4-9.9a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4z"/></svg>Sígueme en @yehu_gal</a>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer>
-  <div class="envoltura"><span>Hecho en México con ❤️ por Yehu</span><span>Headpod · WhyType · <a href="privacidad/">Privacidad</a></span></div>
+  <div class="envoltura"><span>Hecho en México con ❤️ por <a href="https://www.instagram.com/yehu_gal/" target="_blank" rel="noopener">Yehu</a></span><span>Headpod · WhyType · <a href="privacidad/">Privacidad</a></span></div>
 </footer>
 
 
@@ -625,7 +656,7 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
   /* Al llegar, cada parte aparece una sola vez y se queda visible */
   if (!quieto && 'IntersectionObserver' in window){
     var piezas = Array.prototype.slice.call(document.querySelectorAll(
-      '.puerta, .escena .texto > *, .tira-titulo, .cosa, .extra-app > *:not(.prueba-demo), .maquina > *, .botones, .final h2, .pasos li, .extra > div'));
+      '.puerta, .escena .texto > *, .tira-titulo, .cosa, .extra-app > *:not(.prueba-demo), .maquina > *, .botones, .final h2, .pasos li, .extra > div, .tarjeta-yo'));
     var alto0 = window.innerHeight;
     var ojo = new IntersectionObserver(function(es){
       es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('visto'); ojo.unobserve(e.target); } });
