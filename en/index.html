@@ -9,6 +9,7 @@
 <meta name="theme-color" content="#faf6f1" media="(prefers-color-scheme: light)">
 <link rel="alternate" hreflang="es" href="https://yigaleana-maker.github.io/">
 <link rel="alternate" hreflang="en" href="https://yigaleana-maker.github.io/en/">
+<link rel="stylesheet" href="../demo.css">
 <link rel="icon" href="../img/whytype-icono.png">
 <meta property="og:title" content="One to listen. One to write.">
 <meta property="og:description" content="Headpod and WhyType: free Android apps, no ads and no accounts.">
@@ -235,6 +236,20 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .btn:active{transform:scale(.92)}
 .btn{transition:transform .45s cubic-bezier(.34,1.8,.64,1)}
 
+
+.prueba-demo{grid-column:1/-1;display:flex;flex-direction:column;align-items:center}
+.prueba-demo .eti-prueba{align-self:flex-start}
+/* El título entra palabra por palabra con rebote */
+.js-anima .portada h1 .pal{display:inline-block;animation:palabra .9s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes palabra{from{opacity:0;transform:translateY(45%) rotate(5deg) scale(.92)}to{opacity:1;transform:none}}
+/* Las tarjetas se inclinan hacia el dedo o el mouse */
+.puerta{transform-style:preserve-3d;will-change:transform}
+.puerta.inclina{transition:transform .12s ease-out}
+/* La onda al tocar un botón */
+.btn{position:relative;overflow:hidden}
+.onda-btn{position:absolute;border-radius:50%;background:currentColor;opacity:.28;transform:scale(0);animation:ondaBtn .65s cubic-bezier(.2,.7,.3,1) forwards;pointer-events:none}
+@keyframes ondaBtn{to{transform:scale(1);opacity:0}}
+
 /* ——— Cómo instalar / privacidad ——— */
 .final{background:var(--pizarra);padding-block:72px}
 .final h2{font-family:var(--f-marca);font-weight:700;font-size:clamp(26px, 4vw, 38px);letter-spacing:-.03em}
@@ -399,10 +414,9 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
       </div>
 
       <div class="extra-app">
-        <div class="prueba-hp">
-          <span class="eti-prueba">Try it here</span>
-          <canvas class="dial-prueba" id="dial-prueba" aria-label="Demo dial: tap play, skip back or forward, or drag the scale"></canvas>
-          <div class="dial-pie"><span>Tap play or drag the scale</span><span id="dial-vel">1×</span></div>
+        <div class="prueba-hp prueba-demo">
+          <span class="eti-prueba">Try the players</span>
+          <div id="demo-rep" class="demo-rep" data-lang="en"></div>
         </div>
         <div class="novedades" data-repo="headpod-actualizaciones" data-boton=".btn-hp" data-app="Headpod">
           <h3>What’s new in Headpod</h3>
@@ -500,6 +514,7 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="../demo.js" defer></script>
 <script>
 (function(){
   var quieto = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -596,7 +611,7 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
   /* Al deslizar, lo que llega a las orillas se difumina */
   if (!quieto){
     var piezas = Array.prototype.slice.call(document.querySelectorAll(
-      '.portada .eti, .portada h1, .portada .bajada, .puerta, .escena video, .escena .texto > *, .tira-titulo, .tira, .cosa, .extra-app > *, .maquina > *, .whynote .botones, .final h2, .pasos li, .extra > div'));
+      '.portada .eti, .portada h1, .portada .bajada, .puerta, .escena video, .escena .texto > *, .tira-titulo, .tira, .cosa, .extra-app > *:not(.prueba-demo), .maquina > *, .whynote .botones, .final h2, .pasos li, .extra > div'));
     piezas.forEach(function(p){ p.classList.add('desvanece'); });
     var barra = document.querySelector('.barra');
     var pendiente = false;
@@ -853,6 +868,61 @@ footer .envoltura{display:flex;justify-content:space-between;gap:12px;flex-wrap:
     area.addEventListener('click', moverCarro);
     area.addEventListener('keyup', moverCarro);
   })();
+
+  /* ——— Momentos expresivos ——— */
+  if (!quieto){
+    /* El título de arriba entra palabra por palabra */
+    var h1 = document.querySelector('.portada h1');
+    if (h1){
+      var n = 0, partes = Array.prototype.slice.call(h1.childNodes);
+      h1.innerHTML = '';
+      partes.forEach(function(nodo){
+        if (nodo.nodeType === 3){
+          nodo.textContent.split(/(\s+)/).forEach(function(p){
+            if (!p) return;
+            if (/^\s+$/.test(p)){ h1.appendChild(document.createTextNode(p)); return; }
+            var s = document.createElement('span'); s.className = 'pal'; s.textContent = p; s.style.animationDelay = (n++ * 90) + 'ms'; h1.appendChild(s);
+          });
+        } else { nodo.classList.add('pal'); nodo.style.animationDelay = (n++ * 90) + 'ms'; h1.appendChild(nodo); }
+      });
+      document.documentElement.classList.add('js-anima');
+    }
+    /* Las tarjetas de las apps se inclinan hacia el dedo o el mouse */
+    Array.prototype.forEach.call(document.querySelectorAll('.puerta'), function(p){
+      function mover(e){
+        var r = p.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+        p.classList.add('inclina');
+        p.style.transform = 'perspective(900px) rotateX(' + (-y * 9).toFixed(2) + 'deg) rotateY(' + (x * 11).toFixed(2) + 'deg) scale(1.02)';
+      }
+      function soltar(){ p.classList.remove('inclina'); p.style.transition = 'transform .7s cubic-bezier(.34,1.56,.64,1)'; p.style.transform = ''; setTimeout(function(){ p.style.transition = ''; }, 700); }
+      p.addEventListener('pointermove', mover);
+      p.addEventListener('pointerdown', mover);
+      p.addEventListener('pointerleave', soltar);
+      p.addEventListener('pointerup', function(e){ if (e.pointerType !== 'mouse') soltar(); });
+    });
+    /* La onda al tocar un botón, como en Android */
+    Array.prototype.forEach.call(document.querySelectorAll('.btn'), function(b){
+      b.addEventListener('pointerdown', function(e){
+        var r = b.getBoundingClientRect(), d = Math.max(r.width, r.height) * 2.2, o = document.createElement('span');
+        o.className = 'onda-btn'; o.style.width = o.style.height = d + 'px';
+        o.style.left = (e.clientX - r.left - d / 2) + 'px'; o.style.top = (e.clientY - r.top - d / 2) + 'px';
+        b.appendChild(o); setTimeout(function(){ o.remove(); }, 700);
+        try { navigator.vibrate && navigator.vibrate(8); } catch(_){}
+      });
+    });
+    /* Los audífonos se acercan un poco mientras deslizas hacia ellos */
+    var video = document.querySelector('.escena video'), esperaVideo = false;
+    if (video){
+      function acercar(){
+        esperaVideo = false;
+        var r = video.getBoundingClientRect(), vh = window.innerHeight;
+        var p = Math.max(0, Math.min(1, (vh - r.top) / (vh + r.height)));
+        video.style.transform = 'scale(' + (0.88 + 0.2 * Math.sin(p * Math.PI)).toFixed(3) + ')';
+      }
+      window.addEventListener('scroll', function(){ if (!esperaVideo){ esperaVideo = true; requestAnimationFrame(acercar); } }, {passive: true});
+      acercar();
+    }
+  }
 
   /* Copiar el correo */
   document.getElementById('copiar').addEventListener('click', function(){
