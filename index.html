@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>yg4apps · Headpod y WhyType</title>
 <meta name="description" content="Headpod, la experiencia más increíble de podcast, y WhyType, tus notas en una máquina de escribir de verdad. Apps gratis para Android.">
-<meta name="theme-color" content="#1c1c1e" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#efe8da" media="(prefers-color-scheme: light)">
 <link rel="alternate" hreflang="es" href="https://yigaleana-maker.github.io/">
 <link rel="alternate" hreflang="en" href="https://yigaleana-maker.github.io/en/">
@@ -25,7 +25,7 @@
    papel crema de día). Cada sección se viste como su app en sus tarjetas y acentos. */
 :root{
   color-scheme: dark;
-  --noche:#1c1c1e;          /* fondo de toda la página */
+  --noche:#000000;          /* fondo de toda la página: negro total */
   --cafe:#1d1411;           /* tarjetas Headpod */
   --cafe2:#2a1e19;
   --crema:#f5e9dc;          /* texto claro */
@@ -36,8 +36,8 @@
   --tinta:#2a2623;
   --tinta2:#6d655d;
   --rojo:#e5352a;           /* acento WhyType */
-  --pizarra:#1c1c1e;
-  --pizarra2:#2a2a2d;
+  --pizarra:#000000;
+  --pizarra2:#161618;
   --gris:#a9a9ad;
   --f-marca:"Unbounded", "Arial Black", system-ui, sans-serif;
   --f-hp:"Nunito", system-ui, sans-serif;
@@ -455,6 +455,22 @@ footer .envoltura{display:block}
   *{animation:none!important;transition:none!important}
   html{scroll-behavior:auto}
 }
+
+/* ——— Modo oscuro total: todo en negro, también lo de WhyType; el papel crema queda solo para el modo claro ——— */
+@media not all and (prefers-color-scheme: light){
+  .p-wn{background:#121110;color:var(--crema);background-image:radial-gradient(#ffffff0d 1px, transparent 1.4px);background-size:9px 9px;border:1px solid #ffffff12}
+  .p-wn h2{color:#fff}
+  .p-wn p{color:#b9b0a4}
+  .b-hoja{background:#121110;color:var(--crema);box-shadow:none;border:1px solid #ffffff10}.b-hoja p{color:#b9b0a4}
+  .b-kraft{background:#1a1612;color:var(--crema);border:1px solid #ffffff10}.b-kraft p{color:#b9b0a4}
+  .b-tinta{background:#0f0f10;border:1px solid #ffffff10}
+  .invita-wn{background:#121110;color:var(--crema);border:1px solid #ffffff12}.invita-wn p{color:#b9b0a4}
+  .yo-wn{background:#121110;background-image:radial-gradient(#ffffff0d 1px,transparent 1px);background-size:14px 14px;color:var(--crema)}
+  .yo-wn .btn-wn2{background:#26231f;color:var(--crema)}
+  .tarjeta-yo{border:1px solid #ffffff12}
+  .yo-wn p,.yo-wn small{color:#b9b0a4}
+  .yo-wn .yo-maquina{color:var(--crema)}
+}
 </style>
 </head>
 <body>
@@ -561,7 +577,7 @@ footer .envoltura{display:block}
         </div>
         <div class="novedades" data-repo="whynote-actualizaciones" data-boton=".btn-wn" data-app="WhyType">
           <h3>Lo nuevo en <span translate="no">WhyType</span></h3>
-          <ol><li><b>WhyType 2.2.100</b><small>15 de noviembre de 2026</small><ul><li>Ícono nuevo de WhyType, con el mismo estilo que Headpod: renglones tecleados sobre un círculo rojo.</li></ul></li><li><b>WhyType 2.2.99</b><small>15 de noviembre de 2026</small><ul><li>En la bienvenida, "Ya tengo un respaldo" trae tus notas de una copia de WhyType o de WhyNote.</li></ul></li><li><b>WhyType 2.2.98</b><small>15 de noviembre de 2026</small><ul><li>WhyNote ahora se llama WhyType. Tus notas, recordatorios, privadas y ajustes siguen igual.</li></ul></li></ol>
+          <ol><li><b>WhyType 2.2.109</b><small>20 de noviembre de 2026</small><ul><li>Una sola pantalla para tu máquina: al tocar Carro se abre el catálogo con tus cápsulas, tu foto, tus colores y Artesanías del mundo.</li></ul></li><li><b>WhyType 2.2.108</b><small>20 de noviembre de 2026</small><ul><li>La luz de la lámpara nace en la varilla y sube abriéndose suave, sin cortes.</li></ul></li><li><b>WhyType 2.2.107</b><small>20 de noviembre de 2026</small><ul><li>Tu foto como cápsula: elige una foto, encuádrala y úsala.</li><li>Desde colores: lisa, degradado, dos tonos o franjas.</li><li>La luz se mide: Luz, Apertura y Alcance.</li></ul></li></ol>
         </div>
       </div>
 
@@ -609,7 +625,7 @@ footer .envoltura{display:block}
         <figure><img src="img/hp/ajustes-3.webp?v=3" alt="Ajustes de tus datos, ayuda y versión 2.5.112" loading="lazy"><figcaption>Ajustes: tus datos</figcaption></figure>
       </div>
 
-      <div class="tira-titulo"><h3>Elige tu reproductor</h3><small>o con el botón 🎨 dentro del reproductor</small></div>
+      <div class="tira-titulo"><h3>Elige tu reproductor</h3><small>o mantén el dedo en el reproductor</small></div>
       <div class="tira" tabindex="0" aria-label="Los cuatro estilos de reproductor">
         <figure><img src="img/hp/rep-material3.webp?v=3" alt="Material 3" loading="lazy"><figcaption>Material 3<span>Expresivo, con botones que se deforman</span></figcaption></figure>
         <figure><img src="img/hp/rep-disco.webp?v=3" alt="Disco" loading="lazy"><figcaption>Disco<span>Un tocadiscos: el brazo marca el avance</span></figcaption></figure>
@@ -633,7 +649,7 @@ footer .envoltura{display:block}
         </div>
         <div class="novedades" data-repo="headpod-actualizaciones" data-boton=".btn-hp" data-app="Headpod">
           <h3>Lo nuevo en <span translate="no">Headpod</span></h3>
-          <ol><li><b>Headpod 2.5.112</b><small>15 de noviembre de 2026</small><ul><li>Nuevo: cambia el estilo del reproductor sin salir de él con el botón de la paleta. Elige Material 3, Disco, Portada o Clásico y el cambio se ve al instante.</li><li>La bienvenida ahora te deja elegir tu reproductor desde el principio.</li></ul></li><li><b>Headpod 2.5.110</b><small>15 de noviembre de 2026</small><ul><li>Portada completa con animaciones más vivas: la portada se desliza como una carta y se puede lanzar.</li></ul></li><li><b>Headpod 2.5.108</b><small>15 de noviembre de 2026</small><ul><li>Portada completa al estilo Apple Music: la portada es una tarjeta con esquinas redondeadas y sombra sobre su fondo desenfocado.</li></ul></li></ol>
+          <ol><li><b>Headpod 2.5.116</b><small>20 de noviembre de 2026</small><ul><li>Headpod ya habla inglés: si tu teléfono está en inglés, toda la app se ve en inglés. También puedes elegir el idioma en Ajustes → Idioma.</li><li>El estilo del reproductor se cambia manteniendo el dedo en el reproductor; ya no hay botón de la paleta.</li></ul></li><li><b>Headpod 2.5.115</b><small>20 de noviembre de 2026</small><ul><li>Arreglo: el selector de estilos (mantén el dedo en el reproductor) ya pasa por los cuatro estilos sin trabarse.</li></ul></li><li><b>Headpod 2.5.113</b><small>20 de noviembre de 2026</small><ul><li>Nuevo: mantén el dedo en el reproductor y se abren los estilos. Desliza a los lados para verlos en vivo y toca Usar.</li><li>Al cerrar Headpod desde las apps recientes, deja de sonar.</li></ul></li></ol>
         </div>
       </div>
     </div>

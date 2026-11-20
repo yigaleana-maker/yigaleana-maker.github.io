@@ -8,14 +8,14 @@
   var T = EN ? {
     estilos: ['Material 3', 'Turntable', 'Artwork', 'Classic'],
     pistas: ['Tap play: the cover changes shape and the wave comes alive. Press a button and it widens.',
-      'Tap play: the arm lands on the record. Drag the arm to move. Swipe the bottom card and try the new Style button.',
+      'Tap play: the arm lands on the record. Drag the arm to move. Hold your finger on the screen to change style, like in the app.',
       'Swipe the cover sideways to change episodes. Drag the scale to move the red needle.',
       'The original design: the big play changes shape when it plays.'],
     de: 'of', eps: [['Your show', 'This is how Headpod feels'], ['Another show', 'An episode for the road'], ['Stories', 'Tales to hear at night']]
   } : {
     estilos: ['Material 3', 'Disco', 'Portada', 'Clásico'],
     pistas: ['Toca el play: la portada cambia de forma y la onda cobra vida. Al apretar un botón, se ensancha.',
-      'Toca el play: el brazo baja al disco. Arrastra el brazo para moverte. Desliza la tarjeta de abajo y prueba el botón nuevo de Estilo.',
+      'Toca el play: el brazo baja al disco. Arrastra el brazo para moverte. Mantén el dedo en la pantalla para cambiar de estilo, como en la app.',
       'Desliza la portada a los lados para cambiar de episodio. Arrastra la escala para mover la aguja roja.',
       'El diseño original: el play grande cambia de forma al sonar.'],
     de: 'de', eps: [['Tu programa', 'Así se siente Headpod'], ['Otro programa', 'Un episodio para el camino'], ['Relatos', 'Historias para escuchar de noche']]
@@ -60,6 +60,22 @@
   var pantalla = tel.firstChild;
   var pista = el('<p class="demo-pista"></p>');
   raiz.appendChild(sel); raiz.appendChild(tel); raiz.appendChild(pista);
+
+  /* Como en la app: mantener el dedo quieto en la pantalla pasa al siguiente estilo */
+  (function () {
+    var t = null, x0 = 0, y0 = 0;
+    function cancelar() { if (t) { clearTimeout(t); t = null; } }
+    pantalla.addEventListener('pointerdown', function (e) {
+      x0 = e.clientX; y0 = e.clientY; cancelar();
+      t = setTimeout(function () {
+        t = null; vibrar(24);
+        tel.animate([{ transform: 'scale(1)' }, { transform: 'scale(.94)' }, { transform: 'scale(1)' }], { duration: 420, easing: 'cubic-bezier(.34,1.56,.64,1)' });
+        cambiarEstilo((S.estilo + 1) % 4);
+      }, 560);
+    });
+    pantalla.addEventListener('pointermove', function (e) { if (Math.abs(e.clientX - x0) + Math.abs(e.clientY - y0) > 10) cancelar(); });
+    ['pointerup', 'pointercancel', 'pointerleave'].forEach(function (n) { pantalla.addEventListener(n, cancelar); });
+  })();
 
   var vista = null, actual = null;
   function cambiarEstilo(i) {
@@ -180,7 +196,7 @@
   var paginaDisco = 0;
   function construirDisco(v) {
     var ep = T.eps[S.ep], c = COLORES[S.ep];
-    var chips = EN ? ['Style', 'Notes', 'Text', 'Close'] : ['Estilo', 'Notas', 'Texto', 'Cerrar'];
+    var chips = EN ? ['Notes', 'Text', 'Close'] : ['Notas', 'Texto', 'Cerrar'];
     v.innerHTML = '<div class="disco">' +
       '<div class="grande" style="left:' + (CG.x - RG) + 'px;top:' + (CG.y - RG) + 'px;width:' + 2 * RG + 'px;height:' + 2 * RG + 'px"></div>' +
       '<div class="vinilo" style="left:' + (CD.x - RD) + 'px;top:' + (CD.y - RD) + 'px;width:' + 2 * RD + 'px;height:' + 2 * RD + 'px">' +
@@ -192,7 +208,7 @@
       '<div class="fila"><button class="dm-btn b-gusta">' + IC.corazon + '</button><button class="dm-btn">' + IC_ATRAS + '</button><button class="dm-btn play"></button><button class="dm-btn">' + IC_ADELANTE + '</button><button class="dm-btn b-vel">1×</button></div>' +
       '<div class="tarjeta-pag"><div class="puntos"><i></i><i></i></div><div class="pista-pag"><div class="pag">' +
         '<button class="dm-btn redondo b-bajar">' + IC.bajar + '</button><button class="dm-btn redondo b-timer">' + IC.reloj + '</button><button class="dm-btn redondo b-guardar">' + IC.guardar + '</button><button class="dm-btn redondo luna">🌙</button></div>' +
-        '<div class="pag"><button class="dm-btn chip-p estilo">' + IC_PALETA + chips[0] + '</button><button class="dm-btn chip-p">' + chips[1] + '</button><button class="dm-btn chip-p">' + chips[2] + '</button></div>' +
+        '<div class="pag"><button class="dm-btn chip-p">' + chips[0] + '</button><button class="dm-btn chip-p">' + chips[1] + '</button><button class="dm-btn chip-p">' + chips[2] + '</button></div>' +
       '</div></div></div>';
     var fila = v.querySelectorAll('.fila .dm-btn'), vinilo = v.querySelector('.vinilo'), brazo = v.querySelector('.brazo');
     tocar(fila[1], function () { saltar(-15); }); tocar(fila[2], playPausa); tocar(fila[3], function () { saltar(15); });
@@ -205,7 +221,6 @@
     tp.addEventListener('pointerdown', function (e) { xp = e.clientX; enPag = true; });
     tp.addEventListener('pointerup', function (e) { if (!enPag) return; enPag = false; var d = e.clientX - xp; if (Math.abs(d) > 30) { vibrar(8); irPagina(d < 0 ? 1 : 0); } });
     Array.prototype.forEach.call(puntos, function (p, k) { p.addEventListener('click', function () { irPagina(k); }); });
-    tocar(v.querySelector('.estilo'), function () { cambiarEstilo((S.estilo + 1) % 4); });
     tocar(v.querySelector('.luna'), function () {});
     /* El único gesto: arrastrar el brazo */
     var arrastre = false, ultima = -1;
